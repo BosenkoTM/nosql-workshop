@@ -16,6 +16,44 @@ export PUBLIC_IP=$(curl ipinfo.io/ip)
 export DOCKER_HOST_IP=$(ip addr show ens33 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)
 ```
 
+или
+
+Если вы работаете только локально:
+
+```
+export PUBLIC_IP=localhost
+export DOCKER_HOST_IP=127.0.0.1
+```
+
+Если вы знаете свои IP-адреса:
+
+```
+export PUBLIC_IP=your.public.ip
+export DOCKER_HOST_IP=your.local.ip
+
+```
+
+В некоторых случаях можно использовать автоматическое определение IP в Docker-compose:
+
+```
+services:
+  myservice:
+    networks:
+      - host
+```
+
+Эти переменные важны, если:
+
+- Настраиваете распределенную систему.
+
+- Работаете с Docker-контейнерами.
+
+- Нужна связь между сервисами.
+
+Требуется доступ извне.
+
+
+
 Now for Elasticserach to run properly, we have to increase the `vm.max_map_count` paramter like shown below.  
 
 ```
