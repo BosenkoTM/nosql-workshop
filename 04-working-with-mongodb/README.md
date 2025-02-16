@@ -135,47 +135,47 @@ db.getCollectionNames()
 
 ```
 db.movies.insertOne (
-{
-"id": "0110912",
-"title": "Pulp Fiction",
-"year": 1994,
-"runtime": 154,
-"languages": ["en", "es", "fr"],
-"rating": 8.9,
-"votes": 2084331,
-"genres": ["Crime", "Drama"],
-"plotOutline": "Жюль Уиннфилд (Сэмюэл Л. Джексон) и Винсент Вега (Джон Траволта) — два киллера, которые отправляются на поиски чемодана, украденного у их работодателя, главаря мафии Марселласа Уоллеса (Винг Рэймс). Уоллес также попросил Винсента вывезти его жену Мию (Ума Турман) через несколько дней, когда сам Уоллес будет в отъезде. Бутч Кулидж (Брюс Уиллис) — стареющий боксер, которому платят Уоллесом проиграть свою битву. Жизни этих, казалось бы, не связанных между собой людей переплетены воедино, состоящие из серии забавных, странных и неуместных инцидентов.",
-"coverUrl": "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY150_CR1,0,101,150_.jpg",
-"actors": [
-{ "actorID": "0000619", "name": "Тим Рот"},
-{ "actorID": "0001625", "name": "Аманда Пламмер"},
-{ "actorID": "0522503", "name": "Лора Лавлейс"},
-{ "actorID": "0000237", "name": "Джон Траволта"},
-{ "actorID": "0000168", "name": "Сэмюэл Л. Джексон"},
-{ "actorID": "0482851", "name": "Фил Ламарр"},
-{ "actorID": "0001844", "name": "Фрэнк Уэйли"},
-{ "actorID": "0824882", "name": "Бёрр Стирс"},
-{ "actorID": "0000246", "name": "Брюс Уиллис"},
-{ "actorID": "0000609", "name": "Винг Рамс"},
-{ "actorID": "0000235", "name": "Ума Турман"},
-{ "actorID": "0000233", "name": "Квентин Тарантино"}
-],
-"directors": [
-{ "directorID": "0000233", "name": "Квентин Тарантино"}
-],
-"producers": [
-{ "producerID": "0004744", "name": "Лоуренс Бендер"},
-{ "producerID": "0000362", "name": "Дэнни ДеВито"},
-{ "producerID": "0321621", "name": "Ричард Н. Гладштейн"},
-{ "producerID": "0787834", "name": "Майкл Шамберг"},
-{ "producerID": "0792049", "name": "Стейси Шер"},
-{ "producerID": "0918424", "name": "Bob Weinstein"},
-{ "producerID": "0005544", "name": "Harvey Weinstein"}
-]
+{ 
+    "id": "0110912", 
+    "title": "Pulp Fiction",
+    "year": 1994,
+    "runtime": 154,
+    "languages": ["en", "es", "fr"],
+    "rating": 8.9,
+    "votes": 2084331,
+    "genres": ["Crime", "Drama"],
+    "plotOutline": "Jules Winnfield (Samuel L. Jackson) and Vincent Vega (John Travolta) are two hit men who are out to retrieve a suitcase stolen from their employer, mob boss Marsellus Wallace (Ving Rhames). Wallace has also asked Vincent to take his wife Mia (Uma Thurman) out a few days later when Wallace himself will be out of town. Butch Coolidge (Bruce Willis) is an aging boxer who is paid by Wallace to lose his fight. The lives of these seemingly unrelated people are woven together comprising of a series of funny, bizarre and uncalled-for incidents.",
+    "coverUrl": "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY150_CR1,0,101,150_.jpg",
+    "actors": [
+        { "actorID": "0000619", "name": "Tim Roth"},
+        { "actorID": "0001625", "name": "Amanda Plummer"},    
+        { "actorID": "0522503", "name": "Laura Lovelace"},         
+        { "actorID": "0000237", "name": "John Travolta"},   
+        { "actorID": "0000168", "name": "Samuel L. Jackson"},   
+        { "actorID": "0482851", "name": "Phil LaMarr"},   
+        { "actorID": "0001844", "name": "Frank Whaley"},  
+        { "actorID": "0824882", "name": "Burr Steers"},  
+        { "actorID": "0000246", "name": "Bruce Willis"}, 
+        { "actorID": "0000609", "name": "Ving Rahmes"},         
+        { "actorID": "0000235", "name": "Uma Thurman"},
+        { "actorID": "0000233", "name": "Quentin Tarantino"}
+    ],
+    "directors": [
+        { "directorID": "0000233", "name": "Quentin Tarantino"}
+    ],
+    "producers": [
+        { "producerID": "0004744", "name": "Lawrence Bender"},
+        { "producerID": "0000362", "name": "Danny DeVito"},
+        { "producerID": "0321621", "name": "Richard N. Gladstein"},        
+        { "producerID": "0787834", "name": "Michael Shamberg"},        
+        { "producerID": "0792049", "name": "Stacey Sher"},  
+        { "producerID": "0918424", "name": "Bob Weinstein"},  
+        { "producerID": "0005544", "name": "Harvey Weinstein"}  
+    ]
 })
 ```
 
-После выполнения команды вы должны получить следующий результат, сообщающий, что был вставлен 1 документ.
+После выполнения команды должны получить, что был вставлен 1 документ.
 
 ```
 {
@@ -188,186 +188,179 @@ installedId: ObjectId('66cb796c8137d3ecf9c76a8d')
 
 Приведенная выше строка выполняет вставку в коллекцию **movies**, передавая ей один параметр. Внутри MongoDB использует двоичный сериализованный формат JSON, называемый BSON. Внешне это означает, что мы часто используем JSON, как и в случае с нашими параметрами.
 
-Давайте также добавим фильм «Матрица»
+Давайте также добавим фильм "The Matrix"
 
 ```
 db.movies.insertOne (
-{
-"id": "0133093",
-"title": "Матрица",
-"year": 1999,
-"runtime": 136,
-"languages": ["en"],
-"rating": 8.7,
-"votes": 1496538,
-"genres": ["Action", "Sci-Fi"],
-"plotOutline": "Томас А. Андерсон — человек, живущий двумя жизнями. Днем он обычный программист, а ночью — хакер, известный как Нео. Нео всегда подвергал сомнению свою реальность, но правда находится далеко за пределами его воображения. Нео оказывается преследуемым полицией, когда с ним связывается Морфеус, легендарный компьютерный хакер, которого правительство заклеймило как террориста. Морфеус пробуждает Нео в реальном мире, разоренной пустоши, где большая часть человечества была захвачена расой машин, живущих за счет людей. тепло тела и электрохимическая энергия, которые заключают свои разумы в искусственную реальность, известную как Матрица. Как бунтарь против машин, Нео должен вернуться в Матрицу и противостоять агентам: сверхмощным компьютерным программам, призванным уничтожить Нео и все человеческое восстание.",
-"coverUrl": "https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX101_CR0,0,101,150_.jpg",
-"actors": [
-{ "actorID": "0000206", "name": "Киану Ривз"},
-{ "actorID": "0000401", "name": "Лоренс Фишберн"},
-{ "actorID": "0005251", "name": "Кэрри-Энн Мосс"},
-{ "actorID": "0915989", "name": "Хьюго Уивинг"},
-{ "actorID": "0287825", "name": "Глория Фостер"},
-{ "actorID": "0001592", "name": "Джо Пантолиано"},
-{ "actorID": "0159059", "name": "Маркус Чонг"},
-{ "actorID": "0032810", "name": "Джулиан Араханга"},
-{ "actorID": "0000246", "name": "Брюс Уиллис"},
-{ "actorID": "0000609", "name": "Винг Rahmes"},
-{ "actorID": "0000235", "name": "Ума Турман"},
-{ "actorID": "0000233", "name": "Квентин Тарантино"}
-],
-"directors": [
-{ "directorID": "0905154", "name": "Лана Вачовски"},
-{ "directorID": "0905152", "name": "Лилли Вачовски"}
-],
-"producers": [
-{ "producerID": "0075732", "name": "Брюс Берман"},
-{ "producerID": "0185621", "name": "Дэн Краккиоло"},
-{ "producerID": "0400492", "name": "Кэрол Хьюз"}
-]
+{ 
+    "id": "0133093", 
+    "title": "The Matrix",
+    "year": 1999,
+    "runtime": 136,
+    "languages": ["en"],
+    "rating": 8.7,
+    "votes": 1496538,
+    "genres": ["Action", "Sci-Fi"],
+    "plotOutline": "Thomas A. Anderson is a man living two lives. By day he is an average computer programmer and by night a hacker known as Neo. Neo has always questioned his reality, but the truth is far beyond his imagination. Neo finds himself targeted by the police when he is contacted by Morpheus, a legendary computer hacker branded a terrorist by the government. Morpheus awakens Neo to the real world, a ravaged wasteland where most of humanity have been captured by a race of machines that live off of the humans' body heat and electrochemical energy and who imprison their minds within an artificial reality known as the Matrix. As a rebel against the machines, Neo must return to the Matrix and confront the agents: super-powerful computer programs devoted to snuffing out Neo and the entire human rebellion.",
+    "coverUrl": "https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX101_CR0,0,101,150_.jpg",
+    "actors": [
+        { "actorID": "0000206", "name": "Keanu Reeves"},
+        { "actorID": "0000401", "name": "Laurence Fishburne"},    
+        { "actorID": "0005251", "name": "Carrie-Anne Moss"},         
+        { "actorID": "0915989", "name": "Hugo Weaving"},   
+        { "actorID": "0287825", "name": "Gloria Foster"},   
+        { "actorID": "0001592", "name": "Joe Pantoliano"},   
+        { "actorID": "0159059", "name": "Marcus Chong"},  
+        { "actorID": "0032810", "name": "Julian Arahanga"},  
+        { "actorID": "0000246", "name": "Bruce Willis"}, 
+        { "actorID": "0000609", "name": "Ving Rahmes"},         
+        { "actorID": "0000235", "name": "Uma Thurman"},
+        { "actorID": "0000233", "name": "Quentin Tarantino"}
+    ],
+    "directors": [
+        { "directorID": "0905154", "name": "Lana Wachowski"},
+        { "directorID": "0905152", "name": "Lilly Wachowski"}
+    ],
+    "producers": [
+        { "producerID": "0075732", "name": "Bruce Berman"},
+        { "producerID": "0185621", "name": "Dan Cracchiolo"},
+        { "producerID": "0400492", "name": "Carol Hughes"}  
+    ]        
 })
 ```
 
-Если мы выполним `db.getCollectionNames()` теперь мы должны увидеть коллекцию, в которую мы только что добавили документы
+Если выполним `db.getCollectionNames()`  увидем коллекцию, в которую  только что добавили документы
 
 ```
 > db.getCollectionNames()
 [ 'movies' ]
 ```
 
-Теперь вы можете использовать команду `find` для коллекции **movies**, чтобы вернуть список документов:
+Теперь можно использовать команду `find` для коллекции **movies**, чтобы вернуть список документов:
 
 ```
 db.movies.find()
 ```
 
-На самом деле мы выполняем этот оператор.
+На самом деле выполняется оператор.
 
 ```
 db.movies.find({})
 ```
 
-Вы можете видеть, что пустой документ передается в качестве параметра. Этот документ позже будет содержать фактический запрос для выполнения ограничения на возвращаемые документы. Пустой документ просто означает возврат всех и является значением по умолчанию.
+Пустой документ передается в качестве параметра. Этот документ позже будет содержать фактический запрос для выполнения ограничения на возвращаемые документы. Пустой документ просто означает возврат всех и является значением по умолчанию.
 
-Чтобы отобразить результаты в красиво отформатированном виде, вы можете использовать метод `pretty()`
+Чтобы отобразить результаты в отформатированном виде, используем метод `pretty()`
 
 ```
 db.movies.find().pretty()
 ```
 
-Обратите внимание, что в дополнение к указанным вами данным есть поле `_id`. Каждый документ должен иметь уникальное поле идентификатора.
-Вы можете либо сгенерировать его самостоятельно, либо позволить MongoDB сгенерировать для вас значение, которое имеет тип `ObjectId`. В большинстве случаев вы, вероятно, захотите позволить MongoDB сгенерировать его для вас. По умолчанию поле `_id` индексируется, что можно проверить с помощью команды `db.persons.getIndexes()`
+Обратите внимание, что в дополнение к указанным данным есть поле `_id`. Каждый документ должен иметь уникальное поле идентификатора.
+Можно сгенерировать его самостоятельно, либо разрешить MongoDB сгенерировать значение, которое имеет тип `ObjectId`. В большинстве случаев MongoDB автоматически генерирует. По умолчанию поле `_id` индексируется, что можно проверить с помощью команды `db.persons.getIndexes()`
 
 ```
 > db.movies.getIndexes()
 [ { "v" : 2, "key" : { "_id" : 1 }, "name" : "_id_" } ]
 ```
 
-Вы видите имя индекса, базу данных и коллекцию, в которой он был создан, а также поля, включенные в индекс.
+Видно имя индекса, базу данных и коллекцию, в которой он был создан, а также поля, включенные в индекс.
 
 
 ## Создание документов актеров в коллекции `persons`
 
-Теперь давайте также добавим несколько актеров в другую, новую коллекцию с именем `persons`. Мы называем ее так, потому что один и тот же человек может иметь разные роли в одном или нескольких фильмах.
+Добавим несколько актеров в  новую коллекцию с именем `persons`. Один и тот же человек может иметь разные роли в одном или нескольких фильмах.
 
-Давайте сначала добавим актера "Брюс Уиллис"
+Давайте сначала добавим актера "Bruce Willis"
 
 ```
 db.persons.insertOne (
-{
-"id": 0000246,
-"name": "Брюс Уиллис",
-"headshot": "https://m.media-amazon.com/images/M/MV5BMjA0MjMzMTE5OF5BMl5BanBnXkFtZTcwMzQ2ODE3Mw@@._V1_UY98_CR8,0,67,98_AL_.jpg",
-"birthDate": "1955-03-19",
-"tradeMarks": ['Часто играет человека, который пережил трагедию, что-то потерял или у которого кризис уверенности или совести.',
-'Часто играет симпатичных остроумных героев с моральным центром',
-'Заголовки боевиков-приключений, часто играет полицейского, киллер или кто-то из военных',
-'Часто играет мужчин, которые попадают в ситуации, которые находятся далеко за пределами их контроля',
-'Сардонические однострочники',
-'Бритая голова',
-'Отличительный, хриплый голос',
-'Ухмылка.',
-'Известен игрой циничных антигероев с несчастливой личной жизнью'],
-"actedInMovies": [
-{ "movieId": "0110912", "title": "Криминальное чтиво"},
-
-{ "movieId": "1606378", "title": "Крепкий орешек: хороший день, чтобы умереть"},
-
-{ "movieId": "0217869", "title": "Неуязвимый"},
-
-{ "movieId": "0377917", "title": "Пятый элемент"},
-
-{ "movieId": "0112864", "title": "Die Hard: With a Vengeance"}
-]
+{ 
+    "id": 0000246, 
+    "name": "Bruce Willis",
+    "headshot": "https://m.media-amazon.com/images/M/MV5BMjA0MjMzMTE5OF5BMl5BanBnXkFtZTcwMzQ2ODE3Mw@@._V1_UY98_CR8,0,67,98_AL_.jpg",
+    "birthDate": "1955-03-19",
+    "tradeMarks": ['Frequently plays a man who suffered a tragedy, had lost something or had a  crisis of confidence or conscience.',
+					  'Frequently plays likeable wisecracking heroes with a moral centre',
+					  'Headlines action-adventures, often playing a policeman, hitman or someone in the military',
+					  'Often plays men who get caught up in situations far beyond their control',
+					  'Sardonic one-liners',
+					  'Shaven head',
+					  'Distinctive, gravelly voice',
+					  'Smirky grin.',
+					  'Known for playing cynical anti-heroes with unhappy personal lives'],
+    "actedInMovies": [
+        { "movieId": "0110912", "title": "Pulp Fiction"},
+        { "movieId": "1606378", "title": "A Good Day to Die Hard"},
+        { "movieId": "0217869", "title": "Unbreakable"},
+        { "movieId": "0377917", "title": "The Fifth Element"},
+        { "movieId": "0112864", "title": "Die Hard: With a Vengeance"}
+    ]        
 })
 ```
 
-затем добавьте актера "Киану Ривз"
+затем добавьте актера "Keanu Reeves"
 
 ```
 db.persons.insertOne (
-{
-"id": 0000206,
-"name": "Киану Ривз",
-"headshot": "https://m.media-amazon.com/images/M/MV5BMjA0MjMzMTE5OF5BMl5BanBnXkFtZTcwMzQ2ODE3Mw@@._V1_UY98_CR8,0,67,98_AL_.jpg",
-"birthDate": "1955-03-19",
-"tradeMarks": ['Пристальный созерцательный взгляд',
-'Глубокий хриплый голос',
-'Известен игрой стойких сдержанных персонажей'],
-"actedInMovies": [
-{ "movieId": "0133093", "title": "Матрица"},
-{ "movieId": "0234215", "title": "Матрица: Перезагрузка"},
-{ "movieId": "0111257", "title": "Скорость"}
-]
+{ 
+    "id": 0000206, 
+    "name": "Keanu Reeves",
+    "headshot": "https://m.media-amazon.com/images/M/MV5BMjA0MjMzMTE5OF5BMl5BanBnXkFtZTcwMzQ2ODE3Mw@@._V1_UY98_CR8,0,67,98_AL_.jpg",
+    "birthDate": "1955-03-19",
+    "tradeMarks": ['Intense contemplative gaze',
+		  'Deep husky voice',
+		  'Known for playing stoic reserved characters'],
+    "actedInMovies": [
+        { "movieId": "0133093", "title": "The Matrix"},
+        { "movieId": "0234215", "title": "The Matrix Reloaded"},
+        { "movieId": "0111257", "title": "Speed"}
+    ]        
 })
 ```
 
-за ней следует актриса "Сандра Буллок"
+ актрису "Sandra Bullock"
 
 ```
 db.persons.insertOne (
-{
-"id": 0000113,
-"name": "Сандра Буллок",
-"headshot": "https://m.media-amazon.com/images/M/MV5BMTI5NDY5NjU3NF5BMl5BanBnXkFtZTcwMzQ0MTMyMw@@._V1_UX67_CR0,0,67,98_AL_.jpg",
-"birthDate": "1964-07-26",
-"actedInMovies": [
-{ "movieId": "2737304", "title": "Птичий короб"},
-{ "movieId": "0120179", "title": "Скорость 2: Круиз-контроль"},
-{ "movieId": "0111257", "title": "Скорость"},
-{ "movieId": "0212346", "title": "Мисс Конгениальность"}
-]
+{ 
+    "id": 0000113, 
+    "name": "Sandra Bullock",
+    "headshot": "https://m.media-amazon.com/images/M/MV5BMTI5NDY5NjU3NF5BMl5BanBnXkFtZTcwMzQ0MTMyMw@@._V1_UX67_CR0,0,67,98_AL_.jpg",
+    "birthDate": "1964-07-26",
+    "actedInMovies": [
+        { "movieId": "2737304", "title": "Bird Box"},
+        { "movieId": "0120179", "title": "Speed 2: Cruise Control"},
+        { "movieId": "0111257", "title": "Speed"},
+        { "movieId": "0212346", "title": "Miss Congeniality"}
+    ]        
 })
 ```
 
-и наконец мы также добавляем "Квентин Тарантино"
+и наконец  добавляем "Quentin Tarantino"
 
 ```
 db.persons.insertOne (
-{
-"id": 0000233,
-"name": "Квентин Тарантино",
-"headshot": "https://m.media-amazon.com/images/M/MV5BMTgyMjI3ODA3Nl5BMl5BanBnXkFtZTcwNzY2MDYxOQ@@._V1_UX67_CR0,0,67,98_AL_.jpg",
-"birthDate": "1963-03-27",
-"tradeMarks": ['Главные герои обычно ездят на General Motors транспортные средства, в частности Chevrolet и Cadillac, такие как Jules 1974 Nova и Vincents 1960-х Malibu.',
-'Портфели и чемоданы играют важную роль в фильмах «Криминальное чтиво» (1994), «Бешеные псы» (1992), «Джеки Браун» (1997), «Настоящая любовь» (1993) и «Убить Билла. Том 3». 2 (2004).',
-'Ссылается на культовые фильмы и телевидение',
-'Часто работает с Харви Кейтелем, Тимом Ротом, Майклом Мэдсеном, Умой Турман, Майклом Боуэном, Сэмюэлем Л. Джексоном, Майклом Парксом и Кристофом Вальцем',
-'Его фильмы обычно имеют кадры из багажника автомобиля',
-'В его фильмах всегда есть голландский элемент: начальная мелодия Little Green Bag в Reservoir Dogs (1992) была исполнена Джорджем Бейкером Селектионом и написана Яном Гербрандом Виссером и Бенджамино Боуэнсом, которые все голландцы. Персонаж Фредди Ньюандейк, которого играет Тим ​​Рот, является прямым переводом типичной голландской фамилии Nieuwendijk. Кодовое имя Тима Рота — Mr. Orange, королевский цвет Голландии и фамилия королевской семьи. Разговор в Амстердаме в «Криминальном чтиве» (1994), Винсент Вега курит голландский табак (Барабан), упоминание Рутгера Хауэра в «Джеки Браун» (1997), невесту зовут Беатрикс, имя королевы Нидерландов.',
-'[Мексиканское противостояние] Во всех его фильмах (включая «Настоящую любовь» (1993), которую он только написал, но не срежиссировал) есть сцена, в которой три или более персонажей одновременно направляют друг на друга пистолеты.',
-'Часто использует в своих фильмах нетрадиционный прием повествования, такой как ретроспектива (Бешеные псы (1992)), нелинейный (Криминальное чтиво (1994)) или формат «глав» (Убить Билла: Часть 1 (2003)).',
-'Его фильмы часто включают один длинный, непрерывный кадр, где за персонажем следуют где-то.'],
-"actedInMovies": [
-{ "movieId": "0378194", "title": "Убить Билла: Часть 2"},
-
-{ "movieId": "0110912", "title": "Скорость 2: Круиз-контроль"},
-
-{ "movieId": "0116367", "title": "От заката до рассвета"},
-
-{ "movieId": "0119396", "title": "Джеки Браун"}
-]
+{ 
+    "id": 0000233, 
+    "name": "Quentin Tarantino",
+    "headshot": "https://m.media-amazon.com/images/M/MV5BMTgyMjI3ODA3Nl5BMl5BanBnXkFtZTcwNzY2MDYxOQ@@._V1_UX67_CR0,0,67,98_AL_.jpg",
+    "birthDate": "1963-03-27",
+    "tradeMarks": ['Lead characters usually drive General Motors vehicles, particularly Chevrolet and Cadillac, such as Jules 1974 Nova and Vincents 1960s Malibu.',
+          'Briefcases and suitcases play an important role in Pulp Fiction (1994), Reservoir Dogs (1992), Jackie Brown (1997), True Romance (1993) and Kill Bill: Vol. 2 (2004).',
+          'Makes references to cult movies and television',
+          'Frequently works with Harvey Keitel, Tim Roth, Michael Madsen, Uma Thurman, Michael Bowen, Samuel L. Jackson, Michael Parks and Christoph Waltz.',
+          'His films usually have a shot from inside an automobile trunk',
+          'He always has a Dutch element in his films: The opening tune, Little Green Bag, in Reservoir Dogs (1992) was performed by George Baker Selection and written by Jan Gerbrand Visser and Benjamino Bouwens who are all Dutch. The character Freddy Newandyke, played by Tim Roth is a direct translation to a typical Dutch last name, Nieuwendijk. The code name of Tim Roth is Mr. Orange, the royal color of Holland and the last name of the royal family. The Amsterdam conversation in Pulp Fiction (1994), Vincent Vega smokes from a Dutch tobacco shag (Drum), the mentioning of Rutger Hauer in Jackie Brown (1997), the brides name is Beatrix, the name of the Royal Dutch Queen.',
+		  '[The Mexican Standoff] All his movies (including True Romance (1993), which he only wrote and did not direct) feature a scene in which three or more characters are pointing guns at each other at the same time.',
+         'Often uses an unconventional storytelling device in his films, such as retrospect (Reservoir Dogs (1992)), non-linear (Pulp Fiction (1994)), or "chapter" format (Kill Bill: Vol. 1 (2003)).',
+         'His films will often include one long, unbroken take where a character is  followed around somewhere.'],
+    "actedInMovies": [
+        { "movieId": "0378194", "title": "Kill Bill: Vol. 2"},
+        { "movieId": "0110912", "title": "Speed 2: Cruise Control"},
+        { "movieId": "0116367", "title": "From Dusk Till Dawn"},
+        { "movieId": "0119396", "title": "Jackie Brown"}
+    ]        
 })
 ```
 
@@ -377,7 +370,7 @@ db.persons.insertOne (
 db.persons.find()
 ```
 
-Мы также можем использовать метод `countDocuments()`, чтобы вернуть количество документов в коллекции.
+Использовать метод `countDocuments()`, чтобы вернуть количество документов в коллекции.
 
 ```
 db.persons.find().count()
@@ -395,7 +388,7 @@ db.persons.estimatedDocumentCount()
 db.persons.countDocuments()
 ```
 
-**Примечание:** обратите внимание, что не все документы абсолютно одинаковы. Документ «Сандра Буллок» не содержит массив `tradeMark`. Коллекции не содержат схемы, выполняется только парсинг JSON, поэтому документ должен быть допустимым JSON. Давайте посмотрим, что произойдет, если мы используем недопустимый документ.
+**Примечание:** обратите внимание, что не все документы абсолютно одинаковы. Документ «Сандра Буллок» не содержит массив `tradeMark`. Коллекции не содержат схемы, выполняется только парсинг JSON, поэтому документ должен быть допустимым JSON. Давайте посмотрим, что произойдет, если  используем недопустимый документ.
 
 ```
 db.persons.insertOne (
@@ -405,43 +398,43 @@ db.persons.insertOne (
 })
 ```
 
-Обратите внимание, что мы не закрыли должным образом ключ `id` (отсутствует "). При вставке мы получим следующую ошибку
+Обратите внимание, что мы не закрыли должным образом ключ `id` (missing  "). При вставке  получим следующую ошибку
 
 ```
 > db.persons.insertOne (
 ... {
-... "id: 0000113,
+...     "id: 0000113,
 Uncaught:
-SyntaxError: Незавершенная строковая константа. (3:4)
+SyntaxError: Unterminated string constant. (3:4)
 
-1 | db.persons.insertOne (
-2 | {
-> 3 | "id: 0000113,
-| ^
-4 |
+  1 | db.persons.insertOne (
+  2 | {
+> 3 |     "id: 0000113,
+    |     ^
+  4 |
 
-filmdb> "name": "Недопустимый актер"
+filmdb>     "name": "Invalid Actor"
 Uncaught:
-SyntaxError: Отсутствует точка с запятой. (1:10)
+SyntaxError: Missing semicolon. (1:10)
 
-> 1 | "name": "Недопустимый актер"
-| ^
-2 |
+> 1 |     "name": "Invalid Actor"
+    |           ^
+  2 |
 ```
 
 Таким образом, хотя документы в одной коллекции могут полностью отличаться от других документов в этой коллекции, они всегда должны быть допустимыми документами JSON.
 
 ## Запрос документов с помощью селектора запросов
 
-До сих пор мы использовали `find` для извлечения всех документов в коллекции. Это нормально, если у вас ограниченный набор документов, как здесь, но, конечно, если у вас миллион документов, вам нужен способ запросить только некоторые из них.
+До сих пор использовали `find` для извлечения всех документов в коллекции. Это нормально, если у вас ограниченный набор документов, как здесь, но, конечно, если у вас миллион документов, вам потребуется запрос на извлечение только некоторых документов.
 
-В дополнение к шести концепциям, которые мы рассмотрели, есть один практический аспект MongoDB, который вам нужно хорошо понять, прежде чем переходить к более сложным темам, **селекторы запросов**.
+В дополнение к шести концепциям, которые рассмотрели ранее, есть один практический аспект MongoDB, который нужно усвоить, прежде чем переходить к более сложным темам, **селекторы запросов**.
 
-**селектор запросов** MongoDB похож на предложение where оператора SQL. Таким образом, вы используете его при поиске, подсчете, обновлении и удалении документов из коллекций. Селектор — это объект JSON, простейшим из которых является {}, который соответствует всем документам. Если бы мы хотели найти все фильмы жанра боевик, мы могли бы использовать `{ geners:'Action' }`.
+**селектор запросов** MongoDB похож на предложение where оператора SQL. Таким образом, вы используете его при поиске, счете, обновлении и удалении документов из коллекций. Селектор — это объект JSON, простейшим из которых является {}, который соответствует всем документам. Если бы  хотели найти все фильмы жанра боевик, могли бы использовать `{ geners:'Action' }`.
 
-Прежде чем слишком глубоко погружаться в селекторы, давайте настроим несколько дополнительных фильмов для игры. Мы будем использовать 50 лучших фильмов из IMDB, без двух фильмов, которые мы уже добавили ранее. Мы не будем добавлять «полноценные» документы, мы только добавим ограниченную информацию для каждого фильма. Мы снова видим, что MongoDB «не имеет схемы», в том смысле, что не все документы должны содержать всю информацию.
+Прежде чем глубоко погружаться в селекторы, давайте настроим несколько дополнительных фильмов для игры. Будем использовать 50 лучших фильмов из IMDB, без двух фильмов, которые уже добавили ранее. Будем добавлять «полноценные» документы, мы только добавим ограниченную информацию для каждого фильма. Видим, что MongoDB «schema-less», в том смысле, что не все документы должны содержать всю информацию.
 
-Мы используем метод `insertMany` для добавления нескольких документов JSON одновременно.
+Используем метод `insertMany` для добавления нескольких документов JSON одновременно.
 
 ```
 db.movies.insertMany([
@@ -496,29 +489,30 @@ db.movies.insertMany([
 ])
 ```
 
-After executing the multi insert, we can check that we have in fact 50 movies in our `movies` collection. 
+После выполнения мультивставки мы можем убедиться, что в нашей коллекции `movies` на самом деле имеется 50 фильмов.
 
 ```
 > db.movies.find().count()
 50 
 ```
  
-Now that we have data, we can master selectors. `{field: value}` is used to find any documents where field is equal to value. `{field1: value1, field2: value2}` is how we can combine them with **and** semantic. 
-The special `$lt`, `$lte`, `$gt`, `$gte` and `$ne` are used for less than, less than or equal, greater than, greater than or equal and not equal operations. 
+Теперь, когда у нас есть данные,  можем освоить селекторы. `{field: value}` используется для поиска любых документов, где поле равно значению. `{field1: value1, field2: value2}` — это то, как мы можем объединить их с семантикой **and**.
+Специальные `$lt`, `$lte`, `$gt`, `$gte` и `$ne` используются для операций меньше, меньше или равно, больше, больше или равно и не равно.
 
-To get all Family movies, we can perform 
+Чтобы получить все Family фильмы, можем выполнить
 
 ```
 db.movies.find({"genres": "Family"})
 ```
 
-If we want get all movies that have been published in 2010 and after, we could do:
+Если мы хотим получить все фильмы, которые были опубликованы в 2010 году и позже, мы можем сделать следующее:
 
 ```
 db.movies.find({"genres":"Action", "year": { $gte :  2010 } })
 ```
 
-To find all movies which are **not** of genre **Drama**
+Чтобы найти все фильмы, которые **not** относятся к жанру **Drama**
+
 
 ```
 db.movies.find({"genres": { $ne: "Drama"} })
