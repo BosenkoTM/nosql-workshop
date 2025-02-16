@@ -30,7 +30,7 @@ sudo sysctl -w vm.max_map_count=262144
 # Получите проект
 cd
 sudo rm -R nosql-workshop/
-git clone https://github.com/gschmutz/nosql-workshop.git
+git clone https://github.com/BosenkoTM/nosql-workshop.git
 cd nosql-workshop/01-environment/docker
 ```
 
