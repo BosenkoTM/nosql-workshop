@@ -478,7 +478,7 @@ db.movies.countDocuments()
 
 Давайте также добавим фильм "The Matrix"
 
-```json
+```javascript
 db.movies.insertOne (
 { 
     "id": "0133093", 
@@ -519,20 +519,20 @@ db.movies.insertOne (
 
 Если выполним `db.getCollectionNames()`  увидем коллекцию, в которую  только что добавили документы
 
-```json
+```javascript
 > db.getCollectionNames()
 [ 'movies' ]
 ```
 
 Теперь можно использовать команду `find` для коллекции **movies**, чтобы вернуть список документов:
 
-```json
+```javascript
 db.movies.find()
 ```
 
 На самом деле выполняется оператор.
 
-```json
+```javascript
 db.movies.find({})
 ```
 
@@ -540,14 +540,14 @@ db.movies.find({})
 
 Чтобы отобразить результаты в отформатированном виде, используем метод `pretty()`
 
-```json
+```javascript
 db.movies.find().pretty()
 ```
 
 Обратите внимание, что в дополнение к указанным данным есть поле `_id`. Каждый документ должен иметь уникальное поле идентификатора.
 Можно сгенерировать его самостоятельно, либо разрешить MongoDB сгенерировать значение, которое имеет тип `ObjectId`. В большинстве случаев MongoDB автоматически генерирует. По умолчанию поле `_id` индексируется, что можно проверить с помощью команды `db.persons.getIndexes()`
 
-```json
+```javascript
 > db.movies.getIndexes()
 [ { "v" : 2, "key" : { "_id" : 1 }, "name" : "_id_" } ]
 ```
@@ -561,7 +561,7 @@ db.movies.find().pretty()
 
 Давайте сначала добавим актера "Bruce Willis"
 
-```json
+```javascript
 db.persons.insertOne (
 { 
     "id": 0000246, 
@@ -589,7 +589,7 @@ db.persons.insertOne (
 
 затем добавьте актера "Keanu Reeves"
 
-```json
+```javascript
 db.persons.insertOne (
 { 
     "id": 0000206, 
@@ -609,7 +609,7 @@ db.persons.insertOne (
 
  актрису "Sandra Bullock"
 
-```json
+```javascript
 db.persons.insertOne (
 { 
     "id": 0000113, 
@@ -627,7 +627,7 @@ db.persons.insertOne (
 
 и наконец  добавляем "Quentin Tarantino"
 
-```json
+```javascript
 db.persons.insertOne (
 { 
     "id": 0000233, 
@@ -654,31 +654,31 @@ db.persons.insertOne (
 
 Теперь давайте также проверим, что все 4 человека добавлены в коллекцию
 
-```json
+```javascript
 db.persons.find()
 ```
 
 Использовать метод `countDocuments()`, чтобы вернуть количество документов в коллекции.
 
-```json
+```javascript
 db.persons.find().count()
 ```
 
 или метод `estimatedDocumentCount()` для получения предполагаемого количества (на основе метаданных)
 
-```json
+```javascript
 db.persons.estimatedDocumentCount()
 ```
 
 Что в этом случае (поскольку мы не указываем селектор запроса) то же самое, что и
 
-```json
+```javascript
 db.persons.countDocuments()
 ```
 
 **Примечание:** обратите внимание, что не все документы абсолютно одинаковы. Документ «Сандра Буллок» не содержит массив `tradeMark`. Коллекции не содержат схемы, выполняется только парсинг JSON, поэтому документ должен быть допустимым JSON. Давайте посмотрим, что произойдет, если  используем недопустимый документ.
 
-```json
+```javascript
 db.persons.insertOne (
 {
 "id: 0000113,
@@ -724,7 +724,7 @@ SyntaxError: Missing semicolon. (1:10)
 
 Используем метод `insertMany` для добавления нескольких документов JSON одновременно.
 
-```json
+```javascript
 db.movies.insertMany([
 	{"id": "0111161", "title": "The Shawshank Redemption", "genres": ["Drama"], "year": 1994, "rating": 9.2, "rank": 1},
 	{"id": "0068646", "title": "The Godfather", "genres": ["Crime", "Drama"], "year": 1972, "rating": 9.2, "rank": 2},
@@ -779,7 +779,7 @@ db.movies.insertMany([
 
 После выполнения мультивставки можем убедиться, что в нашей коллекции `movies` на самом деле имеется 50 фильмов.
 
-```json
+```javascript
 > db.movies.find().count()
 50 
 ```
@@ -789,26 +789,25 @@ db.movies.insertMany([
 
 Чтобы получить все Family фильмы, можем выполнить
 
-```json
+```javascript
 db.movies.find({"genres": "Family"})
 ```
 
 Если  хотим получить все фильмы, которые были опубликованы в 2010 году и позже, мы можем сделать следующее:
 
-```json
+```javascript
 db.movies.find({"genres":"Action", "year": { $gte :  2010 } })
 ```
 
 Чтобы найти все фильмы, которые **not** относятся к жанру **Drama**
 
-
-```json
+```javascript
 db.movies.find({"genres": { $ne: "Drama"} })
 ```
 
 Оператор `$exists` может использоваться для проверки наличия или отсутствия поля.
 
-```json
+```javascript
 db.movies.find({ "plotOutline": { $exists: true} })
 ```
 
