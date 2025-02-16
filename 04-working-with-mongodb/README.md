@@ -811,97 +811,98 @@ db.movies.find({"genres": { $ne: "Drama"} })
 db.movies.find({ "plotOutline": { $exists: true} })
 ```
 
-we can see that only two movies have the `plotOutline` property set. 
+мы видим, что только два фильма имеют установленное свойство `plotOutline`.
 
-The `$in` operator can be used for matching one of several values that we pass as an array
+Оператор `$in` можно использовать для сопоставления одного из нескольких значений, которые мы передаем как массив.
 
-```
+```javascript
 db.movies.find({ "genres": { $in: ['Family', 'Mistery']} })
 ```
 
-which returns all movies in either the `Family` or `Mistery` genre.
+который возвращает все фильмы в жанре `Family` или `Mistery`.
 
-If we want to **OR** rather than **AND** several conditions on different fields, we use the `$or` operator and assign to it an array of selectors we want or’d
+Если  хотим использовать логическое ИЛИ (OR) вместо И (AND) для нескольких условий на разных полях, мы используем оператор $or, которому передаем массив селекторов, которые нужно объединить через ИЛИ.
 
-To find all movies of genre *Music* **OR** which have been published *2012* or later
+ Чтобы найти все фильмы жанра *Music* **OR** которые были выпущены в *2012* году или позже
 
-```
+```javascript
 db.movies.find({ $or: [ { "genres":"Music" },  { "year": { $gte :  2012 } } ] })
 ```
 
-To find all movies of genre *Action* **AND** which have been published *2010* or later **OR** have a rating later than *8.8*
+Чтобы найти все фильмы жанра *Action* **AND** которые были выпущены в *2010* году или позже **OR** имеют рейтинг выше *8.8*
 
-```
+```javascript
 db.movies.find({ "genres":"Action", $or: [ { "year": { $gte :  2010 } },  { "rating": { $gt :  8.8 } } ] })
 ```
 
-There’s something pretty neat going on in our last two examples. You might have already noticed, but the `genres` field is an array. MongoDB supports arrays as first class objects. This is an incredibly handy feature. Once you start using it, you wonder how you ever lived without it. What’s more interesting is how easy selecting based on an array value is: `{ genres: 'Action' }` will return any document where genres has a value of `Action`.
+В наших последних двух примерах есть что-то довольно интересное. Возможно, вы уже заметили, но поле `genres` является массивом. MongoDB поддерживает массивы как объекты первого класса. Это невероятно удобная функция. Когда вы начинаете ее использовать, вы задаетесь вопросом, как вы жили без нее. Что еще интереснее, так это то, насколько просто выполнять выборку на основе значения массива: `{ genres: 'Action' }` вернет любой документ, где в genres есть значение `Action`.
 
-There are more available operators than what we’ve seen so far. These are all described in the [Query Selectors](https://docs.mongodb.com/manual/reference/operator/query/index.html) section of the MongoDB manual. What we’ve covered so far though is the basics you’ll need to get started. It’s also what you’ll end up using most of the time.
+Существует больше доступных операторов, чем мы видели до сих пор. Все они описаны в разделе [Query Selectors](https://docs.mongodb.com/manual/reference/operator/query/index.html) руководства MongoDB. То, что мы рассмотрели до сих пор - это основы, которые вам понадобятся для начала работы. Это также то, что вы будете использовать чаще всего.
 
-We’ve seen how these selectors can be used with the `find` command. But they can also be used with the `remove` command, the `count` command and the `update` command which we’ll spend more time with later on.
+Мы видели, как эти селекторы можно использовать с командой `find`. Но их также можно использовать с командой `remove`, командой `count` и командой `update`, которым мы уделим больше внимания позже.
 
-The `ObjectId` which MongoDB generated for our `_id` field can be selected like so:
+`ObjectId`, который MongoDB сгенерировал для нашего поля `_id`, можно выбрать следующим образом:
 
-```
+```javascript
 db.movies.find( {_id: ObjectId("<the-object-id>")})
 ```
 
-Make sure to replace the `<the-object-id>` by an actual value of one of the movies you have inserted before. 
+Убедитесь, что вы заменили `<the-object-id>` на фактическое значение одного из фильмов, которые вы вставили ранее.
 
-## Updating Documents
+ ## Обновление документов
 
-In its simplest form, `updateOne()` takes two parameters: the selector (where) to use and what updates to apply to fields. Let's say that we want to change the rating of the movie `Fight Club` to `9`
+В своей простейшей форме `updateOne()` принимает два параметра: селектор (where) для использования и обновления, которые нужно применить к полям. Допустим, мы хотим изменить рейтинг фильма `Fight Club` на `9`
 
-```
+```javascript
 db.movies.updateOne ( {title: 'Fight Club'} , { $set: {rating: 9} } )
 ```
 
-In addition to `$set`, we can leverage other operators to do some nifty things. All update operators work on fields - so your entire document won’t be wiped out. For example, the `$inc` operator is used to increment a field by a certain positive or negative amount. 
+Помимо `$set`, мы можем использовать другие операторы для выполнения некоторых полезных операций. Все операторы обновления работают с полями - поэтому ваш весь документ не будет стерт. Например, оператор `$inc` используется для увеличения поля на определенное положительное или отрицательное значение.
 
-If we want to increase the votes for the movie "The Matrix", which is currently set to `1496538` as we can easily see using a find
+Если мы хотим увеличить количество голосов для фильма "The Matrix", которое в настоящее время установлено на `1496538`, как мы можем легко увидеть с помощью find
 
-```
+```javascript
 db.movies.find( {title: 'The Matrix'}, {"votes":1})
 ```
 
-*Note:* the second parameter in the find specifies that instead of the complete document we only want to return the `votes` property as we can see in the result (the _id is always returned by default and could be removed by explicitly also specifying `{ _id:0}` in the 2nd parameter). 
+*Примечание:* второй параметр в find указывает, что вместо полного документа мы хотим вернуть только свойство `votes`, как мы можем видеть в результате (_id всегда возвращается по умолчанию и может быть удален путем явного указания `{ _id:0}` во втором параметре).
 
-```
+```javascript
 > db.movies.find( {title: 'The Matrix'}, {"votes":1})
 { "_id" : ObjectId("5ccffa52aff86ec587e35faa"), "votes" : 1496538 }
 ```
 
-we can execute the following update
+мы можем выполнить следующее обновление
 
-```
+```javascript
 db.movies.updateOne( {title: 'The Matrix'} , { $inc: {votes: 1} } )
 ```
-check the new result using the same find as above a 2nd time
 
-```
+проверить новый результат, используя тот же find второй раз
+
+```javascript
 db.movies.find( {title: 'The Matrix'}, {"votes":1})
 ```
 
-## Performance Optimizations using Indexes
+ ## Оптимизация производительности с помощью индексов
 
-Indexes in MongoDB work a lot like indexes in a relational database: they help improve query and sorting performance. Indexes are created via `createIndex` command. So let's add an index on the title of movies documents. For an ascending index on a field, specify a value of `1`; for descending index, specify a value of `-1`.
+Индексы в MongoDB работают во многом как индексы в реляционной базе данных: они помогают улучшить производительность запросов и сортировки. Индексы создаются с помощью команды `createIndex`. Давайте добавим индекс по названию фильмов. Для возрастающего индекса по полю укажите значение `1`; для убывающего индекса укажите значение `-1`.
 
-```
+```javascript
 db.movies.createIndex( {title: 1} );
 ```
 
-if we know execute a query on the tile, the index will be used
+если мы теперь выполним запрос по названию, будет использован индекс
 
-```
+```javascript
 db.movies.find ( {title: "The Matrix"} );
 ```
 
-If we would have a lot more data in the movies collection, we might see a visual difference. But with only 50 movies, that's not the case. However we can use the `explain()` method to view the execution plan of the optimiser.
+Если бы у нас было гораздо больше данных в коллекции фильмов, мы могли бы увидеть визуальную разницу. Но с всего 50 фильмами это не так. Однако мы можем использовать метод `explain()` для просмотра плана выполнения оптимизатора.
 
-Adding the `explain` method at the end of the find statement will return the following result
+Добавление метода `explain` в конце оператора find вернет следующий результат
 
-```
+```javascript
 > db.movies.find ( {title: "The Matrix"} ).explain();
 {
   explainVersion: '1',
@@ -954,24 +955,24 @@ Adding the `explain` method at the end of the find statement will return the fol
 }
 ```
 
-We can see that the `winningPlan` uses the `title_1` index. 
+Мы можем видеть, что `winningPlan` использует индекс `title_1`.
 
-A unique index can be created by supplying a second parameter and setting `unique` to true. Let's add an index on the `id` field to ensure that it is unique. 
+Уникальный индекс может быть создан путем передачи второго параметра и установки `unique` в true. Давайте добавим индекс по полю `id`, чтобы убедиться, что оно уникально.
 
-```
+```javascript
 db.movies.createIndex( {id: 1}, {unique: true} );
 ```
 
-If we now try to add one of the movies a 2nd time we get an error:
+Если мы теперь попытаемся добавить один из фильмов второй раз, мы получим ошибку:
 
-```
+```javascript
 > db.movies.insertOne( {"id": "0111161", "title": "The Shawshank Redemption", "genres": ["Drama"], "year": 1994, "rating": 9.2, "rank": 1} )
 MongoServerError: E11000 duplicate key error collection: filmdb.movies index: id_1 dup key: { id: "0111161" }
 ```
 
-We can list the index we currently have on the `movies` collection using `db.movies.getIndexes()`:
+Мы можем просмотреть индексы, которые у нас есть в настоящее время в коллекции `movies`, используя `db.movies.getIndexes()`:
 
-```
+```javascript
 > db.movies.getIndexes()
 [
   { v: 2, key: { _id: 1 }, name: '_id_' },
@@ -980,41 +981,40 @@ We can list the index we currently have on the `movies` collection using `db.mov
 ]
 ```
 
-We can see a total of 3 indices, the two we have just added and a 3rd one on the `_id` field which has been created automatically by MongoDB.
+Мы можем видеть всего 3 индекса: два, которые мы только что добавили, и третий по полю `_id`, который был создан автоматически MongoDB.
 
+Индекс может быть удален с помощью команды `dropIndex`.
 
-An index can be dropped using the `dropIndex` command. 
-
-```
+```javascript
 db.movies.dropIndex( {title: 1} );
 ```
 
-We can also create a **Compound** Index covering multiple fields, we can create a **Multikey** Index to index the content of an array field and create **Geospatial**, **Text** and **Hashed** Indexes. 
+Мы также можем создать **Составной** индекс, охватывающий несколько полей, создать **Многоключевой** индекс для индексации содержимого поля массива и создать **Геопространственные**, **Текстовые** и **Хэшированные** индексы.
 
-Consult the [MongoDB's documentation](https://docs.mongodb.com/manual/indexes/) to read more about Indexes.  
+Обратитесь к [документации MongoDB](https://docs.mongodb.com/manual/indexes/) для получения дополнительной информации об индексах.
 
-## Text Search 
+ ## Текстовый поиск
 
-MongoDB supports query operations that perform a text search of string content. To perform text search, MongoDB uses a **text index** and the `$text` operator.
+MongoDB поддерживает операции запросов, которые выполняют текстовый поиск по строковому содержимому. Для выполнения текстового поиска MongoDB использует **текстовый индекс** и оператор `$text`.
 
-To perform text search queries, you must have a text index on your collection. A collection can only have one text search index, but that index can cover multiple fields.
+Для выполнения запросов текстового поиска у вас должен быть текстовый индекс в вашей коллекции. Коллекция может иметь только один индекс текстового поиска, но этот индекс может охватывать несколько полей.
 
-For example you can run the following in a mongo shell to allow text search over the `title` and `plotOutline` fields:
+Например, вы можете выполнить следующее в оболочке mongo, чтобы разрешить текстовый поиск по полям `title` и `plotOutline`:
 
-```
+```javascript
 db.movies.createIndex ( { title: "text", plotOutline: "text" } )
 ```
 
-Now let's to a text search for the term "fight"
+Теперь давайте выполним текстовый поиск по термину "fight"
 
-```
+```javascript
 db.movies.find( { $text: { $search: "fight" } } )
 ```
 
-The `$text` query operator will tokenize the search string using whitespace and most punctuation as delimiters, and perform a logical OR of all such tokens in the search string.
-We should get a result with two movies, one Flight Club where the term can be found in the title and another one where the term is used in the `plotOutline`. 
+Оператор запроса `$text` будет токенизировать строку поиска, используя пробелы и большинство знаков препинания в качестве разделителей, и выполнит логическое ИЛИ всех таких токенов в строке поиска.
+Мы должны получить результат с двумя фильмами, один Fight Club, где термин можно найти в названии, и другой, где термин используется в `plotOutline`.
 
-```
+```javascript
 db.movies.find( { $text: { $search: "fight" } } )
 [
   {
@@ -1065,175 +1065,74 @@ db.movies.find( { $text: { $search: "fight" } } )
 ]
 ```
 
-If we change the term to `fight terrorist` we can see that the search string will be tokenized into `fight` and `terrorist` and all the movies will be returned matching either of the two terms in the `title` or the `plotOutline` field. 
+Если мы изменим термин на `fight terrorist`, мы увидим, что строка поиска будет разбита на токены `fight` и `terrorist`, и будут возвращены все фильмы, соответствующие любому из этих двух терминов в поле `title` или `plotOutline`.
 
-```
+```javascript
 db.movies.find( { $text: { $search: "fight terrorist" } } )
 ```
 
-Therefore we will also get back a 3rd movie, the movie "The Matrix" which uses the word Terrorist in the plot outline.
+Поэтому мы также получим третий фильм, фильм "The Matrix", в описании сюжета которого используется слово Terrorist.
 
-## Aggregating Data
+ ## Агрегация данных
 
-Aggregation pipeline gives you a way to transform and combine documents in your collection. You do it by passing the documents through a pipeline that’s somewhat analogous to the Unix “pipe” where you send output from one command to another to a third, etc.
+Конвейер агрегации дает вам возможность преобразовывать и комбинировать документы в вашей коллекции. Вы делаете это, пропуская документы через конвейер, который аналогичен Unix "pipe", где вы передаете вывод от одной команды к другой, к третьей и т.д.
 
-The simplest aggregation you are probably already familiar with is the SQL group by expression. We already saw the simple `countDocuments()` and `count()` method, but what if we want to see how many movies we have for the different ratings?
+Простейшая агрегация, с которой вы, вероятно, уже знакомы - это выражение SQL group by. Мы уже видели простые методы `countDocuments()` и `count()`, но что если мы хотим увидеть, сколько фильмов у нас есть для разных рейтингов?
 
-```
+```javascript
 db.movies.aggregate( [{$group:{_id:'$rating', total: { $sum:1 }}}]) 
 ```
 
-In the shell we have the aggregate helper which takes an array of pipeline operators. For a simple count grouped by something, we only need one such operator and it’s called `$group`. This is the exact analog of GROUP BY in SQL where we create a new document with `_id` field indicating what field we are grouping by (here it’s rating) and other fields usually getting assigned results of some aggregation, in this case we `$sum 1` for each document that matches a particular rating. You probably noticed that the `_id` field was assigned `$rating` and not only `rating` - the `$` before a field name indicates that the value of this field from incoming document will be substituted.
+В оболочке у нас есть помощник агрегации, который принимает массив операторов конвейера. Для простого подсчета, сгруппированного по чему-либо, нам нужен только один такой оператор, называемый `$group`. Это точный аналог GROUP BY в SQL, где мы создаем новый документ с полем `_id`, указывающим, по какому полю мы группируем (здесь это rating), и другими полями, обычно получающими результаты некоторой агрегации, в данном случае мы используем `$sum 1` для каждого документа, соответствующего определенному рейтингу. Вы, вероятно, заметили, что полю `_id` было присвоено `$rating`, а не просто `rating` - `$` перед именем поля указывает, что будет подставлено значение этого поля из входящего документа.
 
-What are some of the other pipeline operators that we can use? 
+Какие еще операторы конвейера мы можем использовать?
 
-The most common one to use before (and frequently after) `$group` is the `$match` - this is exactly like the find method and it allows us to aggregate only a matching subset of our documents, or to exclude some documents from our result.
+Наиболее часто используемый до (и часто после) `$group` - это `$match` - это точно как метод find, и он позволяет нам агрегировать только соответствующее подмножество наших документов или исключить некоторые документы из нашего результата.
 
-In the following example we group by `genres` and count the number of movies for each genre. Because the `genres` field is an array, we first have to use `$unwind` to flatten the array. We also return the minimum, maximum and average rating for each group. The result is sorted by the number of movies per genre in descending order. 
+В следующем примере мы группируем по `genres` и подсчитываем количество фильмов для каждого жанра. Поскольку поле `genres` является массивом, сначала мы должны использовать `$unwind` для разворачивания массива. Мы также возвращаем минимальный, максимальный и средний рейтинг для каждой группы. Результат сортируется по количеству фильмов в жанре в порядке убывания.
 
-```
+```javascript
 db.movies.aggregate([
-					{$match: {year:{$gt:2000}}}, 
-					{$unwind: "$genres" }, 
-					{$group: {_id:'$genres',
-					    number :{ $sum:1 },
-					    minRating:{$min:'$rating'}, 
-					    maxRating:{$max:'$rating'}, 
-					    avgRating:{$avg:'$rating'}
-					}}, 
-					{$sort:{number:-1}} ])
+                    {$match: {year:{$gt:2000}}}, 
+                    {$unwind: "$genres" }, 
+                    {$group: {_id:'$genres',
+                        number :{ $sum:1 },
+                        minRating:{$min:'$rating'}, 
+                        maxRating:{$max:'$rating'}, 
+                        avgRating:{$avg:'$rating'}
+                    }}, 
+                    {$sort:{number:-1}} ])
 ```
 
-Execution should return the following result
+Выполнение должно вернуть следующий результат
 
-```
-[
-  {
-    _id: 'Drama',
-    number: 11,
-    minRating: 8.5,
-    maxRating: 9,
-    avgRating: 8.636363636363637
-  },
-  {
-    _id: 'Adventure',
-    number: 7,
-    minRating: 8.5,
-    maxRating: 8.9,
-    avgRating: 8.7
-  },
-  {
-    _id: 'Fantasy',
-    number: 5,
-    minRating: 8.5,
-    maxRating: 8.9,
-    avgRating: 8.74
-  },
-  {
-    _id: 'Sci-Fi',
-    number: 4,
-    minRating: 8.5,
-    maxRating: 8.8,
-    avgRating: 8.625
-  },
-  {
-    _id: 'Thriller',
-    number: 4,
-    minRating: 8.5,
-    maxRating: 9,
-    avgRating: 8.675
-  },
-  {
-    _id: 'Crime',
-    number: 3,
-    minRating: 8.5,
-    maxRating: 9,
-    avgRating: 8.700000000000001
-  },
-  {
-    _id: 'Action',
-    number: 3,
-    minRating: 8.7,
-    maxRating: 9,
-    avgRating: 8.833333333333334
-  },
-  {
-    _id: 'Biography',
-    number: 2,
-    minRating: 8.5,
-    maxRating: 8.5,
-    avgRating: 8.5
-  },
-  {
-    _id: 'Mystery',
-    number: 2,
-    minRating: 8.5,
-    maxRating: 8.5,
-    avgRating: 8.5
-  },
-  {
-    _id: 'Music',
-    number: 2,
-    minRating: 8.5,
-    maxRating: 8.5,
-    avgRating: 8.5
-  },
-  {
-    _id: 'Animation',
-    number: 1,
-    minRating: 8.5,
-    maxRating: 8.5,
-    avgRating: 8.5
-  },
-  {
-    _id: 'Family',
-    number: 1,
-    minRating: 8.5,
-    maxRating: 8.5,
-    avgRating: 8.5
-  },
-  {
-    _id: 'Comedy',
-    number: 1,
-    minRating: 8.5,
-    maxRating: 8.5,
-    avgRating: 8.5
-  },
-  {
-    _id: 'War',
-    number: 1,
-    minRating: 8.5,
-    maxRating: 8.5,
-    avgRating: 8.5
-  }
-]
-```
+[результат опущен для краткости]
 
-There is another powerful pipeline operator called `$project` (analogous to the projection we can specify to the find command) which allows you not just to include certain fields, but to create or calculate new fields based on values in existing fields. For example, you can use math operators to add together values of several fields before finding out the average, or you can use string operators to create a new field that’s a concatenation of some existing fields.
+Есть еще один мощный оператор конвейера, называемый `$project` (аналогичный проекции, которую мы можем указать для команды find), который позволяет не только включать определенные поля, но и создавать или вычислять новые поля на основе значений в существующих полях. Например, вы можете использовать математические операторы для сложения значений нескольких полей перед нахождением среднего, или вы можете использовать строковые операторы для создания нового поля, которое является конкатенацией некоторых существующих полей.
 
-This just barely scratches the surface of what you can do with aggregations. Consult the [MongoDB's documentation](https://docs.mongodb.com/manual/core/aggregation-pipeline/index.html) to read more about Aggregation Pipelines.  
+Это лишь слегка затрагивает поверхность того, что вы можете делать с агрегациями. Обратитесь к [документации MongoDB](https://docs.mongodb.com/manual/core/aggregation-pipeline/index.html) для получения дополнительной информации о конвейерах агрегации.
 
-## Removing Documents
+## Удаление документов
 
-For removing one or more documents, just use what we have learned about the Query Selectors, but as a parameter to the `deleteOne` command instead of the `find` command. 
+Для удаления одного или нескольких документов просто используйте то, что мы узнали о селекторах запросов, но в качестве параметра команды `deleteOne` вместо команды `find`.
 
-If we want to remove a specific document, for example the movie "Fight Club", we can perform
+Если мы хотим удалить конкретный документ, например фильм "Fight Club", мы можем выполнить
 
-```
+```javascript
 db.movies.deleteOne( { "title": "Fight Club" } )
 ```
 
-The result will show how many documents have been removed:
+Результат покажет, сколько документов было удалено:
 
-```
+```javascript
 > db.movies.deleteOne( { "title": "Fight Club" } )
 { acknowledged: true, deletedCount: 1 }
 ```
 
-We can see that as expected, one movie has been removed. 
+Мы видим, что, как и ожидалось, один фильм был удален.
 
-We can easily also remove the rest of the additional movies we have added before with the following command, specifying to remove all documents where there is no `plotOutline` field. 
+Мы также можем легко удалить остальные дополнительные фильмы, которые мы добавили ранее, следующей командой, указав удалить все документы, где нет поля `plotOutline`.
 
-```
+```javascript
 db.movies.deleteMany( { "plotOutline": { $exists: false} } )
 ```
