@@ -13,24 +13,15 @@
 ## Сервисы, доступные на платформе NoSQL
 Следующие сервисы доступны как часть платформы:
 
-Продукт | Тип | Услуга | URL
-------|------| --------| ----
-Redis | Разработка | Redis Commander | <http://localhost:28119>
-Cassandra | Разработка | Cassandra-Web | <http://localhost:28200>
-MongoDB | Управление | Администрирование Mongo | <http://localhost:28204>
-MongoDB | Разработка | Mongo-Express | <http://localhost:28203>
-Elasticsearch | Разработка | Dejavu | <http://localhost:28205>
-Elasticsearch | Разработка | cerebro | <http://localhost:28206>
-Elasticsearch | Разработка | Kibana | <http://localhost:5601>
-Elasticsearch | Разработка | ElasticHQ | <http://localhost:28207>
-Neo4J | Разработка | Neo4J | <http://localhost:7474>
-Grafana | Разработка | Grafana | <http://localhost:3000>
-Zepplin | Разработка | Zeppelin | <http://localhost:28080>
-Jupyter | Разработка | Jupyter | <http://localhost:28888>
-Influx DB | Разработка | Chronograf | <http://localhost:28209>
-Influx DB | Разработка | Influx UI | <http://localhost:28208>
-Администратор | Разработка | PostgreSQL | <http://localhost:28210>
-CAdvisor | Управление | Docker | <http://localhost:28217>
+Продукт  Сервис | URL
+------| --------| ----
+Redis |  Redis Commander | <http://localhost:28119>
+Cassandra |  Cassandra-Web | <http://localhost:28200>
+MongoDB |  Администрирование Mongo | <http://localhost:28204>
+MongoDB |  Mongo-Express | <http://localhost:28203>
+Neo4J |  Neo4J | <http://localhost:7474>
+Jupyter |  Jupyter | <http://localhost:28888>
+
 
 ## Семинар на основе IMDb
 
