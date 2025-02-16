@@ -40,10 +40,10 @@ And finally let's start the environment:
 
 ```
 # Make sure that the environment is not running
-docker-compose down
+sudo docker compose down
 
 # Startup Environment
-docker-compose up -d
+sudo docker compose up -d
 ```
 
 The environment should start immediately, as all the necessary images should already be available in the local docker image registry. 
@@ -59,14 +59,14 @@ Your instance is now ready to use. Complete the post installation steps document
 To stop the environment, execute the following command:
 
 ```
-docker-compose stop
+sudo docker compose stop
 ```
 
-after that it can be re-started using `docker-compose start`.
+after that it can be re-started using `sudo docker compose start`.
 
 To stop and remove all running container, execute the following command:
 
 ```
-docker-compose down
+sudo docker compose down
 ```
 
