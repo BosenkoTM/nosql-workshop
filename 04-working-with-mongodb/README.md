@@ -285,86 +285,89 @@ db.getCollectionNames()       // Список коллекций
 db.movies.insertOne({...})    // Добавление документа
 ```
 
-Подводя итог, MongoDB состоит из баз данных, содержащих коллекции. Коллекция состоит из документов. Каждый документ состоит из полей. Коллекции можно индексировать, что повышает производительность поиска и сортировки. Наконец, когда мы получаем данные из MongoDB, мы делаем это через курсор, фактическое выполнение которого откладывается до необходимости.
+ # Практическая работа 1. Создание документов в MongoDB
 
-Зачем использовать новую терминологию (коллекция против таблицы, документ против строки и поле против столбца)? Просто чтобы все усложнить? Правда в том, что, хотя эти концепции похожи на свои аналоги в реляционных базах данных, они не идентичны. Основное различие заключается в том, что реляционные базы данных определяют столбцы на уровне таблицы, тогда как документоориентированная база данных определяет свои поля на уровне документа. То есть каждый документ в коллекции может иметь свой собственный уникальный набор полей. Таким образом, коллекция — это упрощенный контейнер по сравнению с таблицей, в то время как документ содержит гораздо больше информации, чем строка.
+## Вставка документа фильма в коллекцию `movies`
 
-Хотя это важно понимать, не волнуйтесь, если что-то еще не ясно. Потребуется не больше пары вставок, чтобы увидеть, что это на самом деле означает. В конечном счете, суть в том, что коллекция не является строгой в отношении того, что в нее попадает (она не имеет схемы). Поля отслеживаются с каждым отдельным документом. Преимущества и недостатки этого будут рассмотрены в будущей главе.
-
-Итак, начнем в оболочке MongoDB.
-
-Сначала мы используем глобальный помощник use для переключения баз данных, поэтому продолжайте и введите
-
-```
-use filmdb
-```
-
-Неважно, что база данных на самом деле еще не существует. Первая коллекция, которую мы создадим, также создаст базу данных `filmdb`. Теперь, когда вы находитесь внутри базы данных, вы можете начать выполнять команды базы данных, такие как `db.getCollectionNames()`.
-
-```
-db.getCollectionNames()
-```
-
-Вы получите пустой массив, так как в базе данных `filmdb` пока нет коллекций.
-
-Поскольку коллекции не имеют схемы, нам не нужно явно создавать их, и мы можем напрямую начать добавлять документы в коллекцию.
-
-## Создание документов Movie в коллекции `movies`
-
-Мы можем просто вставить документ в новую коллекцию. Для этого используйте команду `insert`, указав в ней документ для вставки:
-
-Добавьте документ для фильма "Pulp Fiction" в коллекцию `movies`. Приведенную ниже команду можно использовать из оболочки MongoDB.
-
-```
-db.movies.insertOne (
-{ 
+### Команда вставки
+```javascript
+db.movies.insertOne({
     "id": "0110912", 
     "title": "Pulp Fiction",
     "year": 1994,
-    "runtime": 154,
-    "languages": ["en", "es", "fr"],
-    "rating": 8.9,
-    "votes": 2084331,
-    "genres": ["Crime", "Drama"],
-    "plotOutline": "Jules Winnfield (Samuel L. Jackson) and Vincent Vega (John Travolta) are two hit men who are out to retrieve a suitcase stolen from their employer, mob boss Marsellus Wallace (Ving Rhames). Wallace has also asked Vincent to take his wife Mia (Uma Thurman) out a few days later when Wallace himself will be out of town. Butch Coolidge (Bruce Willis) is an aging boxer who is paid by Wallace to lose his fight. The lives of these seemingly unrelated people are woven together comprising of a series of funny, bizarre and uncalled-for incidents.",
-    "coverUrl": "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY150_CR1,0,101,150_.jpg",
-    "actors": [
-        { "actorID": "0000619", "name": "Tim Roth"},
-        { "actorID": "0001625", "name": "Amanda Plummer"},    
-        { "actorID": "0522503", "name": "Laura Lovelace"},         
-        { "actorID": "0000237", "name": "John Travolta"},   
-        { "actorID": "0000168", "name": "Samuel L. Jackson"},   
-        { "actorID": "0482851", "name": "Phil LaMarr"},   
-        { "actorID": "0001844", "name": "Frank Whaley"},  
-        { "actorID": "0824882", "name": "Burr Steers"},  
-        { "actorID": "0000246", "name": "Bruce Willis"}, 
-        { "actorID": "0000609", "name": "Ving Rahmes"},         
-        { "actorID": "0000235", "name": "Uma Thurman"},
-        { "actorID": "0000233", "name": "Quentin Tarantino"}
-    ],
-    "directors": [
-        { "directorID": "0000233", "name": "Quentin Tarantino"}
-    ],
-    "producers": [
-        { "producerID": "0004744", "name": "Lawrence Bender"},
-        { "producerID": "0000362", "name": "Danny DeVito"},
-        { "producerID": "0321621", "name": "Richard N. Gladstein"},        
-        { "producerID": "0787834", "name": "Michael Shamberg"},        
-        { "producerID": "0792049", "name": "Stacey Sher"},  
-        { "producerID": "0918424", "name": "Bob Weinstein"},  
-        { "producerID": "0005544", "name": "Harvey Weinstein"}  
-    ]
+    // ... остальные поля
 })
 ```
 
-После выполнения команды должны получить, что был вставлен 1 документ.
-
-```
+### Структура документа фильма
+```javascript
 {
-acknowledged: true,
-installedId: ObjectId('66cb796c8137d3ecf9c76a8d')
+    // Основная информация
+    "id": String,            // ID фильма
+    "title": String,         // Название
+    "year": Number,          // Год выпуска
+    "runtime": Number,       // Продолжительность в минутах
+    
+    // Массивы данных
+    "languages": [String],   // Список языков
+    "genres": [String],      // Список жанров
+    
+    // Рейтинги
+    "rating": Number,        // Оценка
+    "votes": Number,         // Количество голосов
+    
+    // Текстовое описание
+    "plotOutline": String,   // Сюжет
+    
+    // Медиа
+    "coverUrl": String,      // URL постера
+    
+    // Вложенные массивы объектов
+    "actors": [{             // Актёры
+        "actorID": String,
+        "name": String
+    }],
+    "directors": [{          // Режиссёры
+        "directorID": String,
+        "name": String
+    }],
+    "producers": [{          // Продюсеры
+        "producerID": String,
+        "name": String
+    }]
 }
 ```
+
+### Результат вставки
+```javascript
+{
+    acknowledged: true,
+    insertedId: ObjectId('66cb796c8137d3ecf9c76a8d')
+}
+```
+
+## Важные моменты:
+1. MongoDB автоматически создаёт `_id`, если не указан
+2. Документ может содержать:
+   - Простые типы (строки, числа)
+   - Массивы
+   - Вложенные объекты
+   - Массивы объектов
+
+## Проверка вставки
+```javascript
+// Поиск вставленного документа
+db.movies.findOne({ "title": "Pulp Fiction" })
+
+// Подсчёт документов в коллекции
+db.movies.countDocuments()
+```
+
+## Примечания:
+- `insertOne()` вставляет один документ
+- Для вставки нескольких документов используйте `insertMany()`
+- Коллекция создаётся автоматически при первой вставке
+- Все поля в документе необязательны (гибкая схема)
 
 В графических инструментах в большинстве случаев вам нужно только предоставить документ JSON, без указания команды `db.movies.insertOne()`.
 
