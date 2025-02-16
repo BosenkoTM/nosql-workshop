@@ -13,14 +13,14 @@
 ## Сервисы, доступные на платформе NoSQL
 Следующие сервисы доступны как часть платформы:
 
-Продукт  Сервис | URL
-------| --------| ----
-Redis |  Redis Commander | <http://localhost:28119>
-Cassandra |  Cassandra-Web | <http://localhost:28200>
-MongoDB |  Администрирование Mongo | <http://localhost:28204>
-MongoDB |  Mongo-Express | <http://localhost:28203>
-Neo4J |  Neo4J | <http://localhost:7474>
-Jupyter |  Jupyter | <http://localhost:28888>
+ | Продукт | Сервис | URL |
+|---------|---------|-------|
+| Redis | Redis Commander | http://localhost:28119 |
+| Cassandra | Cassandra-Web | http://localhost:28200 |
+| MongoDB | Администрирование Mongo | http://localhost:28204 |
+| MongoDB | Mongo-Express | http://localhost:28203 |
+| Neo4J | Neo4J | http://localhost:7474 |
+| Jupyter | Jupyter | http://localhost:28888 |
 
 
 ## Семинар на основе IMDb
