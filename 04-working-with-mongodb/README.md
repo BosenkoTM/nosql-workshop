@@ -479,7 +479,7 @@ db.movies.countDocuments()
 Давайте также добавим фильм "The Matrix"
 
 ```javascript
-db.movies.insertOne (
+db.movies.insertOne(
 { 
     "id": "0133093", 
     "title": "The Matrix",
