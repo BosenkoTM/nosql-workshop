@@ -19,8 +19,18 @@
 | Cassandra | Cassandra-Web | http://localhost:28200 |
 | MongoDB | Администрирование Mongo | http://localhost:28204 |
 | MongoDB | Mongo-Express | http://localhost:28203 |
+| MongoDB | MongoDB Compass | Установлен локально в Ubuntu 22.04 |
 | Neo4J | Neo4J | http://localhost:7474 |
 | Jupyter | Jupyter | http://localhost:28888 |
+
+Примечание: MongoDB Compass - это графический интерфейс для работы с MongoDB, установленный непосредственно в виртуальной машине Ubuntu 22.04. Для подключения используйте:
+- URI: mongodb://root:abc123!@localhost:27017
+- или заполните поля отдельно:
+  * Hostname: localhost
+  * Port: 27017
+  * Authentication: Username/Password
+  * Username: root
+  * Password: abc123!
 
 
 ## Семинар на основе IMDb
