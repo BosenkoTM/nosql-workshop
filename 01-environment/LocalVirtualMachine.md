@@ -1,19 +1,19 @@
-# Local Virtual Machine Environment
+# Локальная среда виртуальной машины
 
-Open and start the virtual machine either by using **VMWare Workstation** on Windows or **VMWare Fusion** on Mac or **Virtual Box**. 
+Откройте и запустите виртуальную машину с помощью **VMWare Workstation** на Windows или **VMWare Fusion** на Mac или **Virtual Box**.
 
-Currently the VM is configured to use 14 GB of Memory. If you have less than 16 GB in total available on your system, make sure to reduce it before starting the virtual machine. 
+В настоящее время виртуальная машина настроена на использование **14** ГБ памяти. Если в вашей системе доступно менее 16 ГБ, обязательно уменьшите его перед запуском виртуальной машины.
 
-## Prepare Environment
+## Подготовка среды
 
-In the Virtual Machine, start a terminal window and execute the following commands. 
+В виртуальной машине запустите окно терминала и выполните следующие команды.
 
-First lets add the environment variables. Make sure to adapt the network interface (**ens33** according to your environment. You can retrieve the interface name by using **ipconfig** on windwos or **ifconfig* on Mac/Linux. 
+Сначала давайте добавим переменные среды. Обязательно адаптируйте сетевой интерфейс (**ens33**) в соответствии с вашей средой. Вы можете получить имя интерфейса, используя **ipconfig** в Windwos или **ifconfig* в Mac/Linux.
 
 ```
-# Prepare Environment Variables
-export PUBLIC_IP=$(curl ipinfo.io/ip)
-export DOCKER_HOST_IP=$(ip addr show ens33 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)
+# Подготовьте переменные среды
+экспорт PUBLIC_IP=$(curl ipinfo.io/ip)
+экспорт DOCKER_HOST_IP=$(ip addr show ens33 | grep "inet\b" | awk '{print $2}' | Cut -d/ -f1)
 ```
 
 или
@@ -21,30 +21,30 @@ export DOCKER_HOST_IP=$(ip addr show ens33 | grep "inet\b" | awk '{print $2}' | 
 Если вы работаете только локально:
 
 ```
-export PUBLIC_IP=localhost
-export DOCKER_HOST_IP=127.0.0.1
+экспортировать PUBLIC_IP=локальный хост
+экспортировать DOCKER_HOST_IP=127.0.0.1
 ```
 
-Если вы знаете свои IP-адреса:
+Если вы знаете свой IP-адрес:
 
 ```
-export PUBLIC_IP=your.public.ip
-export DOCKER_HOST_IP=your.local.ip
+экспортировать PUBLIC_IP=ваш.public.ip
+экспорт DOCKER_HOST_IP=ваш.локальный.ip
 
 ```
 
-В некоторых случаях можно использовать автоматическое определение IP в Docker-compose:
+В некоторых случаях можно использовать определение IP-адреса в Docker-compose:
 
 ```
-services:
-  myservice:
-    networks:
-      - host
+услуги:
+ мойсервис:
+ сети:
+ - хозяин
 ```
 
 Эти переменные важны, если:
 
-- Настраиваете распределенную систему.
+- Настраивает распределенную систему.
 
 - Работаете с Docker-контейнерами.
 
@@ -54,57 +54,55 @@ services:
 
 
 
-Now for Elasticserach to run properly, we have to increase the `vm.max_map_count` paramter like shown below.  
+Теперь, чтобы Elasticserach работал правильно, нужно увеличить параметр vm.max_map_count, как показано ниже.
 
 ```
-# needed for elasticsearch
-sudo sysctl -w vm.max_map_count=262144   
+# необходим для эластичного поиска
+sudo sysctl -w vm.max_map_count=262144
 ```
 
-Now let's checkout the NoSQL Workshop project from github:
+Теперь давайте проверим проект NoSQL Workshop с github:
 
 ```
-# Get the project
-cd /home/bigdata
-sudo rm -R nosql-workshop/
-git clone https://github.com/gschmutz/nosql-workshop.git
+# Получить проект
+компакт-диск /home/bigdata
+судо РМ -Р nosql-workshop/
+git clone https://github.com/BosenkoTM/nosql-workshop.git
 cd nosql-workshop/01-environment/docker
 ```
 
-## Start Environment
+## Запуск среды
 
-And finally let's start the environment:
-
-```
-# Make sure that the environment is not running
-docker-compose down
-
-# Startup Environment
-docker-compose up -d
-```
-
-The environment should start immediately, as all the necessary images should already be available in the local docker image registry. 
-
-The output should be similar to the one below. 
-
-![Alt Image Text](./images/start-env-docker.png "StartDocker")
-
-Your instance is now ready to use. Complete the post installation steps documented the [here](README.md).
-
-## Stop environment
-
-To stop the environment, execute the following command:
+И, наконец, давайте запустим среду:
 
 ```
-docker-compose stop
+# Убедитесь, что среда не запущена
+sudo docker compose down
+
+# Запуск среды
+sudo docker compose up -d
 ```
 
-after that it can be re-started using `docker-compose start`.
+Среда должна быть доступна сразу после установки всех контейнеров, так как все необходимые образы доступны в локальном реестре образов docker.
 
-To stop and remove all running container, execute the following command:
+Вывод похож на тот, что приведен ниже.
+
+![Alt ​​Image Text](./images/start-env-docker.png "StartDocker")
+
+Теперь  экземпляр готов к использованию. Выполните шаги после установки, описанные [здесь](README.md).
+
+## Остановить среду
+
+Чтобы остановить среду, выполните следующую команду:
 
 ```
-docker-compose down
+sudo docker compose stop
 ```
 
+после этого ее можно перезапустить с помощью `sudo docker compose start`.
 
+Чтобы остановить и удалить все запущенные контейнеры, выполните следующую команду:
+
+```
+sudo docker compose down
+```
