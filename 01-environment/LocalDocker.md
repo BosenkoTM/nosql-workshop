@@ -13,8 +13,8 @@
 
 ```
 # Установите переменные среды в соответствии с IP-адресом локальной машины
-export PUBLIC_IP=10.1.215.134
-export DOCKER_HOST_IP=10.1.215.134
+export PUBLIC_IP=localhost
+export DOCKER_HOST_IP=127.0.0.1
 ```
 
 Теперь для правильной работы Elasticserach нам нужно увеличить параметр `vm.max_map_count`, как показано ниже.
