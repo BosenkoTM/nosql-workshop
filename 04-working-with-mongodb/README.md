@@ -20,17 +20,24 @@ docker exec -ti mongo-1 mongosh -u "root" -p "abc123!"
 
 ```bash
 bigdata@bigdata:~$ docker exec -ti mongo-1 mongosh -u "root" -p "abc123!"
-Текущий идентификатор журнала Mongosh: 6446cf419d459282bba79eebПодключение к: mongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0
-Использование MongoDB: 6.0.5
-Использование Mongosh: 1.8.0
+Current Mongosh Log ID: 67b215162e08a3633d544ca6
+Connecting to:          mongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.8
+Using MongoDB:          7.0.16
+Using Mongosh:          2.3.8
 
-Информацию о Mongosh см. на странице https://docs.mongodb.com/mongodb-shell/
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+
+To help improve our products, anonymous usage data is collected and sent to MongoDB periodically (https://www.mongodb.com/legal/privacy-policy).
+You can opt-out by running the disableTelemetry() command.
 
 ------
-Сервер выдал эти предупреждения при загрузке
-2023-04-24T18:06:04.486+00:00: Настоятельно рекомендуется использовать файловую систему XFS с подсистемой хранения WiredTiger. См. http://dochub.mongodb.org/core/prodnotes-filesystem
-2023-04-24T18:06:08.233+00:00: vm.max_map_count слишком мал
+   The server generated these startup warnings when booting
+   2025-02-16T16:10:32.061+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2025-02-16T16:10:33.459+00:00: vm.max_map_count is too low
 ------
+
+test> 
 
 ------
 Включите бесплатную облачную службу мониторинга MongoDB, которая затем будет получать и отображать
