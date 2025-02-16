@@ -17,6 +17,24 @@ export PUBLIC_IP=localhost
 export DOCKER_HOST_IP=127.0.0.1
 ```
 
+Ubuntu 22/04
+
+```
+# Откройте файл .bashrc в текстовом редакторе
+nano ~/.bashrc
+
+# Добавьте эти строки в конец файла
+export PUBLIC_IP=localhost
+export DOCKER_HOST_IP=127.0.0.1
+
+# Сохраните файл: 
+# Ctrl + O, затем Enter для сохранения
+# Ctrl + X для выхода из nano
+
+# Примените изменения
+source ~/.bashrc
+```
+
 Теперь для правильной работы Elasticserach нам нужно увеличить параметр `vm.max_map_count`, как показано ниже.
 
 ```
