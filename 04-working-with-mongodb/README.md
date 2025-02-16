@@ -65,14 +65,14 @@ Instead of working over the command line and therefore having to connect to the 
 
 The first one is [Mongo Express](https://github.com/mongo-express/mongo-express), a Web-based MongoDB admin interface written with Node.js, Express and Bootstrap3.
 
-In a browser window, navigate to <http://localhost:28123/> and you should directly arrive on the home screen as shown below. 
+In a browser window, navigate to <http://localhost:28203/> and you should directly arrive on the home screen as shown below. 
 
 ![Alt Image Text](./images/mongo-express-home.png "Mongo Express")
 
 #### Admin Mongo
 The second one is [Admin Mongo](https://github.com/adicom-systems/adminMongo), an open source admin user interface for your MongoDB.
 
-In a browser window navigate to <http://localhost:28124/> and login with user `admin` and password `pass` and you should see the home screen as shown below. 
+In a browser window navigate to <http://localhost:28204/> and login with user `admin` and password `pass` and you should see the home screen as shown below. 
 
 ![Alt Image Text](./images/admin-mongo-home.png "Admin Mongo")
 
