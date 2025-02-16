@@ -13,41 +13,27 @@ You have the following options to start the environment:
  * [**Local Docker Environment**](./LocalDocker.md) - you have a local Docker and Docker Compose setup in place which you want to use
 
 
-## Post Provisioning
-
-These steps are necessary after the starting the docker environment. 
-
-### Add entry to local /etc/hosts File
-
-To simplify working with the NoSQL Platform and for the links below to work, add the following entry to your local `/etc/hosts` file. 
-
-```
-40.91.195.92	dataplatform  nosqlplatform
-```
-
-Replace the IP address by the PUBLIC IP of the docker host. 
-
 ## Services accessible on NoSQL Platform
 The following service are available as part of the platform:
 
 Product | Type | Service | Url
 ------|------| --------| ----
-Redis | Development | Redis Commander | <http://nosqlplatform:28119>
-Cassandra | Development | Cassandra-Web | <http://nosqlplatform:28200>
-MongoDB | Management | Admin Mongo | <http://nosqlplatform:28204>
-MongoDB | Development | Mongo-Express | <http://nosqlplatform:28203>
-Elasticsearch | Development | Dejavu | <http://nosqlplatform:28205>
-Elasticsearch | Development | cerebro | <http://nosqlplatform:28206>
-Elasticsearch | Development | Kibana | <http://nosqlplatform:5601>
-Elasticsearch | Development | ElasticHQ | <http://nosqlplatform:28207>
-Neo4J | Development | Neo4J | <http://nosqlplatform:7474>
-Grafana | Development | Grafana | <http://nosqlplatform:3000>
-Zepplin | Development | Zeppelin | <http://nosqlplatform:28080>
-Jupyter | Development | Jupyter | <http://nosqlplatform:28888>
-Influx DB | Development | Chronograf | <http://nosqlplatform:28209>
-Influx DB | Development | Influx UI | <http://nosqlplatform:28208>
-Adminer | Development | PostgreSQL | <http://nosqlplatform:28210>
-CAdvisor | Management | Docker | <http://nosqlplatform:28217>
+Redis | Development | Redis Commander | <http://localhost:28119>
+Cassandra | Development | Cassandra-Web | <http://localhost:28200>
+MongoDB | Management | Admin Mongo | <http://localhost:28204>
+MongoDB | Development | Mongo-Express | <http://localhost:28203>
+Elasticsearch | Development | Dejavu | <http://localhost:28205>
+Elasticsearch | Development | cerebro | <http://localhost:28206>
+Elasticsearch | Development | Kibana | <http://localhost:5601>
+Elasticsearch | Development | ElasticHQ | <http://localhost:28207>
+Neo4J | Development | Neo4J | <http://localhost:7474>
+Grafana | Development | Grafana | <http://localhost:3000>
+Zepplin | Development | Zeppelin | <http://localhost:28080>
+Jupyter | Development | Jupyter | <http://localhost:28888>
+Influx DB | Development | Chronograf | <http://localhost:28209>
+Influx DB | Development | Influx UI | <http://localhost:28208>
+Adminer | Development | PostgreSQL | <http://localhost:28210>
+CAdvisor | Management | Docker | <http://localhost:28217>
 
 
 ## Workshop based on IMDb
