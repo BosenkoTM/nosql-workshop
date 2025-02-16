@@ -287,10 +287,8 @@ db.movies.insertOne({...})    // Добавление документа
 
  # Практическая работа 1. Создание документов в MongoDB
  
- # Подключение к MongoDB Compass пошагово
-
 ## 1. Подключение к существующей MongoDB
-1. Откройте MongoDB Compass
+1. Откройте `MongoDB Compass`
 2. В поле URI введите:
 ```
 mongodb://root:abc123!@localhost:27017
@@ -312,33 +310,9 @@ mongodb://root:abc123!@localhost:27017
    - Collection Name: `movies`
    - Нажмите "Create Database"
 
+## 3. Вставка Документа в MongoDB Compass. Вставка документа фильма в коллекцию `movies`
 
-
-## 4. Проверка данных
-- В коллекции `movies` должен появиться новый документ
-- Можно использовать вкладку "Find" для поиска данных
-- Попробуйте фильтр: `{title: "Pulp Fiction"}`
-
-## Дополнительно
-- Используйте вкладку "Indexes" для создания индексов
-- "Explain Plan" поможет оптимизировать запросы
-- "Aggregation" для сложных запросов
-- "Schema" покажет структуру документов
-
-
-## Вставка документа фильма в коллекцию `movies`
-
-### Команда вставки
-```javascript
-db.movies.insertOne({
-    "id": "0110912", 
-    "title": "Pulp Fiction",
-    "year": 1994,
-    // ... остальные поля
-})
-```
-
-### Структура документа фильма
+### Структура документа `movies`
 ```javascript
 {
     // Основная информация
@@ -377,6 +351,96 @@ db.movies.insertOne({
 }
 ```
 
+## 3.1. Создание Документа
+1. В MongoDB Compass:
+   - Выберите базу данных `filmdb`
+   - Выберите коллекцию `movies`
+   - Нажмите "Add Data" → "Insert Document"
+
+2. В окне редактора вставьте JSON:
+```json
+{ 
+    "id": "0110912", 
+    "title": "Pulp Fiction",
+    "year": 1994,
+    "runtime": 154,
+    "languages": ["en", "es", "fr"],
+    "rating": 8.9,
+    "votes": 2084331,
+    "genres": ["Crime", "Drama"],
+    "plotOutline": "Jules Winnfield (Samuel L. Jackson) and Vincent Vega (John Travolta) are two hit men who are out to retrieve a suitcase stolen from their employer, mob boss Marsellus Wallace (Ving Rhames). Wallace has also asked Vincent to take his wife Mia (Uma Thurman) out a few days later when Wallace himself will be out of town. Butch Coolidge (Bruce Willis) is an aging boxer who is paid by Wallace to lose his fight. The lives of these seemingly unrelated people are woven together comprising of a series of funny, bizarre and uncalled-for incidents.",
+    "coverUrl": "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY150_CR1,0,101,150_.jpg",
+    "actors": [
+        { "actorID": "0000619", "name": "Tim Roth"},
+        { "actorID": "0001625", "name": "Amanda Plummer"},    
+        { "actorID": "0522503", "name": "Laura Lovelace"},         
+        { "actorID": "0000237", "name": "John Travolta"},   
+        { "actorID": "0000168", "name": "Samuel L. Jackson"},   
+        { "actorID": "0482851", "name": "Phil LaMarr"},   
+        { "actorID": "0001844", "name": "Frank Whaley"},  
+        { "actorID": "0824882", "name": "Burr Steers"},  
+        { "actorID": "0000246", "name": "Bruce Willis"}, 
+        { "actorID": "0000609", "name": "Ving Rahmes"},         
+        { "actorID": "0000235", "name": "Uma Thurman"},
+        { "actorID": "0000233", "name": "Quentin Tarantino"}
+    ],
+    "directors": [
+        { "directorID": "0000233", "name": "Quentin Tarantino"}
+    ],
+    "producers": [
+        { "producerID": "0004744", "name": "Lawrence Bender"},
+        { "producerID": "0000362", "name": "Danny DeVito"},
+        { "producerID": "0321621", "name": "Richard N. Gladstein"},        
+        { "producerID": "0787834", "name": "Michael Shamberg"},        
+        { "producerID": "0792049", "name": "Stacey Sher"},  
+        { "producerID": "0918424", "name": "Bob Weinstein"},  
+        { "producerID": "0005544", "name": "Harvey Weinstein"}  
+    ]
+}
+```
+
+3. Нажмите "Insert"
+
+## 4. Проверка Вставки
+После вставки:
+1. Обновите вид коллекции
+2. Вы должны увидеть новый документ
+3. MongoDB автоматически добавит поле `_id`
+
+## 5. Структура Документа
+Документ содержит:
+- Простые поля (`id`, `title`, `year`, etc.)
+- Массивы (`languages`, `genres`)
+- Вложенные массивы объектов (`actors`, `directors`, `producers`)
+
+## 6. Поиск Документа
+В Compass:
+1. Перейдите во вкладку "Find"
+2. Введите фильтр:
+```json
+{
+  "title": "Pulp Fiction"
+}
+```
+3. Нажмите "Find"
+
+## 7. Возможные Проблемы
+Если возникает ошибка:
+- Проверьте формат JSON (все кавычки должны быть двойными)
+- Убедитесь, что все скобки закрыты
+- Проверьте, что нет trailing comma (запятой после последнего элемента)
+
+## 8. Проверка данных
+- В коллекции `movies` должен появиться новый документ
+- Можно использовать вкладку "Find" для поиска данных
+- Попробуйте фильтр: `{title: "Pulp Fiction"}`
+
+## Дополнительно
+- Используйте вкладку "Indexes" для создания индексов
+- "Explain Plan" поможет оптимизировать запросы
+- "Aggregation" для сложных запросов
+- "Schema" покажет структуру документов
+
 ### Результат вставки
 ```javascript
 {
@@ -408,7 +472,7 @@ db.movies.countDocuments()
 - Коллекция создаётся автоматически при первой вставке
 - Все поля в документе необязательны (гибкая схема)
 
-В графических инструментах в большинстве случаев вам нужно только предоставить документ JSON, без указания команды `db.movies.insertOne()`.
+В графических инструментах в большинстве случаев нужно только предоставить документ JSON, без указания команды `db.movies.insertOne()`.
 
 Приведенная выше строка выполняет вставку в коллекцию **movies**, передавая ей один параметр. Внутри MongoDB использует двоичный сериализованный формат JSON, называемый BSON. Внешне это означает, что мы часто используем JSON, как и в случае с нашими параметрами.
 
