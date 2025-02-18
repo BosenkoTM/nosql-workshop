@@ -48,16 +48,24 @@
 
 Остановить все контейнеры и удалить
 
+```
 sudo docker stop $(sudo docker ps -aq) && sudo docker rm $(sudo docker ps -aq)
+```
 
 Удаление всех образов
 
+```
 sudo docker rmi $(sudo docker images -q)
+```
 
 Очистка всех сетей
 
+```
 sudo  docker system prune -a
+```
 
 Выполнить запуск  
 
+```
 sudo  docker compose up -d
+```
