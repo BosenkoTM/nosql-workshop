@@ -42,3 +42,22 @@
 ![Alt ​​Image Text](./images/IMDB-domain-and-context-data-model.png "Lightsail Homepage")
 
 Данные были загружены с помощью следующего блокнота Jupyter (ссылка будет добавлена).
+
+если не запустился контейнер docker:
+
+
+Остановить все контейнеры и удалить
+
+sudo docker stop $(sudo docker ps -aq) && sudo docker rm $(sudo docker ps -aq)
+
+Удаление всех образов
+
+sudo docker rmi $(sudo docker images -q)
+
+Очистка всех сетей
+
+sudo  docker system prune -a
+
+Выполнить запуск  
+
+sudo  docker compose up -d
