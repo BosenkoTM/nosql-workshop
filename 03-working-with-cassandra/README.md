@@ -369,7 +369,7 @@ FROM movies.actor;
 Что произойдет, если поставить фильтр, например на `name` актера.
 
 
-```
+```sql
 SELECT *
 FROM movies.actor
 WHERE name = 'Bruce Willis';
@@ -384,7 +384,7 @@ If you want to execute this query despite the performance unpredictability, use 
 ```
 Cassandra не позволяет ограничивать по  столбцу, кроме первичного ключа. Проерим поле `actor_id`, запрос при этом отработает.
 
-``sql
+```sql
 SELECT *
 FROM movies.actor
 WHERE actor_id = 0000246;
