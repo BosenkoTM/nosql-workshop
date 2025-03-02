@@ -733,7 +733,7 @@ WHERE movie_id = 0110912;
 
 всего за один месяц
 
-```
+```sql
 SELECT *
 FROM movies.movie_viewed_by_time
 WHERE movie_id = 0110912 AND year = 2019 AND month = 05;
@@ -741,7 +741,7 @@ WHERE movie_id = 0110912 AND year = 2019 AND month = 05;
 
 или за месяц с января по май
 
-```
+```sql
 SELECT *
 FROM movies.movie_viewed_by_time
 WHERE movie_id = 0110912 AND year = 2019 AND month >= 01 AND month <= 5;
