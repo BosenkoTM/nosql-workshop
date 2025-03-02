@@ -68,41 +68,42 @@ cqlsh> SELECT * FROM system_schema.keyspaces;
 ![Alt Image Text](./images/apache-zeppelin.png "Apache Zeppelin")
 
 Click on **Login** in the top right corner and enter `admin` into the **User Name** and `abc123!` into the **Password** field. Click **Login** and the home screen should refresh to show some preinstalled notebooks.
-
+Нажмите **Войти** в правом верхнем углу и введите `admin` в поле **User Name** и `abc123!` в поле **Password**. Нажмите **Login**.
 ![Alt Image Text](./images/apache-zeppelin-2.png "Apache Zeppelin")
 
-Apache Zeppelin uses a so called "Notebook" based model that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala and more.
+Apache Zeppelin использует так называемую модель на основе «Notebook», которая позволяет выполнять интерактивную аналитику данных и совместную работу с документами на основе SQL, Scala и т. д.
 
-Zeppelin uses the concept of interpreters. Each Interpreter has the capability to "talk" to a given data systems. When creating a Notebook, you can specify the "default" interpreter to use, all other interpreters can be used as well, but then the directive `%<interpreter-name>` has to be used in each cell.
+Zeppelin использует концепцию интерпретаторов. Каждый интерпретатор может «общаться» с заданными системами данных. При создании Notebook вы можете указать интерпретатор «по умолчанию», все остальные интерпретаторы также могут использоваться, но тогда в каждой ячейке должна использоваться директива `%<interpreter-name>`.
 
-Zeppelin has a Cassandra interpreter, which we will use here. But before we can use it, it has to be configured. Click on **anonymous** drop-down and select **Interpreter** as shown in the image below.
+Zeppelin подключил интерпретатор Cassandra, который мы будем здесь использовать. Но прежде чем мы сможем его использовать, его нужно настроить. Щелкните раскрывающийся список **anonymous** или **User Name** вверху справа  и выберите **Interpreter**, как показано на изображении ниже.
 
 ![Alt Image Text](./images/apache-zeppelin-navigate-interpreter.png "Apache Zeppelin Interpreter")
 
-Navigate to the **Cassandra** Interpreter either by searching for it or scrolling down to reach it. Click on **edit** and change the **cassandra.credentials.username** to `cassandra`,  **cassandra.credentials.password** to `cassandra` and **cassandra.host** property to `cassandra-1` (the service name of our Cassandra node in the docker-compose configuration).
+Выбрать **Cassandra** Interpreter, выполнив поиск или прокрутив страницу вниз, чтобы добраться до него. Нажмите **edit** и измените **cassandra.credentials.username** на `cassandra`, **cassandra.credentials.password** на `cassandra` и свойство **cassandra.host** на `cassandra-1` (имя службы нашего узла Cassandra в конфигурации docker-compose).
 
 ![Alt Image Text](./images/apache-zeppelin-interpreter-cassandra.png "Apache Zeppelin Cassandra Interpreter")
 
-Scroll-down to the end of the Interpreter settings and click **Save**. Confirm that you want Zeppelin to restart the Interpreter with the new settings.
+Прокрутите вниз до конца настроек интерпретатора и нажмите **Save**. Подтвердите, чтобы Zeppelin перезапустил интерпретатор с новыми настройками.
 
-Click on **Zeppelin** in the upper left corner to navigate back to the Home screen.
+Нажмите **Zeppelin** в верхнем левом углу, чтобы вернуться на главный экран.
 
-Now let's create a new notebook by clicking on the **Create new note** link. On the pop-up window enter `Cassandra` into the **Note Name** field and select **cassandra** for the **Default Interpreter** and click **Create**.
+Создадим новый блокнот, нажав на ссылку **Create new note**. Во всплывающем окне введите `Cassandra` в поле **Note Nam** и выберите **cassandra** для **Default Interpreter** и нажмите **Create**.
+
 
 ![Alt Image Text](./images/apache-zeppelin-create-notebook.png "Apache Zeppelin Cassandra Create Notebook")
 
-An empty notebook with one cell will appear. This cell is now ready to be used and has the Cassandra interpreted assigned. Enter each command into a separate cell and either click on the **play** icon on the right or hit **Ctrl-Enter** to execute the cell. A new cell will automatically appear when executing the current one.
+Появится пустой блокнот с одной ячейкой. Теперь эта ячейка готова к использованию и имеет назначенную интерпретацию Cassandra. Введите каждую команду в отдельную ячейку и либо щелкните значок **play** справа, либо нажмите **Ctrl-Enter**, чтобы выполнить ячейку. Новая ячейка автоматически появится при выполнении текущей.
 
-You can try it with the following statements
+Выполните скрипт
 
 ```sql
 SELECT * FROM system_schema.keyspaces;
 ```
-execute it and you should see the currently existing keyspaces
+выполните скрипт, должны увидеть существующие на данный момент пространства ключей
 
 ![Alt Image Text](./images/apache-zeppelin-cassandra.png "Apache Zeppelin Cassandra Create Notebook")
 
-For all the commands which follow now in this workshop, you can either use one of the 3 different options shown above. Of course you an also mix to your liking.
+Для всех команд, которые следуют сейчас в этом семинаре, вы можете использовать один из 3 различных вариантов, показанных выше.
 
 ## Create a Keyspace for the Movie sample
 
