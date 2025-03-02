@@ -55,17 +55,16 @@ cqlsh> SELECT * FROM system_schema.keyspaces;
 
 #### Cassandra Web
 
-The first one is the [Cassandra Web](http://avalanche123.com/cassandra-web/).
-In a browser window navigate to <http://dataplatform:28120/> and you should directly get to the home screen as shown below.
+Первый — [Cassandra Web](http://avalanche123.com/cassandra-web/).
+В окне браузера перейдите по адресу <http://localhost:28120/>, и вы сразу попадете на главный экран, как показано ниже.
 
 ![Alt Image Text](./images/cassandra-web.png "Cassandra Web GUI")
 
-If you click on **Execute** in the top-right corner, a pop-window will appear where you can enter CQL statements and execute them.
+Если нажать кнопку **Execute CQL** в правом верхнем углу, появится всплывающее окно, в котором можно ввести операторы CQL и выполнить их.
 
 #### Apache Zeppelin
 
-Another universal "data" tool is [Apache Zeppelin](http://zeppelin.apache.org). In a browser window, navigate to <http://dataplatform:28080/> and you should directly arrive on the home screen as shown below.
-
+Другой универсальный инструмент «данных» — [Apache Zeppelin](http://zeppelin.apache.org). В окне браузера перейдите на <http://localhost:28080/>, и вы сразу же попадете на главный экран, как показано ниже.
 ![Alt Image Text](./images/apache-zeppelin.png "Apache Zeppelin")
 
 Click on **Login** in the top right corner and enter `admin` into the **User Name** and `abc123!` into the **Password** field. Click **Login** and the home screen should refresh to show some preinstalled notebooks.
