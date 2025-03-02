@@ -107,48 +107,47 @@ SELECT * FROM system_schema.keyspaces;
 
 ## Create a Keyspace for the Movie sample
 
-Keyspace in Cassandra is the equivalent of database/schema in relational databases. While creating a keyspace, you need to specify replication settings:
+Keyspace в Cassandra является эквивалентом database/schema в реляционных базах данных. При создании keyspace необходимо указать настройки репликации:
 
 ```
 CREATE KEYSPACE movies WITH replication =
   {'class':'SimpleStrategy','replication_factor':1};
 ```
+Мы будем использовать SimpleStrategy для простоты, поскольку наша настройка Cassandra — это всего лишь один узел.
 
-We'll be using SimpleStrategy to keep things simple, because our Cassandra setup is just single node.
+В производственной среде, где обычно имеется несколько центров обработки данных, обычно используется `NetworkTopologyStrategy`, поскольку она лучше распределяет данные по центрам обработки данных.
 
-In a production environment, where it's usually common to have multiple datacenters, `NetworkTopologyStrategy` is generally used because it better distributes data across datacenters.
+Коэффициент репликации = 1 означает, что на определенном узле будет одна копия строки. Более высокие коэффициенты репликации устанавливаются в реальных системах для создания нескольких реплик, что обеспечивает доступность данных в случае сбоев диска.
 
-Replication factor = 1 means there will be single copy of a row on a particular node. Higher replication factors are set up in real systems for creating multiple replicas that ensures data availability in case of disk failures.
+Чтобы иметь возможность работать с таблицами, вам необходимо использовать свое пространство ключей, как показано в следующем операторе:
 
-To be able to work with tables, you need to use your keyspace, as shown in the following statement:
 
 ```
 USE movies;
 ```
+Другой вариант — добавлять к имени таблицы префикс имени пространства ключей во всех запросах, аналогично тому, что вы можете сделать при ссылке на схему.
 
-Another option is to prefix the table name with the keyspace name in all queries, similar to what you can do when referencing the schema in an RDBMS.
-
-At any time, you can `DESCRIBE` the keyspace, use the following command to do that:
+В любое время вы можете `DESCRIBE` пространство ключей, для этого используйте следующую команду:
 
 ```
 DESCRIBE KEYSPACE movies;
 ```
 
-and you should see an output similar to the one shown below
+получим
 
 ```
 CREATE KEYSPACE movies WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
 ```
 
-If you wish to list all keyspaces present in the database, a Cassandra reserve keyspace named system comes in handy. It contains many system-defined tables for database objects definition and cluster configuration. Let's list all records from the `schema_keyspaces` table that contains records for each keyspace.
+Если вы хотите перечислить все пространства ключей, имеющиеся в базе данных, резервное пространство ключей Cassandra с именем system будет вам полезно. Оно содержит множество системных таблиц для определения объектов базы данных и конфигурации кластера. Давайте перечислим все записи из таблицы `schema_keyspaces`, которая содержит записи для каждого пространства ключей.
 
-Enter the following command:
+Введите следующую команду:
 
 ```
 SELECT * FROM system_schema.keyspaces;
 ```
 
-The output of this command looks as follows:
+получим
 
 ```
  keyspace_name      | durable_writes | replication
@@ -161,13 +160,13 @@ The output of this command looks as follows:
       system_traces |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '2'}
 ```
 
-## Using "Static" Tables (skinny row)
+## Использование "Static" таблиц (skinny row)
 
-### Create the Movie and Actor table
+### Создайте таблицы Movie и Actor 
 
-Run the following statement for creating a table called user. For those who are acquainted with SQL, the following syntax should look very familiar and almost identical. Even some of the naming conventions as well as formatting guidelines can be reused.
+Выполните следующую инструкцию для создания таблицы с именем user. Для тех, кто знаком с SQL, следующий синтаксис должен показаться очень знакомым и почти идентичным. Даже некоторые соглашения об именовании, а также правила форматирования можно использовать повторно.
 
-```
+```sql
 DROP TABLE IF EXISTS movies.movie;
 CREATE TABLE movies.movie (movie_id int,
 	title text,				// title
@@ -182,9 +181,9 @@ CREATE TABLE movies.movie (movie_id int,
 );
 ```
 
-This creates a first static column family (table) in Cassandra. Now do the same for the Actor table.
+Это создает первое статическое семейство столбцов (таблицу) в Cassandra. Теперь сделайте то же самое для таблицы Actor.
 
-```
+```sql
 DROP TABLE IF EXISTS movies.actor;
 CREATE TABLE movies.actor (actor_id int,
   name text,					// name
@@ -196,20 +195,20 @@ CREATE TABLE movies.actor (actor_id int,
 );
 ```
 
-You can view a table metadata using the `DESCRIBE` command, as shown in the following statement
+Вы можете просмотреть метаданные таблицы с помощью команды `DESCRIBE`, как показано в следующем операторе.
 
 ```
 DESCRIBE TABLE movie;
 DESCRIBE TABLE actor;
 ```
 
-### Inserting Data into Movie and Actor
+### Вставка данных в Movie b Actor
 
-In Cassandra, an INSERT operation is actually an "Upsert" (UPDATE or INSERT), which means columns are updated in case a row for the given primary key already exists, otherwise all columns are freshly inserted.
+В Cassandra операция INSERT на самом деле является "Upsert" (UPDATE или INSERT), что означает, что столбцы обновляются в случае, если строка для данного первичного ключа уже существует, в противном случае все столбцы вставляются заново.
 
-First lets add the movie "The Matrix" and "Pulp Fiction"
+Сначала добавим фильмы "Матрица" и "Криминальное чтиво"
 
-```
+```sql
 // insert "The Matrix" - 0133093
 INSERT INTO movies.movie (movie_id, title, release_year, running_time, languages,
                    genres, plot_outline, cover_url, top250_rank)
@@ -250,11 +249,11 @@ VALUES (0111257,
 		  null); 		
 ```
 
-Now let's also add some actors playing in these 2 movies.
+Теперь давайте также добавим некоторых актеров, играющих в этих 2 фильмах.
 
-Let's add the actor "Bruce Willis", "John Travolta", "Sandra Bullock", "Samuel L. Jackson", "Uma Thurman" & "Quentin Tarantino"
+Давайте добавим актеров "Bruce Willis", "John Travolta", "Sandra Bullock", "Samuel L. Jackson", "Uma Thurman" & "Quentin Tarantino"
 
-```
+```sql
 // insert "Bruce Willis" - 0000246
 INSERT INTO movies.actor (actor_id, name, headshot_url, birth_date, trade_mark)
 VALUES (0000246,
@@ -345,29 +344,28 @@ VALUES (0000233,
          'His films will often include one long, unbroken take where a character is  followed around somewhere.']);
 ```
 
-**Note:** In the case of Quentin Tarantino we have shortend the trade marks from the original.
+### Отображение данных
 
-### Displaying Data
+Команда SELECT выводит список содержимого таблицы; фильтр можно применить с помощью предложения WHERE:
 
-SELECT command lists content of a table; a filter can be applied using the WHERE clause:
-
-```
+```sql
 SELECT movie_id, title
 FROM movies.movie;
 ```
 
-We can also select all columns as shown here for the Actor table:
+Мы также можем выбрать все столбцы, как показано здесь для таблицы «Актёр»:
 
-```
+```sql
 SELECT *
 FROM movies.actor;
 ```
 
-Result of previous SELECT queries may make you wonder, this looks so similar to RDBMS tables, is this how data is stored in Cassandra as well?
+Результат предыдущих запросов SELECT может заставить вас задуматься, ведь они похожи на таблицы в РСУБД, неужели данные хранятся в таблицах в Cassandra?
 
-The answer to the preceding questions is—although CQL gives you a nice looking interface similar to a RDBMS you are used to, data is stored in Cassandra according to its own data-model.
+Ответ  таков: хотя CQL предоставляет вам удобный интерфейс, похожий на привычную РСУБД, данные хранятся в Cassandra в соответствии с ее собственной моделью данных.
 
-Try what happens if you try to restrict on another column, such the `name` of the actor.
+Что произойдет, если поставить фильтр, например на `name` актера.
+
 
 ```
 SELECT *
