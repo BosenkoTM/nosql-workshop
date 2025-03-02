@@ -674,7 +674,7 @@ CREATE TABLE movies.movie_viewed_by_time (movie_id int,
 
 Добавьте несколько примеров значений в новую таблицу.
 
-```
+```sql
 // Pulp Fiction Views 2019/03
 UPDATE movies.movie_viewed_by_time
 SET male = male + 1
@@ -723,15 +723,15 @@ SET female = female + 1
 WHERE movie_id = 0110912 AND year = 2019 and month = 05;
 ```
 
-and see the views for the movie "Pulp Fiction" for all the time
+и вывести просмотры фильма "Криминальное чтиво" за все время
 
-```
+```sql
 SELECT *
 FROM movies.movie_viewed_by_time
 WHERE movie_id = 0110912;
 ```
 
-for just one month
+всего за один месяц
 
 ```
 SELECT *
@@ -739,7 +739,7 @@ FROM movies.movie_viewed_by_time
 WHERE movie_id = 0110912 AND year = 2019 AND month = 05;
 ```
 
-or for the month January to May
+или за месяц с января по май
 
 ```
 SELECT *
@@ -750,7 +750,9 @@ WHERE movie_id = 0110912 AND year = 2019 AND month >= 01 AND month <= 5;
 
 ## Using the Python API with Cassandra
 
-to be done ....
+как правило эта тема рассматривается в параллельном курсе по обработке  данных средствами Python
 
 
-This finishes the workshop for Cassandra.
+# Варианты индивидуальных заданий
+
+
