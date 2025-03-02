@@ -35,8 +35,9 @@ SELECT * FROM system_schema.keyspaces;
 
 и вы должны увидеть существующие в настоящее время пространства ключей в качестве результатов
 
-```
+```bash
 cqlsh> SELECT * FROM system_schema.keyspaces;
+
 
  keyspace_name      | durable_writes | replication
 --------------------+----------------+-------------------------------------------------------------------------------------
