@@ -10,7 +10,7 @@
 Вы можете найти утилиту командной строки `cqlsh` внутри контейнера Cassandra Docker, работающего как часть платформы. Подключитесь через SSH к Docker Host и выполните следующую команду `docker exec`
 
 ```
-docker exec -ti cassandra-1 cqlsh -u cassandra -p cassandra
+sudo docker exec -ti cassandra-1 cqlsh -u cassandra -p cassandra
 ```
 
 Это подключит вас к контейнеру `cassandra-1` и запустит `cqlsh` внутри id. Вы должны увидеть вывод, похожий на этот.
