@@ -1,19 +1,19 @@
-# Working with Cassandra
-In this workshop we will learn how to use the Apache Cassandra NoSQL database.
+# Работа в Cassandra
+На этом семинаре мы научимся использовать базу данных Apache Cassandra NoSQL.
 
-We assume that the platform described [here](../01-environment) is running and accessible.
+Мы предполагаем, что описанная [здесь](../01-environment) платформа запущена и доступна.
 
-## Connecting to the Cassandra environment
+## Подключение к среде Cassandra
 
-### Using the Cassandra Command Line utility
+### Использование утилиты командной строки Cassandra
 
-You can find the `cqlsh` command line utility inside the Cassandra docker container running as part of the platform. Connect via SSH onto the Docker Host and run the following `docker exec` command
+Вы можете найти утилиту командной строки `cqlsh` внутри контейнера Cassandra Docker, работающего как часть платформы. Подключитесь через SSH к Docker Host и выполните следующую команду `docker exec`
 
 ```
 docker exec -ti cassandra-1 cqlsh -u cassandra -p cassandra
 ```
 
-This will connect you into the `cassandra-1` container and run the `cqlsh` inside id. You should see an output similar to this one.
+Это подключит вас к контейнеру `cassandra-1` и запустит `cqlsh` внутри id. Вы должны увидеть вывод, похожий на этот.
 
 ```
 bigdata@bigdata:~$ docker exec -ti cassandra-1 cqlsh-u cassandra -p cassandra
@@ -23,17 +23,17 @@ Use HELP for help.
 cqlsh>
 ```
 
-You are now at the Cassandra CQL command prompt, ready to execute CQL statements.
+Теперь вы находитесь в командной строке Cassandra CQL и готовы выполнять операторы CQL.
 
-We can also see the actual version of Cassandra, CQL and cqlsh available to us.
+Мы также можем увидеть актуальную версию Cassandra, CQL и cqlsh, доступную нам.
 
-Try executing the following CQL statement
+Попробуйте выполнить следующий оператор CQL
 
 ```sql
 SELECT * FROM system_schema.keyspaces;
 ```
 
-and you should see the currently existing keyspaces as the results
+и вы должны увидеть существующие в настоящее время пространства ключей в качестве результатов
 
 ```
 cqlsh> SELECT * FROM system_schema.keyspaces;
@@ -49,8 +49,8 @@ cqlsh> SELECT * FROM system_schema.keyspaces;
 (5 rows)
 ```
 
-### Using browser-based GUI
-Instead of working over the command line and therefore having to connect to the Docker Host via SSH, we can also use a browser based GUI to access Cassandra. Two browser-based utilities are available as part of the platform.
+### Использование браузерного графического интерфейса
+Вместо работы через командную строку и, следовательно, необходимости подключаться к Docker Host через SSH, мы также можем использовать браузерный графический интерфейс для доступа к Cassandra. В качестве части платформы доступны две браузерные утилиты.
 
 #### Cassandra Web
 
