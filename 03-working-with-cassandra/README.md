@@ -15,7 +15,7 @@ sudo docker exec -ti cassandra-1 cqlsh -u cassandra -p cassandra
 
 Это подключит вас к контейнеру `cassandra-1` и запустит `cqlsh` внутри id. Вы должны увидеть вывод, похожий на этот.
 
-```
+bash
 bigdata@bigdata:~$ docker exec -ti cassandra-1 cqlsh-u cassandra -p cassandra
 Connected to CassandraCluster at 127.0.0.1:9042.
 [cqlsh 5.0.1 | Cassandra 3.11.19 | CQL spec 3.4.4 | Native protocol v4]
