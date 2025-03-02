@@ -37,7 +37,9 @@ SELECT * FROM system_schema.keyspaces;
 
 ```bash
 cqlsh> SELECT * FROM system_schema.keyspaces;
+```
 
+```
 
  keyspace_name      | durable_writes | replication
 --------------------+----------------+-------------------------------------------------------------------------------------
@@ -67,8 +69,8 @@ cqlsh> SELECT * FROM system_schema.keyspaces;
 Другой универсальный инструмент «данных» — [Apache Zeppelin](http://zeppelin.apache.org). В окне браузера перейдите на <http://localhost:28080/>, и вы сразу же попадете на главный экран, как показано ниже.
 ![Alt Image Text](./images/apache-zeppelin.png "Apache Zeppelin")
 
-Click on **Login** in the top right corner and enter `admin` into the **User Name** and `abc123!` into the **Password** field. Click **Login** and the home screen should refresh to show some preinstalled notebooks.
-Нажмите **Войти** в правом верхнем углу и введите `admin` в поле **User Name** и `abc123!` в поле **Password**. Нажмите **Login**.
+Нажмите **Login** в правом верхнем углу и введите `admin` в поле **User Name** и `abc123!` в поле **Password**. Нажмите **Login**.
+
 ![Alt Image Text](./images/apache-zeppelin-2.png "Apache Zeppelin")
 
 Apache Zeppelin использует так называемую модель на основе «Notebook», которая позволяет выполнять интерактивную аналитику данных и совместную работу с документами на основе SQL, Scala и т. д.
@@ -353,7 +355,7 @@ SELECT movie_id, title
 FROM movies.movie;
 ```
 
-Мы также можем выбрать все столбцы, как показано здесь для таблицы «Актёр»:
+Можно выбрать все столбцы, как показано здесь для таблицы «Актёр»:
 
 ```sql
 SELECT *
@@ -373,88 +375,83 @@ FROM movies.actor
 WHERE name = 'Bruce Willis';
 ```
 
-You can see that you get an error
+получим ошибку
 
 ```
 com.datastax.driver.core.exceptions.InvalidQueryException:
 Cannot execute this query as it might involve data filtering and thus may have unpredictable performance.
 If you want to execute this query despite the performance unpredictability, use ALLOW FILTERING
 ```
+Cassandra не позволяет ограничивать по  столбцу, кроме первичного ключа. Проерим поле `actor_id`, запрос при этом отработает.
 
-Cassandra does not allow to restrict on another column than the primary key. Let's see if that is true. When we use the `actor_id` instead the query will work.
-
-```
+``sql
 SELECT *
 FROM movies.actor
 WHERE actor_id = 0000246;
 ```
+Как указано в исключении, вы можете заставить Cassandra применить ограничение к неосновному столбцу, добавив предложение `ALLOW FILTERING`.
 
-As hinted in the exception, you can force Cassandra to execute a restriction on a non-primary column by adding the `ALLOW FILTERING` clause.
-
-```
+```sql
 SELECT *
 FROM movies.actor
 WHERE name = 'Bruce Willis'
 ALLOW FILTERING;
 ```
+Но будьте осторожны. Это **крайне неэффективно** для Cassandra, и есть веская причина, по которой `ALLOW FILTERING` не включено по умолчанию.
 
-Be careful with this all though. This is **very inefficient** for Cassandra to do and there is a good reason `ALLOW FILTERING` is not enabled by default.
 
-### Updating data
-You can use `UPDATE` to change data. As said previously, it will have the same effect as an `INSERT`.
+### Обновление данных
+Вы можете использовать `UPDATE` для изменения данных. Как было сказано ранее, это будет иметь тот же эффект, что и `INSERT`.
 
-Let's update the actor Bruce Willis and add his middle name.
+Давайте обновим актера Bruce Willis  и добавим его фамилию.
 
-```
+
+```sql
 UPDATE movies.actor
 SET name = 'Bruce Walter Willis'
 WHERE actor_id = 0000246;
 ```
 
-Check the result with a `SELECT`.
+Проверьте результат с помощью `SELECT`.
 
-```
+```sql
 SELECT *
 FROM movies.actor
 WHERE actor_id = 0000246;
 ```
+Такой же результат можно получить с помощью следующей вставки: обновив адрес электронной почты на другое значение.
 
-The same could have been achieved with the following insert, just updating the email to a different value to be able to see the result.
-
-```
+```sql
 INSERT INTO movies.actor (actor_id, name)
 VALUES (0000246, 'Bruce Willis');
 ```
+Проверьте результат еще раз с помощью `SELECT`. Вы можете видеть, что `name` было обновлено.
 
-Check the result again with a `SELECT`. You can see that the `name` has been updated.
+Теперь давайте покажем, что с помощью `UPDATE` vj;yj  создать новую запись:
 
-Now let's show that with an `UPDATE` we can even create a new record:
-
-```
+```sql
 UPDATE movies.actor
 SET name = 'Cool Actor'
 WHERE actor_id = 99999999;
 ```
+Видим, что `INSERT` не будет ругаться, если строка уже существует под данным первичным ключом (ключом строки). Он даже обновит эту строку. Огромная разница по сравнению с РСУБД!
 
-You can clearly see that an `INSERT` will not complain if a row already exists under a given primary key (row key). It will even update that row. A huge difference compared to RDBMS!
-
-Be careful to always pass the right primary key value, otherwise some unexpected results might occur.
-
-
-### Deleting data
-
-Of course we can also delete data.
-
-Data can be deleted using CQL in one of the following ways
-
-1.	As used before - it deletes column(s) or entire row(s)
-2.	`TRUNCATE`: It deletes all rows from the table
-3.	`USING TTL`: It sets time to live on column(s) within a row; after expiration of specified period, columns are automatically deleted by Cassandra.
+Будьте осторожны и всегда передавайте правильное значение первичного ключа, иначе могут возникнуть неожиданные результаты.
 
 
-Let's remove the actor with ID 99999999 we have just inserted before with a `DELETE`:
+### Удаление данных
+Также можем удалить данные.
 
-```
+Данные можно удалить с помощью CQL одним из следующих способов
+
+1. Удаляем можем столбцы или целые строки
+2. `TRUNCATE`: удаляет все строки из таблицы
+3. `USING TTL`: устанавливает время жизни столбцов в строке; по истечении указанного периода столбцы автоматически удаляются Cassandra.
+
+Удалим актера с идентификатором 99999999, которого  только что вставили, с помощью `DELETE`:
+
+
+```sql
 DELETE FROM movies.actor
 WHERE actor_id = 99999999;
 ```
