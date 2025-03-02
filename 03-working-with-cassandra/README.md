@@ -35,7 +35,7 @@ SELECT * FROM system_schema.keyspaces;
 
 и вы должны увидеть существующие в настоящее время пространства ключей в качестве результатов
 
-```bash
+```sql
 cqlsh> SELECT * FROM system_schema.keyspaces;
 ```
 
