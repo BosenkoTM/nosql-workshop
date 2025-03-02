@@ -456,44 +456,52 @@ DELETE FROM movies.actor
 WHERE actor_id = 99999999;
 ```
 
-Let's see  
+посмотрим результат
 
-```
+```sql
 INSERT INTO movies.actor (actor_id, name)
 VALUES (99999998, 'An other actor')
 USING TTL 120;
 ```
 
-So, this test user will automatically be deleted after 120 seconds.
+Итак, этот тестовый пользователь будет автоматически удален через 120 секунд.
 
-You can check the remaining TTL by using the function TTL on a column
+Вы можете проверить оставшийся TTL, используя функцию TTL в столбце
 
-```
+
+```sql
 SELECT TTL(name), actor_id, name
 FROM movies.actor;
 ```
 
-You can see that all the rows without a TTL return NULL, and the row we have added before returns the number of seconds left until the record is removed.
+Все строки без TTL возвращают NULL, а строка, которую добавили ранее, возвращает количество секунд, оставшихся до удаления записи.
 
-If you repeatedly execute that statement, you will see the TTL going down until the record is gone.
+Если повторно выполните этот оператор, увидите, что TTL уменьшается до тех пор, пока запись не исчезнет.
 
-That finishes our work with static tables. In the next section we will see how we can use dynamic tables, which are much more interesting and important capability of Cassandra.
+Это завершает нашу работу со статическими таблицами. В следующем разделе увидим, как можно использовать динамические таблицы, которые являются гораздо более интересной и важной частью Cassandra.
 
-So far we have only stored information which static in a way that the number of columns we wanted to store by Movie and Actor are static during runtime. Of course we might from time to time extend the data model and might add new columns to an existing table. But this is a development task and can be done using an `ALTER TABLE xxxx ADD COLUMN ...` statement, as we know it from RDBMS.
+До сих пор  хранили только информацию, которая является статической таким образом, что количество столбцов, которые  хотели сохранить в Movie и Actor, является статическим во время выполнения. Конечно,  можем время от времени расширять модель данных и добавлять новые столбцы в существующую таблицу. Но эта задача может быть выполнена с помощью оператора `ALTER TABLE xxxx ADD COLUMN ...`.
 
-## Using "Dynamic" Tables (wide row)
+
+## Использование "Dynamic" таблиц (wide row)
+
+Динамические таблицы также позволяют увеличивать количество записей, поэтому количество столбцов постоянно изменяется во время выполнения, и каждая строка может иметь разное количество столбцов, хранящихся в таблице/базе данных.
+
+До сих пор наши Movie и Actor, которые  сохранили в статической таблице Cassandra, не имеют «отношений» друг с другом. Но, при этом , можно сказать, что актер играл во многих фильмах, и в фильме играет много актеров.
+
+Для хранения этой информации широкострочные таблицы являются инструментом, который можно использовать в Casandra.
 
 Dynamic Tables allow also growing to the side, so the number of columns are basically dynamic at runtime and ever row can have a different number of columns stored in the table / database.
 
 So far our Movies and Actors which we have stored in the so-named static Cassandra table have no "relationships" to each-other. But of course an actor has played in many movies and a movie has many actors playing in it.
 
-For storing this information, wide-row tables are the tool to use in Casandra.
+Для хранения этой информации в Cassandra следует использовать таблицы с "широкими" строками.
 
-### Create the "Movies by Actor" and "Actors by Movie" tables
+### Создание таблицы «Фильмы по актерам» и «Актеры по фильмам».
 
-Let's start with the Actor and the movies he has played in, which we call `movies_by_actor`.
+Начнем с актера и фильмов, в которых он играл, которые мы называем `movies_by_actor`.
 
-```
+```sql
 DROP TABLE IF EXISTS movies.movies_by_actor;
 CREATE TABLE movies.movies_by_actor (actor_id int,
 				movie_id int,  
@@ -502,11 +510,9 @@ CREATE TABLE movies.movies_by_actor (actor_id int,
 );
 ```
 
-We use a name which reflects the query we can resolve using that table.
+Создадим вторую таблицу, чтобы получить актеров, которые играли в данном фильме, то есть `actors_by_movie`
 
-Now let's continue with the table to get the actors who have played in a given movie, which we call `actors_by_movie`
-
-```
+```sql
 DROP TABLE IF EXISTS movies.actors_by_movie;
 CREATE TABLE movies.actors_by_movie (movie_id int,
              title text STATIC,
@@ -516,12 +522,12 @@ CREATE TABLE movies.actors_by_movie (movie_id int,
 );
 ```
 
-### Inserting data to the two tables
+### Вставка данных в две таблицы
 
-Let's add some movies for given actors. Of course in real world they have played in much more movies, this is just a sample of movies for some of the actors which we have in the `actor` table. But not all of the movies we add here to the `movies_by_actor` table are in fact stored in the `movie` table. We can see, there are no foreign keys and nobody can stop us to add movies to that table which are not "known" to us / not stored also in the `movie` table.
+Добавим несколько фильмов для данных актеров. Конечно, в реальном мире они играли в гораздо большем количестве фильмов, это всего лишь выборка фильмов для некоторых актеров, которые есть у нас в таблице `actor`. Но не все фильмы, которые мы добавляем здесь в таблицу `movies_by_actor`, на самом деле хранятся в таблице `movie`. Мы видим, что нет никаких внешних ключей, и никто не может помешать добавлять в эту таблицу фильмы, которые нам не "известны"/или не хранятся в таблице `movie`.
 
-```
-// Movies for actor "Bruce Willis"
+```sql
+// Фильмы для актера "Bruce Willis"
 
 INSERT INTO movies.movies_by_actor (actor_id, movie_id, title)
 VALUES (0000246, 0110912, 'Pulp Fiction');
@@ -538,7 +544,7 @@ VALUES (0000246, 0377917, 'The Fifth Element');
 INSERT INTO movies.movies_by_actor (actor_id, movie_id, title)
 VALUES (0000246, 0112864, 'Die Hard: With a Vengeance');
 
-// Movies for actor "Keanu Reeves"
+// Фильмы для актера "Keanu Reeves"
 
 INSERT INTO movies.movies_by_actor (actor_id, movie_id, title)
 VALUES (0000206, 0133093, 'The Matrix');
@@ -550,16 +556,15 @@ INSERT INTO movies.movies_by_actor (actor_id, movie_id, title)
 VALUES (0000206, 0111257, 'Speed');
 
 
-// Movies for actor "Sandra Bullock"
+// Фильмы для актера "Sandra Bullock"
 
 INSERT INTO movies.movies_by_actor (actor_id, movie_id, title)
 VALUES (0000113, 0111257, 'Speed');
 ```
-
-Now let's also add some data to the `actors_by_movie` table. Again, not all of the actors we add here are also stored in the `movie` table. In real-world of course they would have to be in sync and when inserting the data this would have been taken care off.
+Добавим данные в таблицу `actors_by_movie`. Опять же, не все актеры, которых мы добавляем сюда, также хранятся в таблице `movie`. Теперь они должны быть синхронизированы, и при вставке данных это должно учитываться.
 
 ```
-// Actors for movie "The Matrix"
+// Актеры для фильма "The Matrix"
 
 INSERT INTO movies.actors_by_movie (movie_id, title, actor_id, name)
 VALUES (0133093, 'The Matrix', 0000206, 'Keanu Reeves');
@@ -574,7 +579,7 @@ INSERT INTO movies.actors_by_movie (movie_id, title, actor_id, name)
 VALUES (0133093, 'The Matrix', 0915989, 'Hugo Weaving');
 
 
-// Actors for movie "Pulp Fiction"
+// Актеры для фильма "Pulp Fiction"
 
 INSERT INTO movies.actors_by_movie (movie_id, title, actor_id, name)
 VALUES (0110912, 'Pulp Fiction', 0000237, 'John Travolta');
@@ -586,29 +591,30 @@ INSERT INTO movies.actors_by_movie (movie_id, title, actor_id, name)
 VALUES (0110912, 'Pulp Fiction', 0000246, 'Bruce Willis');
 ```
 
-Now let's see these table in Action. First let's see all the movies "Bruce Willis" has played in.
+Посмотрим на эти таблицы. Сначала посмотрим все фильмы, в которых играл "Брюс Уиллис".
 
-```
+```sql
 SELECT title
 FROM movies.movies_by_actor
 WHERE actor_id = 0000246;
 ```
 
-And now let's see the actors which played in the movie "Pulp Fiction"
+м посмотрим на актеров, сыгравших в фильме «Криминальное чтиво».
 
-```
+```sql
 SELECT name, title
 FROM movies.actors_by_movie
 WHERE movie_id = 0110912;
 ```
 
-## Using Counter Columns
+## Использование столбцов-счетчиков
 
-For the movie ratings table, we will be using a static table with some columns of type `COUNTER` so that we can easily count the number of stars we gave to each movie.  
+Для таблицы рейтингов фильмовбудем использовать статическую таблицу со столбцами типа `COUNTER`, чтобы могли легко подсчитать количество звезд, которые проставлены каждому фильму.
 
-Columns of type COUNTER cannot be mixed with other data types and therefore we have to create a new table cannot add these columns to the existing `movie` table.
+Столбцы типа COUNTER нельзя смешивать с другими типами данных, и поэтому придется создать новую таблицу, а не добавлять эти столбцы в существующую таблицу `movie`.
 
-```
+
+```sql
 DROP TABLE IF EXISTS movies.rating_by_movie;
 CREATE TABLE movies.rating_by_movie (movie_id int,
              one_star counter,  
@@ -620,9 +626,10 @@ CREATE TABLE movies.rating_by_movie (movie_id int,
 );
 ```
 
-Let's add some ratings for the movie "Pulp Fiction". With columns of type counter you have to use the `UPDATE` command and you can't use an `INSERT`.
+Давайте добавим рейтинги для фильма "Криминальное чтиво". Со столбцами типа counter можно использовать команду `UPDATE`, а `INSERT` использовать нельзя!
 
-```
+
+```sql
 UPDATE movies.rating_by_movie
 SET five_star = five_star + 1
 WHERE movie_id = 0110912;
@@ -644,16 +651,17 @@ SET two_star = two_star + 1
 WHERE movie_id = 0110912;
 ```
 
-Check the current ratings for movie "Pulp Fiction"
+Проверьте текущие рейтинги фильма "Криминальное чтиво"
 
-```
+```sql
 SELECT * FROM movies.rating_by_movie WHERE movie_id = 0110912;
 ```
 
-Let's also create a table which counts the number of views per movie, separated by male and female viewers and per month.
-In this case we create a wide-row table, with `movie_id` for the partition key and `year` and `month` as the clustering key. Additionally we decided to store the clustering columns in descending order by year and month, so that the latest view counts can be retrieved efficiently.
+Cоздадим таблицу, которая подсчитывает количество просмотров каждого фильма, разделенных на зрителей-мужчин и женщин, и по месяцам.
+В этом случае  создаем динамичную таблицу с `movie_id` для ключа раздела и `year` и `month` в качестве ключей кластеризации. Кроме того, храним столбцы кластеризации в порядке убывания по году и месяцу, чтобы можно было эффективно извлекать последние счетчики просмотров.
 
-```
+
+```sql
 DROP TABLE IF EXISTS movies.movie_viewed_by_time;
 CREATE TABLE movies.movie_viewed_by_time (movie_id int,
 			   year int,
@@ -664,7 +672,7 @@ CREATE TABLE movies.movie_viewed_by_time (movie_id int,
 ) WITH CLUSTERING ORDER BY (year DESC, month DESC);
 ```
 
-Add some sample values to the new table
+Добавьте несколько примеров значений в новую таблицу.
 
 ```
 // Pulp Fiction Views 2019/03
