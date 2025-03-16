@@ -97,17 +97,18 @@ Execute the statement by either hitting ENTER or click on the play arrow on the 
 
 ![Alt Image Text](./images/neo4j-database-view1.png "Neo4J Browser")
 
-We can see the different **Node Labels**, the **Relationship Types** and **Property Keys** which have been created for the Movie Graph and how many have been created of each type. 
+Мы можем увидеть различные **Node Labels**, **Relationship Types** и **Property Keys**, которые были созданы для графа фильмов, а также сколько их создано для каждого типа.
 
-## Example Queries
+## Примеры запросов
 
-Navigate to step 3/8 to find some Cipher statements for finding the information in the graph.
+Перейдите к шагу 3/8, чтобы найти несколько примеров операторов `Cypher` для поиска информации в графе.
 
 ![Alt Image Text](./images/neo4j-find-queries.png "Neo4J Browser")
 
-The first statement, finds the actor named "Tom Hanks"
+Первый запрос находит актёра по имени "Том Хэнкс".
 
-```
+
+```neo4j
 MATCH (tom {name: "Tom Hanks"}) RETURN tom
 ```
 
