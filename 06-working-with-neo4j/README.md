@@ -73,7 +73,7 @@ For help on cypher please visit:
 
 ![Alt Image Text](./images/neo4j-browser-home.png "Neo4J Browser")
 
-Neo4j поставляется с встроенным учебниками, которые предоставляют простой способ загрузки данных в граф и дальнейшего использования этого графа для практики запросов к базе данных.
+Neo4j поставляется с встроенным учебником, которые предоставляют простой способ загрузки данных в граф и дальнейшего использования этого графа для практики запросов к базе данных.
 
 В верхней панели введите `:play movie graph`, чтобы начать работать с учебным пособием **Movie Graph** (Граф фильмов).
 
@@ -89,11 +89,11 @@ Execute the statement by either hitting ENTER or click on the play arrow on the 
 
 ![Alt Image Text](./images/neo4j-create-graph.png "Neo4J Browser")
 
-Click on the little arrow, left to the `CREATE ..` statement and it should show up in the top panel.
+Нажмите на маленькую стрелку слева от команды `CREATE ..`, и она должна появиться в верхней панели.
 
-Execute the `CREATE ..` command to create the movie graph and add some sample movie data to play with.  
+Выполните команду `CREATE ..`, чтобы создать граф фильмов и добавить некоторые пробные данные о фильмах.
 
-Before continuing with the next step, let's see how the graph looks like. Click on the database icon on the top left corner of the Neo4J browser.
+Прежде чем продолжить со следующим шагом, давайте посмотрим, как выглядит граф. Нажмите на иконку базы данных в левом верхнем углу браузера Neo4j.
 
 ![Alt Image Text](./images/neo4j-database-view.png "Neo4J Browser")
 
