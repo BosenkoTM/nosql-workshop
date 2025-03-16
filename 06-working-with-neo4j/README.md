@@ -95,7 +95,7 @@ Execute the statement by either hitting ENTER or click on the play arrow on the 
 
 Прежде чем продолжить со следующим шагом, давайте посмотрим, как выглядит граф. Нажмите на иконку базы данных в левом верхнем углу браузера Neo4j.
 
-![Alt Image Text](./images/neo4j-database-view.png "Neo4J Browser")
+![Alt Image Text](./images/neo4j-database-view1.png "Neo4J Browser")
 
 We can see the different **Node Labels**, the **Relationship Types** and **Property Keys** which have been created for the Movie Graph and how many have been created of each type. 
 
