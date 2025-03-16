@@ -73,13 +73,30 @@ For help on cypher please visit:
 
 ![Alt Image Text](./images/neo4j-browser-home.png "Neo4J Browser")
 
-Neo4j поставляется с встроенным учебником, которые предоставляют простой способ загрузки данных в граф и дальнейшего использования этого графа для практики запросов к базе данных.
+Neo4j поставляется со встроенным учебником, которые предоставляют простой способ загрузки данных в граф и дальнейшего использования этого графа для практики запросов к базе данных.
 
 В верхней панели введите `:play movie graph`, чтобы начать работать с учебным пособием **Movie Graph** (Граф фильмов).
 
 ![Alt Image Text](./images/neo4j-play-moviegraph.png "Neo4J Browser")
 
-Execute the statement by either hitting ENTER or click on the play arrow on the top right corner.
+## Граф фильмов
+
+### Культурные связи между актёрами и фильмами
+
+Граф фильмов — это мини-графическое приложение, содержащее информацию об актёрах и режиссёрах, связанных между собой через фильмы, над которыми они работали вместе.
+
+Этот гайд покажет вам, как:
+
+- **Создавать**: вставлять данные о фильмах в граф.
+- **Искать**: извлекать информацию о конкретных фильмах и актёрах.
+- **Выполнять запросы**: находить связанных актёров и режиссёров.
+- **Решать**: задачу о "Бейконовской дистанции" (Bacon Path).
+
+> **ПРЕДУПРЕЖДЕНИЕ**: Этот гайд будет вносить изменения в данные текущей активной базы данных.
+
+---
+
+Выполните запрос, нажав клавишу ENTER или кликнув на стрелку воспроизведения в правом верхнем углу.
 
 ![Alt Image Text](./images/neo4j-moviegraph.png "Neo4J Browser")
 
@@ -144,16 +161,16 @@ The result is similar to the one before, but this time another type of node, a *
 MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors) RETURN coActors.name
 ```
 
-or the Bacon path, the shortest path of any relationships to Meg Ryan
+Или найдите "Бейконовскую цепочку" — самый короткий путь через любые отношения к  `Meg Ryan`.
 
-```
+```cypher
 MATCH p=shortestPath(
 (bacon:Person {name:"Kevin Bacon"})-[*]-(meg:Person {name:"Meg Ryan"})
 )
 RETURN p
 ```
 
-the result will show the shortest path from Kevin Bacon to Meg Ryan
+Результат покажет самый короткий путь от Kevin Bacon до `Meg Ryan`.
 
 ![Alt Image Text](./images/neo4j-shortest-path.png "Neo4J Browser")
 
