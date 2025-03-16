@@ -108,7 +108,7 @@ Execute the statement by either hitting ENTER or click on the play arrow on the 
 Первый запрос находит актёра по имени "Том Хэнкс".
 
 
-```neo4j
+```cypher
 MATCH (tom {name: "Tom Hanks"}) RETURN tom
 ```
 
