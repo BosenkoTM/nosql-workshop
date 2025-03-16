@@ -1,21 +1,22 @@
-# Working with Neo4J
-
-In this workshop we will learn how to use the Neo4J NoSQL database.
-
-We assume that the platform described [here](../01-environment/README.md) is running and accessible. 
-
-In this workshop you learn how to use Neo4J for querying, visualisation, and data interaction. [Neo4J Browser](https://neo4j.com/developer/guide-neo4j-browser/) is part of Neo4J and offers a browser-based interface for adding data, running queries, creating relationships, and more. It also provides an easy way to visualise the data in the database.
+# Работа с Neo4J
 
 
-## Connecting to the Cypher Shell (optional)
+На этом занятии научимся использовать базу данных NoSQL Neo4J.
 
-To use the `cypher-shell`, in a terminal window execute
+Предполагается, что платформа, описанная [здесь](../01-environment/README.md), запущена и доступна.
+
+В рамках этого занятия вы узнаете, как использовать Neo4J для выполнения запросов, визуализации и взаимодействия с данными. [Neo4J Browser](https://neo4j.com/developer/guide-neo4j-browser/) является частью Neo4J и предлагает веб-интерфейс для добавления данных, выполнения запросов, создания связей и многого другого. Он также предоставляет удобный способ визуализации данных в базе данных.
+
+
+## Подключение к Cypher Shell (необязательно)
+
+Для использования `cypher-shell` выполните в терминальном окне следующую команду:
 
 ```bash
 docker exec -ti neo4j-1 ./bin/cypher-shell -u neo4j -p abc123abc123
 ```
 
-and you should get the Neo4J command prompt:
+и вы должны увидеть приглашение командной строки Neo4J:
 
 ```bash
 eadp@eadp-virtual-machine:~$ docker exec -ti neo4j-1 ./bin/cypher-shell -u neo4j -p abc123abc123
