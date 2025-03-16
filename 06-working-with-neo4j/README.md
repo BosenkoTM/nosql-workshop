@@ -13,20 +13,19 @@
 Для использования `cypher-shell` выполните в терминальном окне следующую команду:
 
 ```bash
-docker exec -ti neo4j-1 ./bin/cypher-shell -u neo4j -p abc123abc123
+sudo docker exec -ti neo4j-1 ./bin/cypher-shell -u neo4j -p abc123abc123
 ```
 
 и вы должны увидеть приглашение командной строки Neo4J:
 
 ```bash
-eadp@eadp-virtual-machine:~$ docker exec -ti neo4j-1 ./bin/cypher-shell -u neo4j -p abc123abc123
-Connected to Neo4j using Bolt protocol version 5.2 at neo4j://localhost:7687 as user neo4j.
+dev@dev-vm:~/Downloads/dba/nonrel/neo4j$ sudo docker exec -ti neo4j-1 ./bin/cypher-shell -u neo4j -p abc123abc123
+Connected to Neo4j using Bolt protocol version 5.7 at neo4j://localhost:7687 as user neo4j.
 Type :help for a list of available commands or :exit to exit the shell.
 Note that Cypher queries must end with a semicolon.
-neo4j@neo4j>
 ```
 
-Type `:help` to get a list of available commands 
+Введите `:help`, чтобы получить список доступных команд.
 
 ```bash
 neo4j@neo4j> :help
@@ -45,7 +44,7 @@ Available commands:
   :source      Executes Cypher statements from a file
   :use         Set the active database
 
-For help on a specific command type:
+Для получения справки по конкретной команде введите:
     :help command
 
 Keyboard shortcuts:
