@@ -67,15 +67,15 @@ For help on cypher please visit:
 
 ![Alt Image Text](./images/neo4j-login.png "Neo4J Browser")
 
-Enter `bolt://dataplatform:7687` into the **Connect URL**, `neo4j` into the **Username** and `abc123abc123` into the **Password** field and click **Connect**. 
+Введите `bolt://dataplatform:7687` в поле **Connect URL** (URL подключения), `neo4j` в поле **Username** (Имя пользователя) и `abc123abc123` в поле **Password** (Пароль), затем нажмите кнопку **Connect** (Подключиться).
 
-If successfully connected, you should see a page similar to the one shown below:
+При успешном подключении вы должны увидеть страницу, аналогичную показанной ниже:
 
 ![Alt Image Text](./images/neo4j-browser-home.png "Neo4J Browser")
 
-Neo4J comes with some predefined tutorials, which provide an easy way for loading some data into the graph and then using that graph to exercise the query capabilities of the graph. 
+Neo4j поставляется с встроенным учебниками, которые предоставляют простой способ загрузки данных в граф и дальнейшего использования этого графа для практики запросов к базе данных.
 
-On the top panel, enter `:play movie graph` to start the **Movie Graph** tutorial. 
+В верхней панели введите `:play movie graph`, чтобы начать работать с учебным пособием **Movie Graph** (Граф фильмов).
 
 ![Alt Image Text](./images/neo4j-play-moviegraph.png "Neo4J Browser")
 
@@ -83,9 +83,9 @@ Execute the statement by either hitting ENTER or click on the play arrow on the 
 
 ![Alt Image Text](./images/neo4j-moviegraph.png "Neo4J Browser")
 
-## Loading the Movie Graph
+## Загрузка графа фильмов
 
-Use the pin on the Movie Graph panel to pin that panel to the top. We will follow the instructions in this window step by step. Click on the next step in the navigation bar on the bottom of the panel to navigate to 2/8.
+Используйте закрепление (-pin) на панели Movie Graph, чтобы закрепить эту панель сверху. Мы будем следовать инструкциям в этом окне пошагово. Нажмите на следующий шаг в навигационной панели внизу, чтобы перейти к 2/8.
 
 ![Alt Image Text](./images/neo4j-create-graph.png "Neo4J Browser")
 
