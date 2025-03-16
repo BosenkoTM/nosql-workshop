@@ -103,7 +103,7 @@ Execute the statement by either hitting ENTER or click on the play arrow on the 
 
 Перейдите к шагу 3/8, чтобы найти несколько примеров операторов `Cypher` для поиска информации в графе.
 
-![Alt Image Text](./images/neo4j-find-queries.png "Neo4J Browser")
+![Alt Image Text](./images/neo4j-find-queries1.png "Neo4J Browser")
 
 Первый запрос находит актёра по имени "Том Хэнкс".
 
@@ -114,7 +114,7 @@ MATCH (tom {name: "Tom Hanks"}) RETURN tom
 
 Execute it and scroll down to see the result in a graphical way. 
 
-![Alt Image Text](./images/neo4j-find-tom-hanks.png "Neo4J Browser")
+![Alt Image Text](./images/neo4j-find-tom-hanks1.png "Neo4J Browser")
 
 We have only matched on a single Person, therefore only a single node is shown. 
 
