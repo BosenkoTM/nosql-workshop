@@ -112,15 +112,15 @@ Execute the statement by either hitting ENTER or click on the play arrow on the 
 MATCH (tom {name: "Tom Hanks"}) RETURN tom
 ```
 
-Execute it and scroll down to see the result in a graphical way. 
+Выполните его и прокрутите вниз, чтобы увидеть результат в графическом виде.
 
 ![Alt Image Text](./images/neo4j-find-tom-hanks1.png "Neo4J Browser")
 
-We have only matched on a single Person, therefore only a single node is shown. 
+Так как мы выполнили сопоставление только для одного человека (Person), отображается всего один узел.
 
-Not let's find the movie with title "Cloud Atlas"...
+Теперь найдём фильм с названием "Cloud Atlas" ...
 
-```
+```cypher
 MATCH (cloudAtlas {title: "Cloud Atlas"}) RETURN cloudAtlas
 ```
 
@@ -128,19 +128,19 @@ The result is similar to the one before, but this time another type of node, a *
 
 ![Alt Image Text](./images/neo4j-show-expand-menu.png "Neo4J Browser")
 
-Click on expand and you see all nodes related to the movie node
+Нажмите на кнопку "Развернуть" (expand), и вы увидите все узлы, связанные с узлом фильма.
 
 ![Alt Image Text](./images/neo4j-show-related-nodes.png "Neo4J Browser")
 
-We can see that these are all of type Person (shown by all having the same color). 
+Мы видим, что все они относятся к типу Person (что показывается одинаковым цветом).
 
-Continue with the other statements on the step 3/8 panel and then continue with the other panels. 
+Выполните все запросы на панели 3/8, а затем переходите к другим панелям.
 
-You will see many interesting queries, showing the power of a graph database, such as
+Вы увидите множество интересных запросов, демонстрирующих мощь графовых баз данных. Например:
 
-Show Tom Hanks' co-actors:
+Покажите партнёров по съёмкам Тома Хэнкса:
 
-```
+```cypher
 MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors) RETURN coActors.name
 ```
 
