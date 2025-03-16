@@ -55,15 +55,15 @@ For help on cypher please visit:
     https://neo4j.com/docs/cypher-manual/current/
 ```
 
-You can also execute any valid Cypher statements. 
+Вы также можете выполнять любые корректные операторы Cypher.
 
-Enter `:exit` to leave the CLI.
+Введите `:exit`, чтобы выйти из командной строки.
 
-For the workshop we will be using Neo4J Browser, as it includes an easy way to load a tutorial database.
+В рамках мастер-класса мы будем использовать Neo4J Browser, так как он предоставляет удобный способ загрузки учебной базы данных.
 
-## Connecting with Neo4J Browser
+## Подключение через Neo4J Browser
 
-In a browser window, navigate to <http://dataplatform:7474> and you should directly land on the Neo4j Browser login screen. 
+В окне браузера перейдите по адресу <http://localhost:7474>, и сразу окажетесь на экране входа в Neo4j Browser.
 
 ![Alt Image Text](./images/neo4j-login.png "Neo4J Browser")
 
