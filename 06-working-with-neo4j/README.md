@@ -204,7 +204,8 @@ MATCH (tom {name: "Tom Hanks"}) RETURN tom
 MATCH (cloudAtlas {title: "Cloud Atlas"}) RETURN cloudAtlas
 ```
 
-The result is similar to the one before, but this time another type of node, a **Movie** node is returned and that's why it is shown in another color. You can click on a node and expand the relationship from/to the **Cloud Atlas** movie node.
+
+Результат похож на предыдущий, но в этот раз возвращается другой тип узла — **Movie** (Movie node), и поэтому он показан другим цветом. Вы можете кликнуть по узлу и развернуть связь с/на узел фильма [**"Cloud Atlas"**](#cloud-atlas).
 
 ![Alt Image Text](./images/neo4j-show-expand-menu.png "Neo4J Browser")
 
