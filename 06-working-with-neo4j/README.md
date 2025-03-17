@@ -130,7 +130,7 @@ For help on cypher please visit:
 
 ![Alt Image Text](./images/neo4j-login.png "Neo4J Browser")
 
-Введите `bolt://dataplatform:7687` в поле **Connect URL** (URL подключения), `neo4j` в поле **Username** (Имя пользователя) и `abc123abc123` в поле **Password** (Пароль), затем нажмите кнопку **Connect** (Подключиться).
+Введите `bolt://localhost:7687` в поле **Connect URL** (URL подключения), `neo4j` в поле **Username** (Имя пользователя) и `abc123abc123` в поле **Password** (Пароль), затем нажмите кнопку **Connect** (Подключиться).
 
 При успешном подключении вы должны увидеть страницу, аналогичную показанной ниже:
 
