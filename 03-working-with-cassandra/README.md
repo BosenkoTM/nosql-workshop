@@ -382,7 +382,7 @@ com.datastax.driver.core.exceptions.InvalidQueryException:
 Cannot execute this query as it might involve data filtering and thus may have unpredictable performance.
 If you want to execute this query despite the performance unpredictability, use ALLOW FILTERING
 ```
-Cassandra не позволяет ограничивать по  столбцу, кроме первичного ключа. Проерим поле `actor_id`, запрос при этом отработает.
+Cassandra не позволяет ограничивать по  столбцу, кроме первичного ключа. Проверим поле `actor_id`, запрос при этом отработает.
 
 ```sql
 SELECT *
@@ -490,12 +490,6 @@ FROM movies.actor;
 До сих пор наши Movie и Actor, которые  сохранили в статической таблице Cassandra, не имеют «отношений» друг с другом. Но, при этом , можно сказать, что актер играл во многих фильмах, и в фильме играет много актеров.
 
 Для хранения этой информации широкострочные таблицы являются инструментом, который можно использовать в Casandra.
-
-Dynamic Tables allow also growing to the side, so the number of columns are basically dynamic at runtime and ever row can have a different number of columns stored in the table / database.
-
-So far our Movies and Actors which we have stored in the so-named static Cassandra table have no "relationships" to each-other. But of course an actor has played in many movies and a movie has many actors playing in it.
-
-Для хранения этой информации в Cassandra следует использовать таблицы с "широкими" строками.
 
 ### Создание таблицы «Фильмы по актерам» и «Актеры по фильмам».
 
@@ -750,9 +744,10 @@ WHERE movie_id = 0110912 AND year = 2019 AND month >= 01 AND month <= 5;
 
 ## Using the Python API with Cassandra
 
-как правило эта тема рассматривается в параллельном курсе по обработке  данных средствами Python
+Эта тема рассматривается в параллельном курсе по обработке  данных средствами Python
 
 
 # Варианты индивидуальных заданий
 
+[Работа на лекции 2 Cassandra.pdf](http://95.131.149.21/moodle/pluginfile.php/4367/mod_assign/introattachment/0/%D0%A0%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%20%D0%BD%D0%B0%20%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8%202%20Cassandra.pdf?forcedownload=1)
 
