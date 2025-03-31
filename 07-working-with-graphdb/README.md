@@ -42,33 +42,34 @@
 
 Через несколько секунд ввод должен завершиться успешным сообщением, как показано на следующем снимке экрана.
 
-![](./images/graphdb-import-4.png)
+![](./images/graphdb-import-44.png)
 
-Now the database is ready to be used.
+Теперь база данных готова к использованию.
 
-## Exploring the graph
+## Обзор графа
 
-Click on **Explore** and **Class hierarchy**
+Нажмите на **Explore** и **Class hierarchy**.
 
 ![](./images/graphdb-explore-1.png)
 
-We can see the schema of the movies graph with the `schema:Movie` base class and the two subclasses `imbd:BlackAndWhiteMovie` and `imdb:ColorMovie`.
+Мы можем увидеть схему графа фильмов с базовым классом `schema:Movie` и двумя подклассами `imbd:BlackAndWhiteMovie` и `imdb:ColorMovie`.
 
-Click on the larger, inner circle, representing the color movies
+Нажмите на более крупную внутреннюю окружность, представляющую цветные фильмы.
 
 ![](./images/graphdb-explore-2.png)
 
-We can see that there are 4'690 instances of color movies in the graph, with a selection of a a few movie titles displayed to the right. 
+Мы можем увидеть, что в графе есть `4690` экземпляров цветных фильмов, с отображением нескольких названий фильмов справа.
 
-You can either directly click on one of the titles shown or use the search to find a certain movie. Let's type in `matrix` 
+Вы можете либо напрямую нажать на одно из отображённых названий, либо использовать поиск для нахождения определённого фильма. Давайте введём `matrix`.
+
 
 ![](./images/graphdb-explore-3.png)
 
-to find the movie **TheMatrix**. Click on it and you will see the triples listed belonging to this movie. 
+Чтобы найти фильм **The Matrix**, введите `matrix`. Нажмите на него, и вы увидите перечисленные связи, которые относятся к этому фильму.
 
 ![](./images/graphdb-explore-4.png)
 
-Click on **Visual Graph** to see the graph visually
+Нажмите **Visual Graph**, чтобы увидеть график визуально.
 
 ![](./images/graphdb-explore-5.png)
 
