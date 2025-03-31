@@ -73,17 +73,19 @@
 
 ![](./images/graphdb-explore-5.png)
 
-The beauty of the Visual Graph is that you can double click on one of the nodes to expand the graph. Let's try that on the Actor **KeanuReeves** and the graph should expand like shown below
+Преимущество Визуального Графа заключается в том, что вы можете дважды щёлкнуть на одном из узлов, чтобы расширить граф. Давайте попробуем это на актера **KeanuReeves**, и граф должен расшириться, как показано ниже.
+
 
 ![](./images/graphdb-explore-6.png)
 
-We can see all the other movies Keanu Reeves also acted in. 
+Мы можем увидеть все другие фильмы, в которых также снялся Кейну Ривз.
 
-Navigating in the graph like that has some potential, but first we need to find a starting node in our graph. For that an RDF / Triple store offers the SPARQL query language.
+Навигация по графу таким образом имеет некоторые преимущества, но сначала нам нужно найти стартовый узел в нашем графе. Для этого RDF/Triple-хранилище предлагает язык запросов SPARQL.
+
 
 ## Querying the graph using SPARQL
 
-Click on SPARQL in the navigation menu to the left and we will get to the SPARQL view which integrates the [YASGUI query editor](http://about.yasgui.org/).
+Нажмите на **SPARQL** в навигационном меню слева, и вы перейдёте в представление SPARQL, которое интегрирует [редактор запросов YASGUI](http://about.yasgui.org/).
 
 ![](./images/graphdb-sparql-1.png)
 
