@@ -85,11 +85,11 @@
 
 ## Querying the graph using SPARQL
 
-Нажмите на **SPARQL** в навигационном меню слева, и вы перейдёте в представление SPARQL, которое интегрирует [редактор запросов YASGUI](http://about.yasgui.org/).
+Нажмите на **SPARQL** в навигационном меню слева, и вы перейдёте в представление SPARQL, которое интегрирует [редактор запросов YASGUI](http://about.yasgui.org/) или [редактор запросов YASGUI](https://docs.triply.cc/yasgui/).
 
 ![](./images/graphdb-sparql-1.png)
 
-The most basic SPARQL select statement is pre-filled in the query window.
+Самый простой оператор выбора SPARQL предварительно заполнен в окне запроса.
 
 ```sparql
 select * where {
