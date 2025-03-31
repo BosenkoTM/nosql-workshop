@@ -34,7 +34,7 @@ Click on **Movies** and select the 2nd option **Get RDF data from a URL**
 
 ![](./images/graphdb-import-2.png)
 
-On the pop-up window enter [`https://raw.githubusercontent.com/gschmutz/nosql-workshop/master/07-working-with-graphdb/data/movies.ttl`](https://raw.githubusercontent.com/gschmutz/nosql-workshop/master/07-working-with-graphdb/data/movies.ttl) into the field
+On the pop-up window enter [`https://raw.githubusercontent.com/BosenkoTM/nosql-workshop/refs/heads/main/07-working-with-graphdb/data/movies.ttl`](https://raw.githubusercontent.com/BosenkoTM/nosql-workshop/refs/heads/main/07-working-with-graphdb/data/movies.ttl) into the field
 
 ![](./images/graphdb-import-3.png)
 
