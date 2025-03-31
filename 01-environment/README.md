@@ -20,8 +20,9 @@
 | MongoDB | Администрирование Mongo | http://localhost:28204 |
 | MongoDB | Mongo-Express | http://localhost:28203 |
 | MongoDB | MongoDB Compass | Установлен локально в Ubuntu 22.04 |
-| Neo4J | Neo4J | http://localhost:7474 |
 | Jupyter | Jupyter | Установлен локально в Ubuntu 22.04 |
+| Neo4J | Neo4J | http://localhost:7474 |
+| GraphDB | GraphDB | http://localhost:17200 |
 
 Примечание: MongoDB Compass - это графический интерфейс для работы с MongoDB, установленный непосредственно в виртуальной машине Ubuntu 22.04. Для подключения используйте:
 - URI: mongodb://root:abc123!@localhost:27017
