@@ -195,4 +195,23 @@ SELECT ?person (COUNT(?movie) as ?numMovies) {
 
 ![](./images/graphdb-sparql-6.png)
 
-Так как мы также использовали `ORDER BY DESC(?numMovies)` для сортировки результатов по количеству фильмов в порядке убывания, мы легко можем увидеть, что как Клинт Ист伍уд, так и Уоди Аллен снялись в 10 фильмах, где они были как главными актёрами, так и режиссёрами.
+Так как мы также использовали `ORDER BY DESC(?numMovies)` для сортировки результатов по количеству фильмов в порядке убывания, мы легко можем увидеть, что как Клинт Иствуд, так и Уоди Аллен снялись в 10 фильмах, где они были как главными актёрами, так и режиссёрами.
+
+```sparql
+PREFIX imdb: <http://academy.ontotext.com/imdb/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?person ?personName (COUNT(?movie) AS ?numMovies)
+WHERE {
+  ?movie schema:name ?name ;
+           schema:director ?person ;
+           imdb:leadActor ?person .
+  ?person schema:name ?personName .
+}
+GROUP BY ?person ?personName
+ORDER BY DESC(?numMovies)
+LIMIT 100
+```
+
+
+
