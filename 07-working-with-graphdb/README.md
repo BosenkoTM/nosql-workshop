@@ -97,23 +97,23 @@ select * where {
 } limit 100
 ```
 
-Click **Run** to run the query. It's selecting all the triples in the graph but limiting the result to 100 results. 
+Нажмите **Run**, чтобы выполнить запрос. Он выбирает все `триплеты` в графе, но ограничивает результат до 100 записей.
 
 ![](./images/graphdb-sparql-2.png)
 
-If we want to only show triples with a certain subject, we can adapt the query like that
+Если мы хотим показывать только триплет с определённым субъектом, мы можем адаптировать запрос следующим образом:
 
 ```sparql
 select * where {
     <http://academy.ontotext.com/imdb/title/PiratesoftheCaribbeanAtWorldsEnd> ?p ?o .
 }
 ```
+Запрос выбирает RDF-утверждения, чей субъект — фильм "Pirates of the Caribbean: At World's End" (идентифицируемый IRI `http://academy.ontotext.com/imdb/title/PiratesOfTheCaribbeanAtWorldsEnd`).
 
-The query selects RDF statements whose subject is the movie Pirates of the Caribbean At World's End (identified by the IRI `http://academy.ontotext.com/imdb/title/TheBourneUltimatum`). 
 
 ![](./images/graphdb-sparql-3.png)
 
-We can shorten the IRIs with setting a prefix like shown here
+Мы можем сократить IRI, установив префикс, как показано ниже:
 
 ```sparql
 PREFIX imdb: <http://academy.ontotext.com/imdb/>
@@ -123,14 +123,26 @@ select * where {
 }
 ```
 
-This is more useful if the same prefix is used multiple times.
+Это более полезно, если один и тот же префикс используется несколько раз.
 
-Note that we need to escape the / in the shortened IRI.
+Обратите внимание, что нужно экранировать `/` в сокращённом IRI.
 
-The variables ?p and ?o correspond to the predicate and object of the RDF statements. We can see that the director (via the predicate `schema:director`) is identified by the IRI `imdb:person/GoreVerbinski` (scroll down if necessary).
+Переменные `?p` и `?o` соответствуют предикату и объекту RDF-утверждений. Мы видим, что режиссёр (через предикат `schema:director`) идентифицируется IRI `imdb:person/GoreVerbinski` (прокрутите вниз при необходимости).
 
+Следующий запрос выбирает все цветные фильмы по классу (`a` является сокращённой записью для `rdf:type`), а затем выполняет два соединения для получения названия фильма (через предикат `schema:name`) и количества комментариев к фильму (через предикат `schema:commentCount`). Наконец, результат должен быть отсортирован по количеству комментариев в порядке убывания.
 
-The next query selects all color movies by class (`a` is a short-hand notation for `rdf:type`) and then performs two joins to fetch the movie's name (via the `schema:name` predicate), and the movie's number of comments (via the `schema:commentCount` predicate). Finally, the result must be ordered by the number of comments in descending order.
+```sparql
+PREFIX imdb: <http://academy.ontotext.com/imdb/>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?movie ?name ?commentCount
+WHERE {
+  ?movie a imdb:ColorMovie ;
+           schema:name ?name ;
+           schema:commentCount ?commentCount .
+}
+ORDER BY DESC(?commentCount)
+LIMIT 100
 
 ```sparql
 PREFIX imdb: <http://academy.ontotext.com/imdb/>
@@ -143,15 +155,14 @@ SELECT * {
 } ORDER BY DESC(?commentCount)
 ```
 
-The table shows the results from executing the query.
+Таблица показывает результаты выполнения запроса.
 
 ![](./images/graphdb-sparql-4.png)
 
-The variables `?movie`, `?movieName` and `?commentCount` contain each movie's IRI, name and number of comments respectively. We can see that the movie with the most comments, The Dark Knight Rises, comes on top.
+Переменные `?movie`, `?name` и `?commentCount` содержат соответственно IRI фильма, название фильма и количество комментариев. Мы видим, что фильм с наибольшим количеством комментариев, "The Dark Knight Rises", находится на вершине списка.
 
-
-The next query selects RDF statements that have the same subject (`?movie`) and the same object (`?person`). 
-For any given movie and person, there must be RDF statements that link the movie and the person with both the `schema:director` and the `imdb:leadActor` predicate.
+Следующий запрос выбирает RDF-утверждения, которые имеют одинаковый субъект (`?movie`) и одинаковый объект (`?person`). 
+Для любого заданного фильма и человека должны существовать RDF-утверждения, связывающие фильм и человека с использованием предикатов `schema:director` и `imdb:leadActor`.
 
 ```sparql
 PREFIX schema: <http://schema.org/>
@@ -163,11 +174,11 @@ SELECT * {
 } ORDER BY ?person
 ```
 
-The table shows the results from executing the query.
+Таблица показывает результаты выполнения запроса.
 
 ![](./images/graphdb-sparql-5.png)
 
-Just like the previous query, in the next query we select movies and people that are both the leading actor and the director. In this query, we also use `GROUP BY ?person` to group the results by person and `COUNT(?movie)` to count how many movies per person satisfy the criteria. The count is returned in the `?numMovies` variable.
+Как и в предыдущем запросе, в следующем запросе мы выбираем фильмы и людей, которые являются как главными актёрами, так и режиссёрами. В этом запросе мы также используем `GROUP BY ?person` для группировки результатов по человеку и `COUNT(?movie)` для подсчёта количества фильмов, удовлетворяющих критериям для каждого человека. Подсчитанное количество возвращается в переменной `?numMovies`.
 
 ```sparql
 PREFIX schema: <http://schema.org/>
@@ -179,8 +190,8 @@ SELECT ?person (COUNT(?movie) as ?numMovies) {
 } GROUP BY ?person ORDER BY DESC(?numMovies)
 ```
 
-The table shows the results from executing the query.
+Таблица показывает результаты выполнения запроса.
 
 ![](./images/graphdb-sparql-6.png)
 
-Since we also used `ORDER BY DESC(?numMovies)` to order the results by movie count in descending order, we can easily see that both Clint Eastwood and Woody Allen made 10 movies where they were the leading actor and the director.
+Так как мы также использовали `ORDER BY DESC(?numMovies)` для сортировки результатов по количеству фильмов в порядке убывания, мы легко можем увидеть, что как Клинт Ист伍уд, так и Уоди Аллен снялись в 10 фильмах, где они были как главными актёрами, так и режиссёрами.
