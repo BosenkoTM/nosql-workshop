@@ -1,46 +1,46 @@
-# Working with GraphDB
+# Работа с GraphDB
 
-In this workshop we will learn how to use the Ontotext GraphDB NoSQL database.
+В этом практическом занятии мы узнаем, как использовать базу данных `Ontotext GraphDB NoSQL`.
 
-We assume that the platform described [here](../01-environment/README.md) is running and accessible. 
+Предполагается, что платформа, описанная [здесь](../01-environment/README.md), запущена и доступна.
 
-In this workshop you learn how to load RDF data into GraphDB and then use the SPARQL query language to query the data.
+На этом занятии вы узнаете, как загружать данные в формате `RDF` в `GraphDB`, а затем использовать язык запросов `SPARQL` для выполнения запросов к данным.
 
-## Loading RDF data
+## Загрузка RDF данных
 
-We will use the Movies data taken from a tutorial provided by GraphDB. The data is available in turtle syntax, a common data format for storing RDF data in the GitHub project under this link <https://raw.githubusercontent.com/gschmutz/nosql-workshop/master/07-working-with-graphdb/data/movies.ttl>. If you click on the link you will see the data as shown below 
+Мы будем использовать данные о фильмах, взятые из учебного пособия, предоставленного GraphDB. Данные доступны в синтаксисе Turtle, распространённом формате для хранения RDF данных, в проекте на GitHub по ссылке <https://raw.githubusercontent.com/gschmutz/nosql-workshop/master/07-working-with-graphdb/data/movies.ttl>. Если вы нажмёте на ссылку, увидите данные, представленные ниже.
 
 ![](./images/graphdb-movies-data.png)
 
-We will use the GraphDB workbench to load the data. In a browser, navigate to <http://dataplatform:17200> to open the GraphDB workbench.
+Мы будем использовать GraphDB Workbench для загрузки данных. В браузере перейдите по адресу <http://localhost:17200>, чтобы открыть GraphDB Workbench.
 
 ![](./images/graphdb-workbench-1.png)
 
-Click on **Create new repository** and select **GraphDB Repository**.
+Нажмите на **Create new repository** и выберите **GraphDB Repository**.
 
 ![](./images/graphdb-workbench-2.png)
 
-Enter `Movies` into the **Repository** field 
+Введите `Movies` в поле **Repository** 
 
 ![](./images/graphdb-workbench-3.png)
 
-and click **Create**.
+и нажмите **Create**.
 
-In the menu bar to the left, click on **Import**.
+В меню слева нажмите на **Import**.
 
 ![](./images/graphdb-import-1.png)
 
-Click on **Movies** and select the 2nd option **Get RDF data from a URL**
+Нажмите на **Movies** и выберите второй вариант **Get RDF data from a URL**.
 
 ![](./images/graphdb-import-2.png)
 
-On the pop-up window enter [`https://raw.githubusercontent.com/BosenkoTM/nosql-workshop/refs/heads/main/07-working-with-graphdb/data/movies.ttl`](https://raw.githubusercontent.com/BosenkoTM/nosql-workshop/refs/heads/main/07-working-with-graphdb/data/movies.ttl) into the field
+В появившемся окне введите [`https://raw.githubusercontent.com/BosenkoTM/nosql-workshop/refs/heads/main/07-working-with-graphdb/data/movies.ttl`](https://raw.githubusercontent.com/BosenkoTM/nosql-workshop/refs/heads/main/07-working-with-graphdb/data/movies.ttl) в поле.
 
 ![](./images/graphdb-import-3.png)
 
-leave **Start import automatically** selected and click on **Import**. Leave the defaults on the other pop-up window and click **Import** again. 
+Оставьте выбранным **Start import automatically** и нажмите **Import**. Оставьте значения по умолчанию в другом всплывающем окне и снова нажмите **Import**.
 
-After a few seconds the input should end with a successful message as shown in the following screenshot. 
+Через несколько секунд ввод должен завершиться успешным сообщением, как показано на следующем снимке экрана.
 
 ![](./images/graphdb-import-4.png)
 
