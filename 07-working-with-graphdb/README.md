@@ -36,7 +36,7 @@
 
 В появившемся окне введите [`https://raw.githubusercontent.com/BosenkoTM/nosql-workshop/refs/heads/main/07-working-with-graphdb/data/movies.ttl`](https://raw.githubusercontent.com/BosenkoTM/nosql-workshop/refs/heads/main/07-working-with-graphdb/data/movies.ttl) в поле.
 
-![](./images/graphdb-import-3.png)
+![](./images/graphdb-import-33.png)
 
 Оставьте выбранным **Start import automatically** и нажмите **Import**. Оставьте значения по умолчанию в другом всплывающем окне и снова нажмите **Import**.
 
