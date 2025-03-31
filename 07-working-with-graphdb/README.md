@@ -143,6 +143,7 @@ WHERE {
 }
 ORDER BY DESC(?commentCount)
 LIMIT 100
+```
 
 ```sparql
 PREFIX imdb: <http://academy.ontotext.com/imdb/>
