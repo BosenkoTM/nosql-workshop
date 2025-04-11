@@ -1108,7 +1108,7 @@
    - `GET ?movie ?name ?commentCount WHERE { ?movie schema:name ?name ; schema:commentCount ?commentCount }`
    - `LIST ?movie ?name ?commentCount WHERE { ?movie schema:name ?name ; schema:commentCount ?commentCount }`  
 
-143. Как отсортировать результаты по убыванию количества комментариев?
+143. Как отсортировать результаты по убыванию количество комментариев?
    - `ORDER BY DESC(?commentCount)`
    - `SORT BY DESC(?commentCount)`
    - `GROUP BY DESC(?commentCount)`
