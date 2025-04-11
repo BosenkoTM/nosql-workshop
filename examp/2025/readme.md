@@ -671,7 +671,7 @@
    - Запросы  
 
 
-87. Как называются метки, которые можно присвоить узлам?
+87. Как называются метки, которые можно присвоить узлам в Neo4j?
    - Labels
    - Tags
    - Categories
@@ -685,14 +685,14 @@
    - `ADD NODE Person (name: 'John', age: 30);`  
 
 
-89. Какое свойство содержит направление в отношениях между узлами?
+89. Какое свойство содержит направление в отношениях между узлами в Neo4j?
    - Название
    - Тип
    - Метка
    - Направление  
 
 
-90. Как создать новое отношение между двумя узлами?
+90. Как создать новое отношение между двумя узлами в Neo4j?
    - `CREATE (a:Person)-[r:KNOWS {since: 2020}]->(b:Person);`
    - `INSERT RELATIONSHIP a TO b WITH TYPE KNOWS;`
    - `CONNECT a TO b AS KNOWS;`
@@ -703,14 +703,14 @@
 
 ### **Запросы и фильтрация**
 
-91. Как найти актёра с именем "Том Хэнкс"?
+91. Выбрать запрос, который найдет актёра с именем Tom Hanks в Neo4j?
    - `SELECT * FROM Person WHERE name = 'Tom Hanks';`
    - `MATCH (tom {name: "Tom Hanks"}) RETURN tom;`
    - `FIND (Person) WHERE name = 'Tom Hanks';`
    - `GET Person WHERE name = 'Tom Hanks';`  
 
 
-92. Как найти фильм с названием "Cloud Atlas"?
+92. Выбрать запрос, который выведет фильм с названием Cloud Atlas в Neo4j?
    - `SELECT * FROM Movie WHERE title = 'Cloud Atlas';`
    - `MATCH (cloudAtlas {title: "Cloud Atlas"}) RETURN cloudAtlas;`
    - `FIND (Movie) WHERE title = 'Cloud Atlas';`
