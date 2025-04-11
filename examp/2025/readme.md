@@ -717,7 +717,7 @@
    - `GET Movie WHERE title = 'Cloud Atlas';`  
 
 
-93. Как найти всех партнёров по съёмкам Тома Хэнкса?
+93. Как найти всех актеров, которые участвовали в съёмках вместе с Tom Hanks?
    - `SELECT coActors.name FROM Person WHERE name = 'Tom Hanks';`
    - `MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors) RETURN coActors.name;`
    - `FIND (Person) WHERE acted_with = 'Tom Hanks';`
