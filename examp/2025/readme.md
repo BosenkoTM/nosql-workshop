@@ -1000,7 +1000,7 @@
 
 
 129. Какая ссылка содержит данные о фильмах в формате Turtle для загрузки в GraphDB?
-   - `https://raw.githubusercontent.com/gschmutz/nosql-workshop/master/07-working-with-graphdb/data/movies.ttl`
+   - `https://raw.githubusercontent.com/BosenkoTM/nosql-workshop/refs/heads/main/07-working-with-graphdb/data/movies.ttl`
    - `http://localhost:17200/import`
    - `http://graphdb.com/data/movies.ttl`
    - `https://github.com/graphdb/movies.ttl`  
