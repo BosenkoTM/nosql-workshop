@@ -70,3 +70,9 @@ sudo  docker system prune -a
 ```
 sudo  docker compose up -d
 ```
+
+Останов всех контейнеров
+
+```
+sudo docker compose down
+```
