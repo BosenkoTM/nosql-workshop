@@ -1,38 +1,60 @@
-# Getting started with Redis
+# Начало работы с Redis
 
-In this workshop we will learn the basics of working with Redis. We will be using Docker for initialising Redis in a container. 
+В этом воркшопе мы изучим основы работы с Redis. Мы будем использовать Docker для инициализации Redis в контейнере.
 
-## Connecting to the Redis environment
+## Использование утилиты командной строки Redis
 
 For connecting to Redis, we can either use the Redis Command Line Utility or the browser-based Redis Commander.
 
-### Using the Redis Command Line utility
+### Использование утилиты командной строки Redis
 
-Open another terminal window and enter the following command to start Redis CLI in another docker container:
+Откройте еще одно окно терминала и введите следующую команду, чтобы запустить Redis CLI в другом docker-контейнере:
 
 ```
 docker run -it --rm --network nosql-platform bitnami/redis redis-cli -h redis-1 -p 6379
 ```
 
-The Redis CLI should start and the following command prompt should appear (whereas the IP-Address can differ). 
+Должен запуститься Redis CLI и появиться следующая командная строка (при этом IP-адрес может отличаться).
 
 ```
-redis 21:04:06.73
-redis 21:04:06.74 Welcome to the Bitnami redis container
-redis 21:04:06.74 Subscribe to project updates by watching https://github.com/bitnami/bitnami-docker-redis
-redis 21:04:06.74 Submit issues and feature requests at https://github.com/bitnami/bitnami-docker-redis/issues
-redis 21:04:06.74
+Unable to find image 'bitnami/redis:latest' locally
+latest: Pulling from bitnami/redis
+ce4f4d45406a: Pull complete 
+Digest: sha256:25bf63f3caf75af4628c0dfcf39859ad1ac8abe135be85e99699f9637b16dc28
+Status: Downloaded newer image for bitnami/redis:latest
+redis 19:43:01.24 INFO  ==> 
+redis 19:43:01.24 INFO  ==> Welcome to the Bitnami redis container
+redis 19:43:01.25 INFO  ==> Subscribe to project updates by watching https://github.com/bitnami/containers
+redis 19:43:01.25 INFO  ==> NOTICE: Starting August 28th, 2025, only a limited subset of images/charts will remain available for free. Backup will be available for some time at the 'Bitnami Legacy' repository. More info at https://github.com/bitnami/containers/issues/83267
+redis 19:43:01.25 INFO  ==> 
 
 redis-1:6379> 
 ```
 
-Redis is configured so that it requires authentication. You can use the `default` user, so only the password has to be passed with the `AUTH` command
+Redis настроен так, что требует аутентификации. Вы можете использовать пользователя `default`, поэтому нужно передать только пароль с помощью команды `AUTH`.
 
 ```
 AUTH abc123!
 ```
 
-Enter help to see the version of Redis installed.
+В случае появления:
+
+```bash
+Сообщение ERR AUTH <password> called without any password configured for the default user означает, что сервер Redis, к которому вы подключились, не настроен на использование пароля.
+```
+сервер `Redis`, к которому вы подключились, не настроен на использование пароля.
+
+Пропустите этот шаг. Не вводите команду `AUTH abc123!`.
+
+Сразу после подключения через `Docker` вы уже находитесь в командной строке `Redis` и можете начать выполнять команды.
+
+Для проверки соединения введите простую команду `PING`:
+
+```bash
+redis-1:6379> PING
+```
+
+Введите `help`, чтобы увидеть версию установленного `Redis`.
 
 ```
 redis:6379> help
