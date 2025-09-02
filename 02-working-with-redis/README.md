@@ -1,20 +1,20 @@
 # Начало работы с Redis
 
-В этом воркшопе мы изучим основы работы с Redis. Мы будем использовать Docker для инициализации Redis в контейнере.
+В этом воркшопе изучим основы работы с Redis. Будем использовать `Docker` для инициализации `Redis` в контейнере.
 
 ## Использование утилиты командной строки Redis
 
-For connecting to Redis, we can either use the Redis Command Line Utility or the browser-based Redis Commander.
+Для подключения к `Redis` можно использовать либо утилиту командной строки `Redis`, либо браузерный `Redis Commander`.
 
 ### Использование утилиты командной строки Redis
 
-Откройте еще одно окно терминала и введите следующую команду, чтобы запустить Redis CLI в другом docker-контейнере:
+Откройте еще одно окно терминала и введите следующую команду, чтобы запустить `Redis CLI` в другом docker-контейнере:
 
 ```bash
 docker run -it --rm --network nosql-platform bitnami/redis redis-cli -h redis-1 -p 6379
 ```
 
-Должен запуститься Redis CLI и появиться следующая командная строка (при этом IP-адрес может отличаться).
+Должен запуститься `Redis CLI` и появиться следующая командная строка (при этом IP-адрес может отличаться).
 
 ```bash
 Unable to find image 'bitnami/redis:latest' locally
@@ -42,7 +42,7 @@ AUTH abc123!
 ```bash
 ERR AUTH <password> called without any password configured for the default user означает, что сервер Redis, к которому вы подключились, не настроен на использование пароля.
 ```
-сервер `Redis`, к которому вы подключились, не настроен на использование пароля.
+сервер `Redis`, к которому подключились, не настроен на использование пароля.
 
 Пропустите этот шаг. Не вводите команду `AUTH abc123!`.
 
@@ -71,15 +71,15 @@ To set redis-cli preferences:
 Set your preferences in ~/.redisclirc
 ```
 
-### Using Redis Commander
+### Использование Redis Commander
 
-In a web browser window, navigate to <http://dataplatform:28119>. You should see an image similar to the one shown below
+В окне веб-браузера перейдите по адресу http://localhost:28119. Вы должны увидеть изображение, что показано ниже.
 
 ![Redis Commander](./images/redis-commander-home.png)
 
-## String Data Structure
+## Структура данных "Строка" (String)
 
-Enter the commands described in the following sections at the prompt. This can be done either using the Redis CLI or using the Redis Commander. 
+Введите команды. Это можно сделать как с помощью `Redis CLI`, так и через `Redis Commander`.
 
 ```
 HELP @STRING
