@@ -552,7 +552,7 @@ redis:6379> SINTER database:products favorite:products
 
 `ZADD` добавляет один или несколько элементов в упорядоченное множество.
 
-
+```bash
 redis:6379> ZADD pioneers 1940 "Alan Kay"
 (integer) 1
 redis:6379> ZADD pioneers 1906 "Grace Hopper"
@@ -575,7 +575,7 @@ redis:6379> ZADD pioneers 1912 "Alan Turing"
 
 `ZRANGE` возвращает диапазон элементов в упорядоченном множестве по индексу (отсортировано от меньшего к большему, т.е. по возрастанию), опционально также возвращает оценки. Индекс начинается с 0.
 
-```
+```bash
 redis:6379> ZRANGE pioneers 2 4
 1) "Claude Shannon"
 2) "Alan Kay"
@@ -592,7 +592,7 @@ redis:6379> ZRANGE pioneers 2 4 WITHSCORES
 
 `ZREVRANGE` возвращает диапазон элементов в упорядоченном множестве по индексу (отсортировано от большего к меньшему, т.е. по убыванию), опционально также возвращает оценки. Индекс начинается с 0.
 
-```
+```bash
 redis:6379> ZREVRANGE pioneers 0 2
 1) "Linus Torvalds"
 2) "Yukihiro Matsumoto"
