@@ -75,7 +75,7 @@ Set your preferences in ~/.redisclirc
 
 В окне веб-браузера перейдите по адресу http://localhost:28119. Вы должны увидеть изображение, что показано ниже.
 
-![Redis Commander](./images/redis-commander-home.png)
+![Redis Commander](./images/redis-commander-home_01.png)
 
 ## Структура данных "Строка" (String)
 
