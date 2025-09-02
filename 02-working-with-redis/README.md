@@ -124,132 +124,131 @@ help @string
 Можно использовать команду `SET` для сохранения значения “redis-server” по ключу “server:name”:
 
 
-```
+```bash
 SET server:name "redis-server"
 ```
 
-Redis will store our data permanently, so we can later ask _What is the value stored at key server:name_?
+`Redis` сохранит данные на постоянной основе, поэтому позже  можем спросить: «Какое значение хранится по ключу server:name?»
 
-```
+```bash
 GET server:name 
 ```
 
-and Redis will reply with “redis-server”.
+и `Redis` ответит “redis-server”.
 
-```
+```bash
 EXISTS server:name
 (integer) 1
 ```
 
-```
+```bash
 KEYS server*
 1) "server:name"
 ```
 
-```
+```bash
 KEYS *
 1) "server:name"
 ```
 
-### Get and Set operations
+### Операции Get и Set
 
-Other common operations provided by key-value stores are DEL to delete a given key and associated value, SET-if-not-exists (called SETNX on Redis) that sets a key only if it does not already exist, and INCR to atomically increment a number stored at a given key. So let's see some of these commands in action:
+Другие распространенные операции, предоставляемые хранилищами «ключ-значение», это `DEL` для удаления заданного ключа и связанного с ним значения, `SET-if-not-exists` (в Redis называется `SETNX`), которая устанавливает ключ, только если он еще не существует, и `INCR` для атомарного увеличения числа, хранящегося по заданному ключу. Давайте посмотрим на некоторые из этих команд в действии:
 
-Let's first set a value at the key `connections` by using the `SET` command:
+Сначала установим значение для ключа `connections` с помощью команды `SET`:
 
-```
+```bash
 redis:6379> SET connections 10
 OK
 ```
 
-Let's check for the value by using the `GET` command:
+Проверим значение с помощью команды `GET`:
 
-```
+```bash
 redis:6379> GET connections
 "10"
 ```
 
-Now let's try if we can overwrite it by using another `SET` command:
+Теперь попробуем перезаписать его с помощью другой команды `SET`:
 
-```
+```bash
 redis:6379> SET connections 20
 OK
 redis:6379> GET connections
 "20"
 ```
 
-Let's see what happens if we are using the `SETNX` command. 
+осмотрим, что произойдет, если мы используем команду `SETNX`.
 
-```
+```bash
 redis:6379> SETNX connections 30
 (integer) 0
 redis:6379> GET connections
 "20"
 ```
 
-if we are using `SETNX` on a key which does not yet exists, we get a different answer:
+Если мы используем `SETNX` для ключа, который еще не существует, мы получим другой ответ:
 
-```
+```bash
 redis:6379> SETNX newkey 30
 (integer) 1
 ```
 
-Let's use `MSET` to set multiple key value pairs...
+Давайте используем `MSET` для установки нескольких пар «ключ-значение»...
 
-```
+```bash
 redis:6379> MSET key1 10 key2 20 key3 30
 (integer) 1
 ```
 
-and the oppposite `MGET` to get multiple values for multiple keys back. 
+...и обратную команду `MGET`, чтобы получить несколько значений для нескольких ключей.
 
-```
+```bash
 redis:6379> MGET key1 key3
 1) "10"
 2) "30"
 ```
+**Примечание**: это сильно отличается от одиночных команд `SET` и `GET`, так как выполняется атомарно в одной операции.
 
-**Note**: this is very much different to single `SET` and `GET` commands, as it it is done atomically in one operation. 
+### Операции инкремента и декремента
 
-### Increment and Decrement operation
+Теперь давайте будем рассматривать значение как счетчик.
 
-Now let's treat the value as a counter. 
-
-First we initialise the connections value to 10, followed by a `INCR` to increment it by one. 
+Сначала мы инициализируем значение connections равным 10, а затем используем `INCR`, чтобы увеличить его на единицу.
  
-```
+```bash
 redis:6379> SET connections 10
 OK
 redis:6379> INCR connections 
 (integer) 11
 ```
 
-We can see that we get the new value of the counter back. 
+Видим, что в ответ получаем новое значение счетчика.
 
-Next we increase it by 10, using the `INCRBY` command. 
+Далее мы увеличиваем его на `10`, используя команду `INCRBY`.
 
-```
+```bash
 redis:6379> INCRBY connections 10
 (integer) 21
 ```
 
-Now let's do the opposite and decrement the counter value. First using the `DECR` command the counter is decremented by one. 
+Теперь сделаем обратное и уменьшим значение счетчика. Сначала с помощью команды `DECR` счетчик уменьшается на единицу.
 
-```
+```bash
 redis:6379> DECR connections
 (integer) 20
 ```
 
 and then with the `DECRBY` we can specify the decrement to use, here we use 10. 
 
-```
+```bash
 redis:6379> DECRBY connections 10
 (integer) 10
 ```
 
 Now let's delete the key/value pair and see what happens if we use `INCR` on a non-existing key. 
 
-```
+```bash
 redis:6379> DEL connections
 (integer) 1
 
@@ -285,49 +284,49 @@ Redis can be told that a key should only exist for a certain length of time. Thi
 
 First let's set a new key/value pair. 
 
-```
+```bash
 redis:6379> SET resource:lock "Redis Demo"
 OK
 ```
 
 and then set it to expire after 2 minutes (120 seconds) by using the `EXPIRE` command.
 
-```
+```bash
 redis:6379> EXPIRE resource:lock 120
 (integer) 1
 ```
 
 This sets the key `resource:lock` to be deleted in 120 seconds. You can test how long a key will exist for with the `TTL` command. It returns the number of seconds until it will be deleted.
 
-```
+```bash
 redis:6379> TTL resource:lock
 (integer) 96
 ```
 
 Waiting the 96 seconds and doing the same command again we can see that it has been deleted.
 
-```
+```bash
 redis:6379> TTL resource:lock
 (integer) -2
 ```
 
 The -2 for the TTL of the key count means that the key does (not/no longer) exist. We can prove it using the `EXISTS` command.
 
-```
+```bash
 redis:6379> EXISTS resource:lock
 (integer) 0
 ```
 
 If you `SET` a key to a new value, its TTL will reset. Let's see that behaviour, by creating the value directly with an expiration time. This can either be done with the special `SETEX` or by `SET` and the option `EX`.  
 
-```
+```bash
 redis:6379> SET resource:lock "Redis Demo 1" EX 120
 OK
 ```
 
 We can see that the time-to-live has been set upon creation. 
 
-```
+```bash
 redis:6379> TTL resource:lock
 (integer) 119
 ```
@@ -341,7 +340,7 @@ OK
 
 We can see that the time-to-live has been cleared. 
 
-```
+```bash
 redis:6379> TTL resource:lock
 (integer) -1
 ```
@@ -356,21 +355,21 @@ Redis also supports several more complex data structures. The first one we'll lo
 
 Let's add a new item to the end of a non-existing list called `skills` using the `RPUSH` command. 
 
-```
+```bash
 redis:6379> RPUSH skills "Oracle RDBMS"
 (integer) 1
 ```
 
 We can see that the list now holds 1 item. Let's add another skill to the `skills` list. 
 
-```
+```bash
 redis:6379> RPUSH skills "Redis"
 (integer) 2
 ```
 
 Not let's see the values currently in the `skills` list. Can we use the `GET` command?
 
-```
+```bash
 redis:6379> GET skills
 (error) WRONGTYPE Operation against a key holding the wrong kind of value
 ```
@@ -378,7 +377,7 @@ redis:6379> GET skills
 The `GET` command belongs to the `String` group and cannot be used for `list` structures.
 But we can use the `LRANGE` command for that. 
 
-```
+```bash
 redis:6379> LRANGE skills 0 -1
 1) "Oracle RDBMS"
 2) "Redis"
@@ -386,7 +385,7 @@ redis:6379> LRANGE skills 0 -1
 
 `LPUSH` puts the new value at the start of the list.
 
-```
+```bash
 redis:6379> LPUSH skills "SQL Server"
 (integer) 3
 redis:6379> LRANGE skills 0 -1
@@ -397,20 +396,20 @@ redis:6379> LRANGE skills 0 -1
 
 `LRANGE` gives a subset of the list. It takes the index of the first element you want to retrieve as its first parameter and the index of the last element you want to retrieve as its second parameter. A value of -1 for the second parameter means to retrieve elements until the end of the list.
 
-```
+```bash
 redis:6379> LRANGE skills 0 -1 
 1) "SQL Server"
 2) "Oracle RDBMS"
 3) "Redis"
 ```
 
-```
+```bash
 redis:6379> LRANGE skills 0 1 
 1) "SQL Server"
 2) "Oracle RDBMS"
 ```
 
-```
+```bash
 redis:6379> LRANGE skills 1 2 
 2) "Oracle RDBMS"
 3) "Redis"
@@ -418,28 +417,28 @@ redis:6379> LRANGE skills 1 2
 
 `LLEN` returns the current length of the list.
 
-```
+```bash
 redis:6379> LLEN skills 
 (integer) 3
 ```
 
 `LPOP` removes the first element from the list and returns it.
 
-```
+```bash
 redis:6379> LPOP skills 
 "SQL Server"
 ```
 
 `RPOP` removes the last element from the list and returns it.
 
-```
+```bash
 redis:6379> RPOP skills 
 "Redis"
 ```
 
 **Note**: the list has now only one element left:
 
-```
+```bash
 redis:6379> LLEN skills 
 (integer) 1
 redis:6379> LRANGE skills 0 -1
@@ -456,7 +455,7 @@ A set is similar to a list, except it does not have a specific order and each el
 
 `SADD` adds the given value to the set. 
 
-```
+```bash
 redis:6379> SADD nosql:products "Cassandra"
 (integer) 1
 redis:6379> SADD nosql:products "Redis"
@@ -467,7 +466,7 @@ redis:6379> SADD nosql:products "MongoDB"
 
 `SMEMBERS` returns a list of all the members of this set.
 
-```
+```bash
 redis:6379> SMEMBERS nosql:products
 1) "Redis"
 2) "Cassandra"
@@ -477,7 +476,7 @@ redis:6379> SMEMBERS nosql:products
 `SREM` removes the given value from the set.
 
 
-```
+```bash
 redis:6379> SREM nosql:products "MongoDB"
 (integer) 1
 redis:6379> SMEMBERS nosql:products
@@ -487,7 +486,7 @@ redis:6379> SMEMBERS nosql:products
 
 `SISMEMBER` tests if the given value is in the set.
 
-```
+```bash
 redis:6379> SISMEMBER nosql:products "Cassandra"
 (integer) 1
 redis:6379> SISMEMBER nosql:products "MongoDB"
@@ -500,7 +499,7 @@ Cassandra is a member of the nosql:products, but MongoDB is not (therefore the r
 
 first let's create another set of RDBMS products:
 
-```
+```bash
 redis:6379> SADD rdbms:products "Oracle"
 (integer) 1
 redis:6379> SADD rdbms:products "SQL Server"
@@ -509,7 +508,7 @@ redis:6379> SADD rdbms:products "SQL Server"
 
 now create the union of the two:
 
-```
+```bash
 redis:6379> SUNION rdbms:products nosql:products
 1) "SQL Server"
 2) "Cassandra"
@@ -519,7 +518,7 @@ redis:6379> SUNION rdbms:products nosql:products
 
 SUNIONSTORE combines two or more sets and stores the result into a new set.
 
-```
+```bash
 redis:6379> SUNIONSTORE database:products rdbms:products nosql:products
 (integer) 4
 redis:6379> SMEMBERS database:products
@@ -531,7 +530,7 @@ redis:6379> SMEMBERS database:products
 
 `SINTER` intersects two or more sets and returns the list of the intersecting elements.
 
-```
+```bash
 redis:6379> SADD favorite:products "Cassandra"
 (integer) 1
 redis:6379> SADD favorite:products "Oracle"
@@ -550,7 +549,7 @@ A sorted set is similar to a regular set, but now each value has an associated s
 
 `ZADD` adds one or more members to a sorted set, or update its score if it already exists.
 
-```
+
 redis:6379> ZADD pioneers 1940 "Alan Kay"
 (integer) 1
 redis:6379> ZADD pioneers 1906 "Grace Hopper"
@@ -607,7 +606,7 @@ Hashes are maps between string fields and string values, so they are the perfect
 
 `HSET` sets the field in the hash stored at the given key to a value. 
 
-```
+```bash
 redis:6379> HSET user:1000 name "John Smith"
 (integer) 1
 redis:6379> HSET user:1000 email "john.smith@example.com"
@@ -618,7 +617,7 @@ redis:6379> HSET user:1000 password "s3cret"
 
 To get back the saved data use `HGETALL` command:
 
-```
+```bash
 redis:6379> HGETALL user:1000
 1) "name"
 2) "John Smith"
@@ -630,14 +629,14 @@ redis:6379> HGETALL user:1000
 
 You can also set multiple fields at once using the `HMSET` command. 
 
-```
+```bash
 redis:6379> HMSET user:1001 name "Mary Jones" password "hidden" email "mjones@example.com"
 OK
 ```
 
 let's see that this worked and a new hash as been created.
 
-```
+```bash
 redis:6379> HGETALL user:1001
 1) "name"
 2) "Mary Jones"
@@ -649,7 +648,7 @@ redis:6379> HGETALL user:1001
 
 If you only need a single field value that is possible as well using the `HGET` command
 
-```
+```bash
 redis:6379> HGET user:1001 name
 "Mary Jones"
 ```
@@ -657,7 +656,7 @@ redis:6379> HGET user:1001 name
 Numerical values in hash fields are handled exactly the same as in simple strings and there are operations to increment this value in an atomic way.
 
 
-```
+```bash
 redis:6379> HSET user:1000 visits 10
 (integer) 1
 redis:6379> HINCRBY user:1000 visits 1
@@ -678,20 +677,20 @@ docker run -it --rm --network nosql-platform bitnami/redis redis-benchmark -h re
 
 ## Python
 
-```
+```Python
 conda install redis-py
 ```
 
-```
+```Python
 import redis
 r = redis.Redis(host='redis', port=6379, db=0)
 ```
 
-```
+```Python
 r.ping()
 ```
 
-```
+```Python
 r.set('foo','bar')
 ```
 
