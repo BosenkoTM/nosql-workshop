@@ -474,7 +474,7 @@ redis:6379> SMEMBERS nosql:products
 3) "MongoDB"
 ```
 
-`SREM` removes the given value from the set.
+`SREM` удаляет заданное значение из множества.
 
 
 ```bash
@@ -485,7 +485,7 @@ redis:6379> SMEMBERS nosql:products
 2) "Cassandra"
 ```
 
-`SISMEMBER` tests if the given value is in the set.
+`SISMEMBER` проверяет, находится ли заданное значение в множестве.
 
 ```bash
 redis:6379> SISMEMBER nosql:products "Cassandra"
@@ -494,11 +494,11 @@ redis:6379> SISMEMBER nosql:products "MongoDB"
 (integer) 0
 ```
 
-Cassandra is a member of the nosql:products, but MongoDB is not (therefore the result of 0).
+`Сassandra` является элементом `nosql:products`, а `MongoDB` — нет (поэтому результат 0).
 
-`SUNION` combines two or more sets and returns the list of all elements.
+`SUNION` объединяет два или более множества и возвращает список всех элементов.
 
-first let's create another set of RDBMS products:
+Сначала создадим еще одно множество продуктов `RDBMS`:
 
 ```bash
 redis:6379> SADD rdbms:products "Oracle"
@@ -507,7 +507,7 @@ redis:6379> SADD rdbms:products "SQL Server"
 (integer) 1
 ```
 
-now create the union of the two:
+Теперь создадим объединение двух множеств:
 
 ```bash
 redis:6379> SUNION rdbms:products nosql:products
@@ -517,7 +517,7 @@ redis:6379> SUNION rdbms:products nosql:products
 4) "Oracle"
 ```
 
-SUNIONSTORE combines two or more sets and stores the result into a new set.
+`SUNIONSTORE` объединяет два или более множества и сохраняет результат в новое множество.
 
 ```bash
 redis:6379> SUNIONSTORE database:products rdbms:products nosql:products
@@ -529,7 +529,7 @@ redis:6379> SMEMBERS database:products
 4) "Oracle"
 ```
 
-`SINTER` intersects two or more sets and returns the list of the intersecting elements.
+`SINTER` находит пересечение двух или более множеств и возвращает список пересекающихся элементов.
 
 ```bash
 redis:6379> SADD favorite:products "Cassandra"
@@ -542,13 +542,15 @@ redis:6379> SINTER database:products favorite:products
 2) "Oracle"
 ```
 
-Check the full list of [Set commands](https://redis.io/commands#set) for more information.
-   
-## Sorted Set data structures
-Sets are a very handy data type, but as they are unsorted they don't work well for a number of problems. This is why Redis 1.2 introduced Sorted Sets.
-A sorted set is similar to a regular set, but now each value has an associated score. This score is used to sort the elements in the set.
+Полный список [команд для множеств](https://redis.io/commands#set).
 
-`ZADD` adds one or more members to a sorted set, or update its score if it already exists.
+   
+## Структуры данных "Упорядоченное множество" (Sorted Set)
+
+Множества — очень удобный тип данных, но поскольку они неупорядочены, они плохо подходят для решения ряда задач. Именно поэтому в `Redis 1.2` были введены упорядоченные множества.
+Упорядоченное множество похоже на обычное, но теперь каждое значение связано с оценкой (score). Эта оценка используется для сортировки элементов в множестве.
+
+`ZADD` добавляет один или несколько элементов в упорядоченное множество.
 
 
 redis:6379> ZADD pioneers 1940 "Alan Kay"
@@ -569,9 +571,9 @@ redis:6379> ZADD pioneers 1912 "Alan Turing"
 (integer) 1
 ```
 
-In these examples, the scores are years of birth and the values are the names of famous people in informatics.
+В этих примерах `оценки` — это год рождения, а `значения` — имена известных людей в информатике.
 
-`ZRANGE` returns a range of members in a sorted set by index (ordered low to high, e.g. ascending), optionally also returns the scores. Index starts with 0. 
+`ZRANGE` возвращает диапазон элементов в упорядоченном множестве по индексу (отсортировано от меньшего к большему, т.е. по возрастанию), опционально также возвращает оценки. Индекс начинается с 0.
 
 ```
 redis:6379> ZRANGE pioneers 2 4
@@ -588,7 +590,7 @@ redis:6379> ZRANGE pioneers 2 4 WITHSCORES
 6) "1953"
 ```
 
-`ZREVRANGE` returns a range of members in a sorted set by index (ordered high to low, e.g. descending), optionally also returns the scores. Index starts with 0. 
+`ZREVRANGE` возвращает диапазон элементов в упорядоченном множестве по индексу (отсортировано от большего к меньшему, т.е. по убыванию), опционально также возвращает оценки. Индекс начинается с 0.
 
 ```
 redis:6379> ZREVRANGE pioneers 0 2
@@ -597,15 +599,15 @@ redis:6379> ZREVRANGE pioneers 0 2
 3) "Sophie Wilson"
 ```
 
-Check the full list of [Sorted Set commands](https://redis.io/commands#sorted_set) for more information.
+Полный список [команд для упорядоченных множеств](https://redis.io/commands#sorted_set).
 
-## Hash structures
+## Структуры данных "Хэш" (Hash)
 
-Simple strings, sets and sorted sets already get a lot done but there is one more data type Redis can handle: Hashes.
+Простые строки, множества и упорядоченные множества уже позволяют многое сделать, но есть еще один тип данных, с которым может работать Redis: хэши.
 
-Hashes are maps between string fields and string values, so they are the perfect data type to represent objects (eg: A User with a number of fields like name, surname, age, and so forth):
+Хэши — это карты (соответствия) между строковыми полями и строковыми значениями, поэтому они являются идеальным типом данных для представления объектов (например, пользователя и его поля-идентификаторы, таких как имя, фамилия, возраст и т.д.):
 
-`HSET` sets the field in the hash stored at the given key to a value. 
+`HSET` устанавливает значение для поля в хэше, хранящемся по заданному ключу.
 
 ```bash
 redis:6379> HSET user:1000 name "John Smith"
@@ -616,7 +618,7 @@ redis:6379> HSET user:1000 password "s3cret"
 (integer) 1
 ```
 
-To get back the saved data use `HGETALL` command:
+Чтобы получить сохраненные данные, используйте команду `HGETALL`:
 
 ```bash
 redis:6379> HGETALL user:1000
@@ -628,14 +630,14 @@ redis:6379> HGETALL user:1000
 6) "s3cret"
 ```
 
-You can also set multiple fields at once using the `HMSET` command. 
+Вы также можете установить несколько полей одновременно с помощью команды `HMSET`. 
 
 ```bash
 redis:6379> HMSET user:1001 name "Mary Jones" password "hidden" email "mjones@example.com"
 OK
 ```
 
-let's see that this worked and a new hash as been created.
+Давайте убедимся, что это сработало и был создан новый хэш.
 
 ```bash
 redis:6379> HGETALL user:1001
@@ -647,7 +649,7 @@ redis:6379> HGETALL user:1001
 6) "mjones@example.com"
 ```
 
-If you only need a single field value that is possible as well using the `HGET` command
+Если требуется получить значение только одного поля, это также возможно с помощью команды HGET.
 
 ```bash
 redis:6379> HGET user:1001 name
