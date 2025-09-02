@@ -10,7 +10,7 @@ For connecting to Redis, we can either use the Redis Command Line Utility or the
 
 Откройте еще одно окно терминала и введите следующую команду, чтобы запустить Redis CLI в другом docker-контейнере:
 
-```
+```bash
 docker run -it --rm --network nosql-platform bitnami/redis redis-cli -h redis-1 -p 6379
 ```
 
@@ -33,7 +33,7 @@ redis-1:6379>
 
 Redis настроен так, что требует аутентификации. Вы можете использовать пользователя `default`, поэтому нужно передать только пароль с помощью команды `AUTH`.
 
-```
+```bash
 AUTH abc123!
 ```
 
