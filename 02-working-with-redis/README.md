@@ -16,7 +16,7 @@ docker run -it --rm --network nosql-platform bitnami/redis redis-cli -h redis-1 
 
 Должен запуститься Redis CLI и появиться следующая командная строка (при этом IP-адрес может отличаться).
 
-```
+```bash
 Unable to find image 'bitnami/redis:latest' locally
 latest: Pulling from bitnami/redis
 ce4f4d45406a: Pull complete 
@@ -40,7 +40,7 @@ AUTH abc123!
 В случае появления:
 
 ```bash
-Сообщение ERR AUTH <password> called without any password configured for the default user означает, что сервер Redis, к которому вы подключились, не настроен на использование пароля.
+ERR AUTH <password> called without any password configured for the default user означает, что сервер Redis, к которому вы подключились, не настроен на использование пароля.
 ```
 сервер `Redis`, к которому вы подключились, не настроен на использование пароля.
 
@@ -56,7 +56,7 @@ redis-1:6379> PING
 
 Введите `help`, чтобы увидеть версию установленного `Redis`.
 
-```
+```bash
 redis:6379> help
 redis-cli 6.0.9
 To get help about Redis commands type:
