@@ -354,29 +354,29 @@ redis:6379> TTL resource:lock
 
 `RPUSH` добавляет новое значение в конец списка.
 
-Давайте добавим новый элемент в конец несуществующего списка с именем `skills` с помощью команды `RPUSH`.
+Добавить новый элемент в конец несуществующего списка с именем `skills` с помощью команды `RPUSH`.
 
 ```bash
 redis:6379> RPUSH skills "Oracle RDBMS"
 (integer) 1
 ```
+Мы видим, что теперь список содержит 1 элемент. Давайте добавим еще один навык в список `skills`.
 
-We can see that the list now holds 1 item. Let's add another skill to the `skills` list. 
 
 ```bash
 redis:6379> RPUSH skills "Redis"
 (integer) 2
 ```
 
-Not let's see the values currently in the `skills` list. Can we use the `GET` command?
+Теперь посмотрим на значения, которые в данный момент находятся в списке `skills`. Можем использовать команду `GET`?
 
 ```bash
 redis:6379> GET skills
 (error) WRONGTYPE Operation against a key holding the wrong kind of value
 ```
 
-The `GET` command belongs to the `String` group and cannot be used for `list` structures.
-But we can use the `LRANGE` command for that. 
+Команда `GET` относится к группе `String` и не может быть использована для структур `list`.
+В таком случае используют команду `LRANGE`.
 
 ```bash
 redis:6379> LRANGE skills 0 -1
@@ -384,7 +384,7 @@ redis:6379> LRANGE skills 0 -1
 2) "Redis"
 ``` 
 
-`LPUSH` puts the new value at the start of the list.
+`LPUSH` добавляет новое значение в начало списка.
 
 ```bash
 redis:6379> LPUSH skills "SQL Server"
@@ -395,7 +395,7 @@ redis:6379> LRANGE skills 0 -1
 3) "Redis"
 ```
 
-`LRANGE` gives a subset of the list. It takes the index of the first element you want to retrieve as its first parameter and the index of the last element you want to retrieve as its second parameter. A value of -1 for the second parameter means to retrieve elements until the end of the list.
+`LRANGE` возвращает подмножество списка. Она принимает индекс первого элемента, который требуется получить, в качестве первого параметра, и индекс последнего элемента, который требуется получить, в качестве второго параметра. Значение -1 для второго параметра означает получение элементов до конца списка.
 
 ```bash
 redis:6379> LRANGE skills 0 -1 
@@ -416,28 +416,28 @@ redis:6379> LRANGE skills 1 2
 3) "Redis"
 ```
 
-`LLEN` returns the current length of the list.
+`LLEN` возвращает текущую длину списка.
 
 ```bash
 redis:6379> LLEN skills 
 (integer) 3
 ```
 
-`LPOP` removes the first element from the list and returns it.
+`LPOP` удаляет первый элемент из списка и возвращает его.
 
 ```bash
 redis:6379> LPOP skills 
 "SQL Server"
 ```
 
-`RPOP` removes the last element from the list and returns it.
+`RPOP` удаляет последний элемент из списка и возвращает его.
 
 ```bash
 redis:6379> RPOP skills 
 "Redis"
 ```
 
-**Note**: the list has now only one element left:
+**Примечание**: теперь в списке остался только один элемент:
 
 ```bash
 redis:6379> LLEN skills 
@@ -446,15 +446,15 @@ redis:6379> LRANGE skills 0 -1
 2) "Oracle RDBMS"
 ```
 
-Check the full list of [List commands](https://redis.io/commands#list) for more information.
+Полный список [команд для списков](https://redis.io/commands#list).
 
-## Set data structures
+## Структуры данных "Множество" (Set)
 
-The next data structure that we'll look at is the set. 
+Следующая структура данных, которую рассмотрим, это множество.
 
-A set is similar to a list, except it does not have a specific order and each element may only appear once. Some of the important commands in working with sets are `SADD`, `SREM`, `SISMEMBER`, `SMEMBERS` and `SUNION`.
+Множество похоже на список, за исключением того, что оно не имеет определенного порядка, и каждый элемент может встречаться только один раз. Некоторые из важных команд для работы с множествами — это `SADD`, `SREM`, `SISMEMBER`, `SMEMBERS` и `SUNION`.
 
-`SADD` adds the given value to the set. 
+`SADD` добавляет заданное значение в множество.
 
 ```bash
 redis:6379> SADD nosql:products "Cassandra"
@@ -465,7 +465,7 @@ redis:6379> SADD nosql:products "MongoDB"
 (integer) 1
 ```
 
-`SMEMBERS` returns a list of all the members of this set.
+`SMEMBERS` возвращает список всех элементов этого множества.
 
 ```bash
 redis:6379> SMEMBERS nosql:products
