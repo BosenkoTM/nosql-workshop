@@ -721,3 +721,61 @@ r.set('foo','bar') - выполнение команды `SET` через `Pytho
 
 Если команда выполнена успешно, метод вернет `True`.
 
+Полный пример для `Jupyter`:
+
+```Python
+import redis
+
+# Создаем подключение (используем localhost, т.к. Jupyter на хосте VM)
+# decode_responses=True автоматически преобразует ответы из байтов в строки
+r = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
+
+# 1. Проверяем соединение
+try:
+    if r.ping():
+        print("Соединение с Redis установлено!")
+except redis.exceptions.ConnectionError as e:
+    print(f"Не удалось подключиться к Redis: {e}")
+
+# 2. Устанавливаем значение
+key = 'message:1'
+value = 'Hello from Python!'
+result = r.set(key, value)
+print(f"Команда SET для ключа '{key}' выполнена успешно: {result}")
+
+# 3. Получаем значение обратно
+retrieved_value = r.get(key)
+print(f"Полученное значение для ключа '{key}': {retrieved_value}")
+
+# 4. Удаляем ключ для очистки
+r.delete(key)
+print(f"Ключ '{key}' удален.")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
