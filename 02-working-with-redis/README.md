@@ -84,11 +84,8 @@ Set your preferences in ~/.redisclirc
 ```bash
 help @string
 ```
-Конечно, вот короткое пояснение к полученному результату.
 
-### Краткое пояснение к результату `help @string`
-
-Вы выполнили команду, которая вывела встроенную документацию по всем командам, работающим с базовым типом данных `Redis` — **строками (Strings)**.
+### `help @string`
 
 По сути, это главная шпаргалка по всем возможным действиям с простыми парами «ключ-значение» в `Redis`.
 
@@ -169,7 +166,7 @@ redis:6379> GET connections
 "10"
 ```
 
-Теперь попробуем перезаписать его с помощью другой команды `SET`:
+Поробуем перезаписать его с помощью другой команды `SET`:
 
 ```bash
 redis:6379> SET connections 20
@@ -178,7 +175,7 @@ redis:6379> GET connections
 "20"
 ```
 
-осмотрим, что произойдет, если мы используем команду `SETNX`.
+Посмотрим, что произойдет, если использовать команду `SETNX`.
 
 ```bash
 redis:6379> SETNX connections 30
@@ -187,14 +184,14 @@ redis:6379> GET connections
 "20"
 ```
 
-Если мы используем `SETNX` для ключа, который еще не существует, мы получим другой ответ:
+Если  используем `SETNX` для ключа, который еще не существует, получим другой ответ:
 
 ```bash
 redis:6379> SETNX newkey 30
 (integer) 1
 ```
 
-Давайте используем `MSET` для установки нескольких пар «ключ-значение»...
+Используем `MSET` для установки нескольких пар «ключ-значение»...
 
 ```bash
 redis:6379> MSET key1 10 key2 20 key3 30
@@ -212,9 +209,9 @@ redis:6379> MGET key1 key3
 
 ### Операции инкремента и декремента
 
-Теперь давайте будем рассматривать значение как счетчик.
+Рассмотрим значение как счетчик.
 
-Сначала мы инициализируем значение connections равным 10, а затем используем `INCR`, чтобы увеличить его на единицу.
+Инициализируем значение `connections` равным `10`, а затем используем `INCR`, чтобы увеличить его на единицу.
  
 ```bash
 redis:6379> SET connections 10
@@ -225,28 +222,27 @@ redis:6379> INCR connections
 
 Видим, что в ответ получаем новое значение счетчика.
 
-Далее мы увеличиваем его на `10`, используя команду `INCRBY`.
+Увеличим его на `10`, используя команду `INCRBY`.
 
 ```bash
 redis:6379> INCRBY connections 10
 (integer) 21
 ```
 
-Теперь сделаем обратное и уменьшим значение счетчика. Сначала с помощью команды `DECR` счетчик уменьшается на единицу.
+Выполним обратную операцию: уменьшим значение счетчика. С помощью команды `DECR` счетчик уменьшается на единицу.
 
 ```bash
 redis:6379> DECR connections
 (integer) 20
 ```
 
-and then with the `DECRBY` we can specify the decrement to use, here we use 10. 
+А затем с помощью `DECRBY` укажем величину, на которую уменьшим значение ключа( используем 10).
 
 ```bash
 redis:6379> DECRBY connections 10
 (integer) 10
 ```
-
-Now let's delete the key/value pair and see what happens if we use `INCR` on a non-existing key. 
+Удалим пару «ключ-значение» и посмотрим, что произойдет, если используем `INCR` для несуществующего ключа.
 
 ```bash
 redis:6379> DEL connections
@@ -258,27 +254,29 @@ redis:6379> EXISTS connections
 redis:6379> INCR connections
 (integer) 1
 ```
-
-We can see that the `INCR` automatically starts with the value 0 and increments it by 1, which is the result we get back. 
+Мы видим, что `INCR` автоматически начинает со значения `0` и увеличивает его на `1`, что и является результатом, который получили.
 
 ----
-**Note:** There is something special about INCR. Why do we provide such an operation if we can do it ourselves with a bit of code? After all it is as simple as:
+**Примечание**: в команде `INCR` есть особенность. Зачем  такая операция, если можно сделать это с помощью небольшого кода? В конце концов, это так же просто, как:
+
+```bash
 x = GET count
 x = x + 1
 SET count x
+```
 
-The problem is that doing the increment in this way will only work as long as there is a single client using the key. See what happens if two clients are accessing this key at the same time:
+Проблема в том, что увеличение значения таким способом будет работать только до тех пор, пока ключ использует один клиент. Посмотрите, что произойдет, если два клиента обращаются к этому ключу одновременно:
 
-  1.	Client A reads count as 10.
-  2.	Client B reads count as 10.
-  3.	Client A increments 10 and sets count to 11.
-  4.	Client B increments 10 and sets count to 11.
+1. Клиент А считывает `count` как 10.
+2. Клиент Б считывает `count` как 10.
+3. Клиент А увеличивает 10 и устанавливает `count` в 11.
+4. Клиент Б увеличивает 10 и устанавливает `count` в 11.
 
-We wanted the value to be 12, but instead it is 11! This is because incrementing the value in this way is not an atomic operation. Calling the `INCR` command in Redis will prevent this from happening, because it is an atomic operation. Redis provides many of these atomic operations on different types of data.
+Старались, чтобы значение стало 12, а вместо этого оно равно 11! Это происходит потому, что увеличение значения таким способом не является атомарной операцией. Вызов команды `INCR` в `Redis` помогает превратить и подтвердить, что операция атомарна. `Redis` предоставляет множество таких атомарных операций для различных типов данных.
 
 ----
 
-### Expiration and Time to Live
+### Срок действия (Expiration) и время жизни (TTL)
 
 Redis can be told that a key should only exist for a certain length of time. This is accomplished with the `EXPIRE` and `TTL` commands.
 
