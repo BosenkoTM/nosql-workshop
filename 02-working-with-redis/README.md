@@ -656,8 +656,7 @@ redis:6379> HGET user:1001 name
 "Mary Jones"
 ```
 
-Numerical values in hash fields are handled exactly the same as in simple strings and there are operations to increment this value in an atomic way.
-
+Числовые значения в полях хэша обрабатываются точно так же, как и в простых строках, и существуют операции для атомарного увеличения этого значения.
 
 ```bash
 redis:6379> HSET user:1000 visits 10
@@ -669,26 +668,46 @@ redis:6379> HINCRBY user:1000 visits 10
 redis:6379> HDEL user:1000 visits
 (integer) 1
 ```
-    
-Check the full list of [Hash commands](https://redis.io/commands#hash) for more information.
+Полный список [команд для хэшей](https://redis.io/commands#hash)  
 
-## Redis Benchmark
+## Тестирование производительности Redis (Redis Benchmark)
+Эта команда предназначена для проверки, насколько быстро сервер `Redis` может обрабатывать различные типы команд. Это полезно для оценки производительности и "прогрева" системы.
 
 ```bash
 docker run -it --rm --network nosql-platform bitnami/redis redis-benchmark -h redis-1 -a "abc123!" -q -n 100000
 ```
+Получим вывод, который показывает, сколько тысяч операций каждого типа  Redis-сервер способен обработать в секунду:
+
+```bash
+PING_INLINE: 116279.07 requests per second
+PING_BULK: 114942.53 requests per second
+SET: 113636.36 requests per second
+GET: 114942.53 requests per second
+INCR: 112359.55 requests per second
+LPUSH: 114942.53 requests per second
+RPUSH: 116279.07 requests per second
+LPOP: 116279.07 requests per second
+RPOP: 113636.36 requests per second
+SADD: 116279.07 requests per second
+```
 
 ## Python
+Этот раздел показывает, как взаимодействовать с `Redis` не через командную строку, а программно, используя язык `Python`. Это основной способ работы с `Redis` в реальных приложениях.
 
+
+1. Установка библиотеки
+   
 ```Python
 conda install redis-py
 ```
-
+2. Подключение к Redis из Python
+   
 ```Python
 import redis
 r = redis.Redis(host='redis', port=6379, db=0)
 ```
 
+3. Проверка соединения
 ```Python
 r.ping()
 ```
@@ -696,5 +715,9 @@ r.ping()
 ```Python
 r.set('foo','bar')
 ```
+**Пояснение**:
 
+r.set('foo','bar') - выполнение команды `SET` через `Python`. Вызываем метод `.set()` у  объекта подключения `r` и передаем ему ключ `('foo')` и значение `('bar')`.
+
+Если команда выполнена успешно, метод вернет `True`.
 
