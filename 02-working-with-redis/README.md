@@ -724,11 +724,16 @@ r.set('foo','bar') - выполнение команды `SET` через `Pytho
 Полный пример для `Jupyter`:
 
 ```Python
+!pip install redis
+```
+
+```Python
 import redis
 
 # Создаем подключение (используем localhost, т.к. Jupyter на хосте VM)
 # decode_responses=True автоматически преобразует ответы из байтов в строки
-r = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
+# r = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
+r = redis.Redis(host='redis-1', port=6379, db=0, decode_responses=True)
 
 # 1. Проверяем соединение
 try:
@@ -752,6 +757,15 @@ r.delete(key)
 print(f"Ключ '{key}' удален.")
 ```
 
+
+**Результат**:
+
+```Python
+Соединение с Redis установлено!
+Команда SET для ключа 'message:1' выполнена успешно: True
+Полученное значение для ключа 'message:1': Hello from Python!
+Ключ 'message:1' удален.
+```
 
 
 
