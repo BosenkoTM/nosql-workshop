@@ -278,80 +278,83 @@ SET count x
 
 ### Срок действия (Expiration) и время жизни (TTL)
 
-Redis can be told that a key should only exist for a certain length of time. This is accomplished with the `EXPIRE` and `TTL` commands.
+В `Redis` можно указать, что ключ должен существовать только в течение определенного времени. Это достигается с помощью команд `EXPIRE` и `TTL`.
 
-First let's set a new key/value pair. 
+Сначала установим новую пару «ключ-значение».
 
 ```bash
 redis:6379> SET resource:lock "Redis Demo"
 OK
 ```
 
-and then set it to expire after 2 minutes (120 seconds) by using the `EXPIRE` command.
+А затем установим срок его действия в 2 минуты (120 секунд) с помощью команды `EXPIRE`.
 
 ```bash
 redis:6379> EXPIRE resource:lock 120
 (integer) 1
 ```
 
-This sets the key `resource:lock` to be deleted in 120 seconds. You can test how long a key will exist for with the `TTL` command. It returns the number of seconds until it will be deleted.
+Это устанавливает, что ключ `resource:lock` будет удален через 120 секунд. Можно проверить, как долго ключ будет существовать, с помощью команды `TTL`. Она возвращает количество секунд до его удаления.
 
 ```bash
 redis:6379> TTL resource:lock
 (integer) 96
 ```
 
-Waiting the 96 seconds and doing the same command again we can see that it has been deleted.
+Подождав 96 секунд и выполнив ту же команду снова, видим, что он был удален.
 
 ```bash
 redis:6379> TTL resource:lock
 (integer) -2
 ```
 
-The -2 for the TTL of the key count means that the key does (not/no longer) exist. We can prove it using the `EXISTS` command.
+Значение -2 для TTL ключа означает, что ключ (больше) не существует. Проверяем с помощью команды `EXISTS`.
+
 
 ```bash
 redis:6379> EXISTS resource:lock
 (integer) 0
 ```
 
-If you `SET` a key to a new value, its TTL will reset. Let's see that behaviour, by creating the value directly with an expiration time. This can either be done with the special `SETEX` or by `SET` and the option `EX`.  
+Если вы `SET`-ите новое значение для ключа, его TTL будет сброшен. Создать значение сразу со сроком действия. Это можно сделать либо с помощью специальной команды `SETEX`, либо с помощью `SET` и опции `EX`.
 
 ```bash
 redis:6379> SET resource:lock "Redis Demo 1" EX 120
 OK
 ```
 
-We can see that the time-to-live has been set upon creation. 
+Мы видим, что время жизни было установлено при создании.
 
 ```bash
 redis:6379> TTL resource:lock
 (integer) 119
 ```
 
-Now use the SET command to update the value
+Теперь используем команду `SET`, чтобы обновить значение.
 
-```
+```bash
 redis:6379> SET resource:lock "Redis Demo 2"
 OK
 ```
 
-We can see that the time-to-live has been cleared. 
+Мы видим, что время жизни было сброшено.
 
 ```bash
 redis:6379> TTL resource:lock
 (integer) -1
 ```
 
-Check the full list of [Srings commands](https://redis.io/commands#string) for more information.
+Полный список [команд для строк](https://redis.io/commands#string) смотрите для получения дополнительной информации.
 
-##	List data structures
+##	Структуры данных "Список" (List)
 
-Redis also supports several more complex data structures. The first one we'll look at is a list. A list is a series of ordered values. Some of the important commands for interacting with lists are `RPUSH`, `LPUSH`, `LLEN`, `LRANGE`, `LPOP``, and RPOP. You can immediately begin working with a key as a list, as long as it doesn't already exist as a different type.
+`Redis` также поддерживает несколько более сложных структур данных. Первая структура, которую рассмотрим, это список. 
 
-`RPUSH` puts the new value at the end of the list.
+**Список** — это серия упорядоченных значений. Некоторые из важных команд для взаимодействия со списками — это `RPUSH`, `LPUSH`, `LLEN`, `LRANGE`, `LPOP` и `RPOP`. Можно сразу начать работать с ключом как со списком, если он еще не существует как другой тип.
 
-Let's add a new item to the end of a non-existing list called `skills` using the `RPUSH` command. 
+`RPUSH` добавляет новое значение в конец списка.
+
+Давайте добавим новый элемент в конец несуществующего списка с именем `skills` с помощью команды `RPUSH`.
 
 ```bash
 redis:6379> RPUSH skills "Oracle RDBMS"
