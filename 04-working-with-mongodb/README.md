@@ -6,11 +6,11 @@
 
 ## Подключение к среде MongoDB
 
-### Использование утилиты командной строки MongoDB
+### Использование утилиты командной строки MongoDB (для версии 5+)
 
 Можно найти утилиту командной строки `mongo` внутри контейнера Docker MongoDB, работающего как часть платформы. Подключитесь к хосту Docker и выполните следующую команду `docker exec`
 
-```
+```bash
 sudo docker exec -ti mongo-1 mongosh -u "root" -p "abc123!"
 ```
 
@@ -40,6 +40,43 @@ You can opt-out by running the disableTelemetry() command.
 test> 
 
 ```
+
+### Использование утилиты командной строки MongoDB (для версии 4.0+ до 5.0)
+
+```bash
+sudo docker exec -ti mongo-1 mongosh -u "root" -p "abc123!"
+```
+
+Как узнать, какой shell доступен?
+
+```bash
+sudo docker exec -ti mongo-1 ls /usr/bin | grep mongo
+```
+
+
+Это позволит вам подключиться к контейнеру `mongo` и запустить оболочку `mongo` внутри него.
+
+Вы должны увидеть вывод, аналогичный приведенному ниже.
+
+```bash
+MongoDB shell version v4.4.29
+connecting to: mongodb://127.0.0.1:27017/?authSource=admin&compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("d5f2072d-6df0-456f-9c68-3f151c692cd7") }
+MongoDB server version: 4.4.29
+Welcome to the MongoDB shell.
+For interactive help, type "help".
+For more comprehensive documentation, see
+        https://docs.mongodb.com/
+Questions? Try the MongoDB Developer Community Forums
+        https://community.mongodb.com
+---
+The server generated these startup warnings when booting: 
+        2025-09-06T11:40:07.084+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+---
+>  
+
+```
+
 
 Теперь вы находитесь в командной строке MongoDB, готовой к выполнению любых операторов MongoDB. Также можно увидеть версию сервера MongoDB и оболочки MongoDB.
 
